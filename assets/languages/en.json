@@ -1,0 +1,17 @@
+{
+  "header": {
+    "home": "Home Page",
+    "quran": "Quran Pak",
+    "books": "Books",
+    "islamicBooks": "Islamic Books",
+    "islamicCalculator": "Islamic Calculator",
+    "masnoonDuas": "Masnoon Duas",
+    "questionsAndAnswers": "Questions and Answers",
+    "masail": "Islamic Rulings",
+    "namazTimings": "Namaz Timings",
+    "zakatCalculator": "Zakat Calculator",
+    "qiblaDirection": "Direction of Qibla",
+    "inheritanceCalculator": "Inheritance Calculator",
+    "nearestMosque": "Nearest Mosque"
+  }
+}

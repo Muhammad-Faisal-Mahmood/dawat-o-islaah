@@ -1,5 +1,15 @@
+import { useTranslation } from "../../../hooks/useTranslation";
+import ToggleLanguage from "./toggleLanguage";
+
 const Header = () => {
-  return <div>Header in components folder</div>;
+  const translation = useTranslation();
+
+  return (
+    <div>
+      <ToggleLanguage />
+      <div>{translation?.header?.home}</div>
+    </div>
+  );
 };
 
 export default Header;
