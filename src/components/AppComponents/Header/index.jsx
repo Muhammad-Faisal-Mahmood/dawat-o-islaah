@@ -1,5 +1,5 @@
 import MenuItems from "./MenuItems";
-import ToggleLanguage from "./toggleLanguage";
+import ToggleLanguage from "./ToggleLanguage";
 
 const Header = () => {
   return (
