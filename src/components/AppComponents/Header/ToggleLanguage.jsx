@@ -5,7 +5,7 @@ const ToggleLanguage = () => {
   return (
     <button
       onClick={toggleLanguage}
-      className="p-2 bg-blue-500 text-white rounded"
+      className="p-2 bg-transparent border-2 border-white px-8 text-lg text-white rounded-full cursor-pointer font-sans transform hover:scale-105 transition-all duration-400 hover:border-orange-300 hover:text-orange-300"
     >
       {language === "en" ? "Switch to Urdu" : "انگریزی میں تبدیل کریں"}
     </button>
