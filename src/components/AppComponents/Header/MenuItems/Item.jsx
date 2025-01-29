@@ -21,7 +21,7 @@ const Item = ({ item, options }) => {
       <Link
         to={"/"}
         className={`cursor-pointer text-lg font-sans flex items-center transition-all duration-300 ${
-          isHovered ? "text-orange-300" : "text-white"
+          isHovered ? "text-amber-400" : "text-white"
         }`}
       >
         {itemWord}
@@ -31,9 +31,9 @@ const Item = ({ item, options }) => {
       </Link>
 
       {options.length > 0 && (
-        <div className="absolute left-0 w-52 pt-2">
+        <div className="absolute left-0 w-52 pt-4">
           <div
-            className={`bg-orange-400 text-black shadow-lg rounded-lg p-2 transition-all duration-300 ease-out transform ${
+            className={`bg-amber-400 text-black shadow-lg rounded-lg p-2 transition-all duration-300 ease-out transform ${
               isHovered
                 ? "opacity-100 scale-100 translate-y-0"
                 : "opacity-0 scale-95 translate-y-2 pointer-events-none"

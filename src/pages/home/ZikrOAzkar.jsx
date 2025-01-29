@@ -40,7 +40,7 @@ const ZikrOAzkar = () => {
 
   return (
     <div className="bg-white  p-2 flex items-center overflow-hidden">
-      <div className="text-center bg-green-600 text-white px-10 text-lg py-2 rounded-lg font-bold mr-4">
+      <div className="text-center  bg-gradient-to-r from-green-400 to-lime-400 text-white px-10 text-lg py-2 rounded-lg font-bold mr-4">
         ZIKR O AZKAAR
       </div>
       <div
