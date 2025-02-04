@@ -42,7 +42,7 @@ const YouMayHaveMissed = () => {
   const posts = [
     {
       image:
-        "https://cdn.britannica.com/89/94689-050-4C424297/shahadah-call-lines-prayer-Islamic-mosque-calligraphy.jpg",
+        "https://e1.pxfuel.com/desktop-wallpaper/784/274/desktop-wallpaper-alhamdulilah-fresh-arabic-calligraphy-alhamdulillah-against-arabic-calligraphy-background.jpg",
       tag: "DUAEN",
       title: "Strengthening Family Bonds through Islamic Values",
       date: "November 1, 2024",
@@ -50,7 +50,7 @@ const YouMayHaveMissed = () => {
     },
     {
       image:
-        "https://cdn.britannica.com/89/94689-050-4C424297/shahadah-call-lines-prayer-Islamic-mosque-calligraphy.jpg",
+        "https://img.freepik.com/premium-vector/vector-design-islamic-arabic-calligraphy-icon-allah-muhammad_483777-181.jpg",
       tag: "DUAEN",
       title: "The Importance of Sincerity in Worship",
       date: "November 1, 2024",
@@ -66,7 +66,7 @@ const YouMayHaveMissed = () => {
     },
     {
       image:
-        "https://cdn.britannica.com/89/94689-050-4C424297/shahadah-call-lines-prayer-Islamic-mosque-calligraphy.jpg",
+        "https://images.squarespace-cdn.com/content/v1/5d016c1ba9f2e7000120c08c/1560579210527-7LDCZH62S91OLOJIKAE9/AdobeStock_87517185.jpeg",
       tag: "AHADITH",
       title: "Guidelines for Ethical Behavior in Daily Life",
       date: "November 1, 2024",

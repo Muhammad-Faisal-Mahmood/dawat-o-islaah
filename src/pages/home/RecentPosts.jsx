@@ -14,14 +14,14 @@ const RecentPosts = () => {
       description: "The Journey of Self-Purification.",
     },
     {
-      title: "The Importance of Sincerity in Worship (Ikhlas)",
+      title: "Guidelines for Ethical Behavior in Daily Life",
       author: "Amaze Technologies",
       date: "November 1, 2024",
-      categories: ["Duaen"],
+      categories: ["Ahadith", "Duaen", "General Posts"],
       imageUrl:
         "https://th.bing.com/th/id/OIP._BFcK18zbG-T7VENqpsAKgHaHa?rs=1&pid=ImgDetMain",
-      tags: ["Prayer"],
-      description: "Exploring sincerity in worship.",
+      tags: ["Islaah", "Islamic", "Islamic Posts"],
+      description: "Practical ethical guidelines for Muslims.",
     },
     {
       title: "Guidelines for Ethical Behavior in Daily Life",
@@ -34,22 +34,23 @@ const RecentPosts = () => {
       description: "Practical ethical guidelines for Muslims.",
     },
     {
-      title: "Strengthening Family Bonds through Islamic Values",
+      title: "The Importance of Sincerity in Worship (Ikhlas)",
       author: "Amaze Technologies",
       date: "November 1, 2024",
       categories: ["Duaen"],
       imageUrl:
         "https://th.bing.com/th/id/OIP._BFcK18zbG-T7VENqpsAKgHaHa?rs=1&pid=ImgDetMain",
-      tags: ["Islamic Values"],
-      description: "Enhancing family bonds through faith.",
+      tags: ["Prayer"],
+      description: "Exploring sincerity in worship.",
     },
+
     {
       title: "Strengthening Family Bonds through Islamic Values",
       author: "Amaze Technologies",
       date: "November 1, 2024",
       categories: ["Duaen"],
       imageUrl:
-        "https://img.freepik.com/premium-photo/heliogravure-printing-postage-stamp-from-arabic-calligraphy_973275-88363.jpg",
+        "https://th.bing.com/th/id/OIP._BFcK18zbG-T7VENqpsAKgHaHa?rs=1&pid=ImgDetMain",
       tags: ["Islamic Values"],
       description: "Enhancing family bonds through faith.",
     },

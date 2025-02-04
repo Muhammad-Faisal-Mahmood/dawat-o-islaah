@@ -18,6 +18,11 @@ const ZikrOAzkar = () => {
       title: "The Importance of Sincerity in Worship (Ikhlas)",
       img: "https://th.bing.com/th/id/R.e47b67a80a0887ff74c34fe4e51d79d4?rik=Am5Ghv77z3JChA&pid=ImgRaw&r=0",
     },
+    {
+      id: 4,
+      title: "The Journey of Self Purification (Tazkiyah al-Nafs)",
+      img: "https://th.bing.com/th/id/R.e47b67a80a0887ff74c34fe4e51d79d4?rik=Am5Ghv77z3JChA&pid=ImgRaw&r=0",
+    },
   ];
 
   const tickerRef = useRef(null);
