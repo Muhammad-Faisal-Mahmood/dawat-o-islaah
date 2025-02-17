@@ -1,20 +1,22 @@
 import React from "react";
 import ZikrOAzkar from "./ZikrOAzkar";
-import RecentPosts from "./RecentPosts";
-import Socials_Posts_Section from "./Socials_Posts_Section";
-import YouMayHaveMissed from "./YouMayHaveMissed";
+import RecentArticles from "./RecentArticles";
 import Services from "./Services";
 import Hero from "./Hero";
+import Books from "./Books";
+import SihahSitta from "./SihahSitta";
+import DailyVerseHadees from "./DailyVerseHadees";
 
 const index = () => {
   return (
-    <div className=" py-12 flex flex-col gap-y-10">
+    <div className="   flex flex-col gap-y-28 mb-20">
       <Hero />
       <ZikrOAzkar />
-      {/* <RecentPosts />
-      <Socials_Posts_Section /> */}
+      <Books />
+      <SihahSitta />
+      <DailyVerseHadees />
       <Services />
-      <YouMayHaveMissed />
+      <RecentArticles />
     </div>
   );
 };
