@@ -44,10 +44,11 @@ const ZikrOAzkar = () => {
   }, []);
 
   return (
-    <div className="bg-white  p-2 flex items-center overflow-hidden">
-      <div className="text-center  bg-gradient-to-r from-green-400 to-lime-400 text-white px-10 text-lg py-2 rounded-lg font-bold mr-4">
+    <div className="bg-[#116466] text-white -mt-20 px-12 py-2 flex items-center overflow-hidden">
+      <h1 className="mr-5  bg-[#1E3A5F] rounded-md py-3 px-2  w-fit text-nowrap">
         ZIKR O AZKAAR
-      </div>
+      </h1>
+
       <div
         ref={tickerRef}
         className="flex items-center gap-x-20 overflow-x-auto hide-scrollbar  whitespace-nowrap"
@@ -65,10 +66,10 @@ const ZikrOAzkar = () => {
         ))}
       </div>
       <div className="ml-auto flex items-center space-x-2 pl-10">
-        <button className="hover:bg-green-600 hover:text-white p-2 rounded-full text-black bg-white border">
+        <button className=" hover:text-black p-2 rounded-full text-white bg-[#C9A227] ">
           <FaArrowLeft />
         </button>
-        <button className="hover:bg-green-600 hover:text-white p-2 rounded-full text-black bg-white border">
+        <button className="hover:text-black p-2 rounded-full text-white bg-[#C9A227] ">
           <FaArrowRight />
         </button>
       </div>

@@ -4,13 +4,15 @@ import RecentPosts from "./RecentPosts";
 import Socials_Posts_Section from "./Socials_Posts_Section";
 import YouMayHaveMissed from "./YouMayHaveMissed";
 import Services from "./Services";
+import Hero from "./Hero";
 
 const index = () => {
   return (
-    <div className="px-20 py-12 flex flex-col gap-y-10">
+    <div className=" py-12 flex flex-col gap-y-10">
+      <Hero />
       <ZikrOAzkar />
-      <RecentPosts />
-      <Socials_Posts_Section />
+      {/* <RecentPosts />
+      <Socials_Posts_Section /> */}
       <Services />
       <YouMayHaveMissed />
     </div>

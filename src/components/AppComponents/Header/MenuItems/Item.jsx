@@ -14,14 +14,14 @@ const Item = ({ item, options }) => {
 
   return (
     <div
-      className="relative group"
+      className="relative group "
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link
         to={"/"}
-        className={`cursor-pointer text-lg font-sans flex items-center transition-all duration-300 ${
-          isHovered ? "text-amber-400" : "text-white"
+        className={`cursor-pointer uppercase font-medium tracking-tight  text-lg font-sans flex items-center transition-all duration-300 ${
+          isHovered ? "text-white" : "text-[#1E3A5F]"
         }`}
       >
         {itemWord}

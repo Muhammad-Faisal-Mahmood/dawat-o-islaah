@@ -77,8 +77,10 @@ const YouMayHaveMissed = () => {
 
   return (
     <div className="p-8">
-      <div className="border border-l-6 border-r-6 border-green-600 w-fit flex items-center justify-center mb-8 px-5 py-2 rounded-full ">
-        <h2 className="text-2xl font-bold  ">You May Have Missed</h2>
+      <div className="w-full flex items-center justify-center mb-8 px-5 py-2  ">
+        <h2 className="text-3xl text-[#222222] font-bold  uppercase tracking-tight">
+          Recent articles
+        </h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {posts.map((post, index) => (

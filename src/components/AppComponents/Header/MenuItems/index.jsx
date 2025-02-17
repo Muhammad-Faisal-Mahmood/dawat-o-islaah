@@ -27,7 +27,7 @@ const MenuItems = () => {
   const renderedItems = language === "ur" ? [...items].reverse() : items;
 
   return (
-    <div className="flex items-center space-x-6">
+    <div className="flex items-center space-x-8">
       {renderedItems.map((item) => (
         <Item key={item.name} item={item.name} options={item.options} />
       ))}
