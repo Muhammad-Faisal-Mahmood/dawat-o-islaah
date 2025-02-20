@@ -38,7 +38,7 @@ const PostCard = ({ image, tag, title, date, author, tags }) => {
   );
 };
 
-const YouMayHaveMissed = () => {
+const RecentArticles = () => {
   const posts = [
     {
       image:
@@ -76,13 +76,13 @@ const YouMayHaveMissed = () => {
   ];
 
   return (
-    <div className="p-8">
-      <div className="w-full flex items-center justify-center mb-8 px-5 py-2  ">
-        <h2 className="text-3xl text-[#222222] font-bold  uppercase tracking-tight">
+    <div className="p-8 flex flex-col items-center md:block">
+      <div className="w-full flex items-center justify-center mb-8 px-2 md:px-5 py-2  ">
+        <h2 className="text-2xl md:text-3xl text-[#222222] font-bold  uppercase tracking-tight">
           Recent articles
         </h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {posts.map((post, index) => (
           <PostCard key={index} {...post} />
         ))}
@@ -91,4 +91,4 @@ const YouMayHaveMissed = () => {
   );
 };
 
-export default YouMayHaveMissed;
+export default RecentArticles;

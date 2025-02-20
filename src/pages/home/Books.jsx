@@ -31,7 +31,7 @@ const Books = () => {
   return (
     <div className="container mx-auto p-4 space-y-8">
       {/* Featured Section */}
-      <div className="grid grid-cols-3 gap-x-16 px-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-8 lg:px-20">
         {books.map((book, index) => (
           <BookInfoCard key={index} {...book} />
         ))}

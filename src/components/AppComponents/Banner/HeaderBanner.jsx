@@ -10,7 +10,7 @@ const HeaderBanner = () => {
   const languages = ["English", "اردو"];
 
   return (
-    <div className="bg-[#1E3A5F] py-2 px-10 text-white text-sm flex justify-between">
+    <div className="bg-[#1E3A5F] py-2 px-5 md:px-10 text-white text-sm flex justify-between">
       {/* Left Section: Location and Prayer Times */}
       <div className="flex gap-4">
         {/* Location */}
@@ -20,7 +20,7 @@ const HeaderBanner = () => {
         </div>
 
         {/* Prayer Times */}
-        <div className="flex">
+        <div className="hidden md:flex ">
           <h1>Prayer times:</h1>
           {Object.entries(prayerTimes).map(([prayer, time], index, array) => (
             <h1 key={prayer} className="ml-1">

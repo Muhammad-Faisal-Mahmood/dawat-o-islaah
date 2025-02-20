@@ -9,7 +9,7 @@ import DailyVerseHadees from "./DailyVerseHadees";
 
 const index = () => {
   return (
-    <div className="   flex flex-col gap-y-28 mb-20">
+    <div className="flex flex-col gap-y-28 mb-20">
       <Hero />
       <ZikrOAzkar />
       <Books />

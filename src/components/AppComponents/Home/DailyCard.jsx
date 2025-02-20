@@ -38,14 +38,14 @@ const DailyCard = ({
       <hr className="mt-4 border-gray-300" />
 
       {/* Actions Section (pushed to the bottom) */}
-      <div className="flex justify-between mt-3 text-[#1E3A5F]">
-        <button className="flex items-center gap-1 text-sm font-medium">
+      <div className="flex flex-col items-center text-base md:text-sm  gap-4 md:gap-0 md:flex-row md:justify-between mt-3 text-[#1E3A5F]">
+        <button className="flex items-center gap-2 font-medium">
           <FaShareAlt color="black" /> Share Now
         </button>
-        <button className="flex items-center gap-1 text-sm font-medium">
+        <button className="flex items-center gap-2 font-medium">
           <FaDownload color="black" /> Download
         </button>
-        <button className="flex items-center gap-1 text-sm font-medium">
+        <button className="flex items-center gap-2 font-medium">
           <FaBookOpen color="black" /> Read Complete
         </button>
       </div>
