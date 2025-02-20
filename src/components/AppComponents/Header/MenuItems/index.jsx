@@ -4,23 +4,16 @@ import Item from "./Item";
 const MenuItems = () => {
   const { language } = useLanguage();
 
-  // List of items with corresponding options
+  // Updated list of menu items (no options)
   const items = [
-    { name: "home", options: [] },
-    { name: "quran", options: [] },
-    { name: "books", options: ["islamicBooks"] },
-    {
-      name: "islamicCalculator",
-      options: [
-        "namazTimings",
-        "zakatCalculator",
-        "qiblaDirection",
-        "inheritanceCalculator",
-        "nearestMosque",
-      ],
-    },
-    { name: "masnoonDuas", options: ["masail"] },
-    { name: "questionsAndAnswers", options: [] },
+    { name: "home" },
+    { name: "alQuran" },
+    { name: "alHadith" },
+    { name: "islamicBooks" },
+    { name: "islamicTools" },
+    { name: "masnoonDuas" },
+    { name: "masail" },
+    { name: "questionAnswer" },
   ];
 
   // Reverse items array if language is 'ur'
@@ -29,7 +22,7 @@ const MenuItems = () => {
   return (
     <div className="flex items-center space-x-8">
       {renderedItems.map((item) => (
-        <Item key={item.name} item={item.name} options={item.options} />
+        <Item key={item.name} item={item.name} />
       ))}
     </div>
   );

@@ -10,7 +10,7 @@ const HeaderBanner = () => {
   const languages = ["English", "اردو"];
 
   return (
-    <div className="bg-[#1E3A5F] py-4 px-10 text-white flex justify-between">
+    <div className="bg-[#1E3A5F] py-2 px-10 text-white text-sm flex justify-between">
       {/* Left Section: Location and Prayer Times */}
       <div className="flex gap-4">
         {/* Location */}
