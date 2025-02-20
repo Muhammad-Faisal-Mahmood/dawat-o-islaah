@@ -9,7 +9,7 @@ const Header = () => {
     <div className="flex justify-between lg:justify-around items-center p-4 px-8 bg-[#C9A227]">
       {/* Logo */}
       <img
-        src="../../../../assets/Icons/IconMain.jpeg"
+        src="/assets/img/logo.jpeg"
         className="w-14 items-center"
         alt="Logo"
       />
