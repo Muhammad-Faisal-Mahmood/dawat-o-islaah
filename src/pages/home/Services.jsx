@@ -50,7 +50,7 @@ const Services = () => {
           Islamic Tools
         </h2>
       </div>
-      <div className="flex flex-wrap justify-center space-x-10 px-4">
+      <div className="flex flex-wrap justify-center gap-6 px-4">
         {cards.map((card) => (
           <div
             key={card.id}
