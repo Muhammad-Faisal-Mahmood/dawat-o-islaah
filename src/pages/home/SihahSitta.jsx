@@ -1,4 +1,3 @@
-import React from "react";
 import SihahSittaGrid from "../../components/AppComponents/Home/SihahSittaGrid";
 
 const SihahSitta = () => {

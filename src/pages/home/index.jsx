@@ -1,4 +1,3 @@
-import React from "react";
 import ZikrOAzkar from "./ZikrOAzkar";
 import RecentArticles from "./RecentArticles";
 import Services from "./Services";

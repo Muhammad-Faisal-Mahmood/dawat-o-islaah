@@ -54,7 +54,7 @@ const Services = () => {
         {cards.map((card) => (
           <div
             key={card.id}
-            className="w-44 h-44  flex flex-col items-center justify-center bg-[#C9A227] rounded-lg  hover:shadow-md hover:shadow-yellow-200 transition duration-300"
+            className="w-[80%] h-44 sm:w-44 sm:h-44  flex flex-col items-center justify-center bg-[#C9A227] rounded-lg  hover:shadow-md hover:shadow-yellow-200 transition duration-300"
           >
             <div className=" mb-4 ">{card.icon}</div>
             <p className="text-[#1E3A5F] text-base text-center">{card.title}</p>
