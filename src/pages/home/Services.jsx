@@ -45,12 +45,12 @@ const Services = () => {
 
   return (
     <div className="bg-[#157347] py-10">
-      <div className="text-center mb-20 mt-5">
+      <div className="text-center mb-10">
         <h2 className="uppercase text-white text-2xl lg:text-3xl font-bold">
           Islamic Tools
         </h2>
       </div>
-      <div className="flex flex-wrap justify-center gap-6 px-4">
+      <div className="flex flex-wrap justify-center space-x-10 px-4">
         {cards.map((card) => (
           <div
             key={card.id}

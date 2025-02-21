@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import MenuItems from "./MenuItems";
 import { FaBars, FaTimes } from "react-icons/fa";
 
