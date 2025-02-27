@@ -2,7 +2,7 @@ import React from "react";
 
 const ShimmerLoader = () => {
   return (
-    <div className="space-y-6 animate-pulse">
+    <div className="space-y-10 px-12 py-12  md:px-36 md:py-24 animate-pulse">
       {/* Fake Surah Header */}
       <div className="text-center">
         <div className="w-48 h-6 bg-gray-300 rounded mx-auto mb-2"></div>
@@ -17,7 +17,7 @@ const ShimmerLoader = () => {
 
       {/* Fake Ayah Blocks */}
       <div className="space-y-6">
-        {Array(3)
+        {Array(10)
           .fill(0)
           .map((_, i) => (
             <div

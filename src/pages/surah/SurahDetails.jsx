@@ -22,6 +22,8 @@ const SurahDetails = () => {
 
   const [showDropdown, setShowDropdown] = useState({ en: false, ur: false });
 
+  console.log("surah details:", surahDetails);
+
   // Function to Toggle Dropdown
   const toggleDropdown = (lang) => {
     setShowDropdown((prev) => ({ ...prev, [lang]: !prev[lang] }));
@@ -96,14 +98,11 @@ const SurahDetails = () => {
 
       {/* Show "Loading Translations..." only for verses */}
       {loadingVerses ? (
-        <div className="flex flex-col">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => {
-            return <ShimmerLoader />;
-          })}
-        </div>
+        <ShimmerLoader />
       ) : (
         <TranslationList
           verses={verses}
+          surahNo={surahDetails.number}
           translations={translations}
           audioLinks={audioLinks}
         />

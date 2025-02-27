@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa"; // Icons
 
-const TranslationList = ({ verses, translations, audioLinks }) => {
+const TranslationList = ({ verses, translations, audioLinks, surahNo }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [playingIndex, setPlayingIndex] = useState(null);
 
@@ -23,7 +23,7 @@ const TranslationList = ({ verses, translations, audioLinks }) => {
       };
     }
   };
-
+  console.log("verses: ", verses);
   return (
     <div className="space-y-10">
       {verses.map((ayah, index) => (
@@ -48,6 +48,10 @@ const TranslationList = ({ verses, translations, audioLinks }) => {
               </span>
             )}
           </button>
+
+          <p className="absolute top-4 right-4 text-gray-500 text-base md:text-lg lg:text-xl">
+            {surahNo}:{ayah.numberInSurah}
+          </p>
 
           {/* Arabic Ayah (Always Centered) */}
           <p className="text-2xl md:text-3xl text-blue-700 text-center pt-5 font-semibold">
