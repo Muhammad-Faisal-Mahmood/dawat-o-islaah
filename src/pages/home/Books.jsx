@@ -8,7 +8,7 @@ const Books = () => {
       description:
         "Recite Quran Kareem with 2 Translations, Words by Words Translation & Tafaseer",
       linkText: "Recite Quran",
-      link: "#",
+      link: "alQuran",
       icon: "📖",
     },
     {

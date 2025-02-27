@@ -44,7 +44,7 @@ const ZikrOAzkar = () => {
   }, []);
 
   return (
-    <div className="bg-[#116466] text-white -mt-28 px-3 hidden md:px-12 py-2 md:flex items-center overflow-hidden">
+    <div className="bg-[#116466] text-white  px-3 hidden md:px-12 py-2 md:flex items-center overflow-hidden">
       <h1 className="mr-5  bg-[#1E3A5F] rounded-md py-3 px-2  w-fit text-nowrap">
         ZIKR O AZKAAR
       </h1>
