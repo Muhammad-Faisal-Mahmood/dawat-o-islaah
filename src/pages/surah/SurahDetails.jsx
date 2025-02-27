@@ -1,13 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useSurah from "../../hooks/useSurah";
-import { FaPlay, FaRegFileAlt, FaBookOpen } from "react-icons/fa"; // Icons for Play & Tafseer
+import TranslationList from "./TranslationList"; // Import TranslationList
+import { FaChevronDown } from "react-icons/fa"; // Icons
+import ShimmerLoader from "./SurahShimmer";
 
 const SurahDetails = () => {
   const { surahNumber } = useParams();
-  const { surah, translations, loading, error } = useSurah(surahNumber);
+  const {
+    surahDetails,
+    translationOptions,
+    verses,
+    translations,
+    audioLinks,
+    selectedTranslations,
+    setSelectedTranslations,
+    loadingDetails,
+    loadingVerses,
+    error,
+  } = useSurah(surahNumber);
 
-  if (loading) return <p className="text-center py-6 text-lg">Loading...</p>;
+  const [showDropdown, setShowDropdown] = useState({ en: false, ur: false });
+
+  // Function to Toggle Dropdown
+  const toggleDropdown = (lang) => {
+    setShowDropdown((prev) => ({ ...prev, [lang]: !prev[lang] }));
+  };
+
+  // Function to Handle Translation Selection
+  const handleTranslationChange = (lang, identifier) => {
+    setSelectedTranslations((prev) => ({
+      ...prev,
+      [lang]: prev[lang].includes(identifier)
+        ? prev[lang].filter((id) => id !== identifier) // Remove if already selected
+        : [...prev[lang], identifier], // Add if not selected
+    }));
+  };
+
+  if (loadingDetails) return <ShimmerLoader />;
   if (error)
     return <p className="text-center text-red-500 py-6 text-lg">{error}</p>;
 
@@ -16,65 +46,68 @@ const SurahDetails = () => {
       {/* Surah Name & Details */}
       <div className="text-center mb-10">
         <h1 className="text-3xl md:text-4xl font-bold">
-          {surah.englishName} ({surah.englishNameTranslation})
+          {surahDetails.englishName} ({surahDetails.englishNameTranslation})
         </h1>
         <p className="text-lg text-gray-500 mt-2">
-          {surah.revelationType} | {surah.numberOfAyahs} Verses
+          {surahDetails.revelationType} | {surahDetails.numberOfAyahs} Verses
         </p>
-        <p className="text-3xl text-blue-600 font-bold mt-4">{surah.name}</p>
+        <p className="text-3xl text-blue-600 font-bold mt-4">
+          {surahDetails.name}
+        </p>
       </div>
 
-      {/* Ayahs List */}
-      <div className="space-y-10">
-        {surah.ayahs.map((ayah, index) => (
-          <div
-            key={ayah.number}
-            className="bg-white shadow-lg rounded-lg p-6 md:p-8 relative transition-all duration-300 hover:shadow-xl"
-          >
-            {/* Play Button */}
-            <button className="absolute top-4 left-4 text-gray-600 flex items-center gap-2 hover:text-gray-900 transition">
-              <FaPlay className="text-lg" />
-              <span className="text-sm hidden md:inline">Play Verse</span>
+      {/* Translation Selection Dropdowns */}
+      <div className="flex flex-col md:flex-row gap-4 mb-6">
+        {["en", "ur"].map((lang) => (
+          <div key={lang} className="relative w-full md:w-1/2">
+            <button
+              onClick={() => toggleDropdown(lang)}
+              className="w-full bg-gray-100 p-2 border border-gray-300 rounded-md flex justify-between items-center"
+            >
+              Select {lang === "en" ? "English" : "Urdu"} Translations
+              <FaChevronDown />
             </button>
 
-            {/* Arabic Ayah */}
-            <p className="text-2xl md:text-3xl text-blue-700 text-center pt-5 font-semibold leading-relaxed">
-              {ayah.text}
-            </p>
-
-            {/* Urdu Translation */}
-            <p className="text-center text-gray-500 italic text-md md:text-lg mt-4">
-              {translations.ur[index]?.text || "Urdu Translation Not Available"}
-            </p>
-
-            {/* English Translation */}
-            <p className="text-center text-gray-700 mt-4 text-lg">
-              {translations.en[index]?.text ||
-                "English Translation Not Available"}
-            </p>
-
-            {/* Ayah Number & Controls */}
-            <div className="mt-6 flex flex-col md:flex-row justify-between items-center border-t pt-4 text-gray-600 text-sm md:text-md">
-              <span className="mb-3 md:mb-0">
-                Surah: {surah.number} | Verse: {ayah.numberInSurah}
-              </span>
-              <div className="flex items-center gap-6">
-                {/* Read Tafseer */}
-                <button className="cursor-pointer flex items-center gap-2 text-green-600 hover:text-green-800 transition">
-                  <FaBookOpen />
-                  <span>Read Tafseer</span>
-                </button>
-
-                {/* Read Translation */}
-                <button className="cursor-pointer flex items-center gap-2 text-green-600 hover:text-green-800 transition">
-                  <FaRegFileAlt />
-                  <span>Read Translation</span>
-                </button>
+            {showDropdown[lang] && (
+              <div className="absolute w-full bg-white shadow-lg rounded-md mt-2 z-10 max-h-60 overflow-auto">
+                {translationOptions[lang].map((option) => (
+                  <label
+                    key={option.identifier}
+                    className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedTranslations[lang].includes(
+                        option.identifier
+                      )}
+                      onChange={() =>
+                        handleTranslationChange(lang, option.identifier)
+                      }
+                      className="mr-2"
+                    />
+                    {option.name}
+                  </label>
+                ))}
               </div>
-            </div>
+            )}
           </div>
         ))}
       </div>
+
+      {/* Show "Loading Translations..." only for verses */}
+      {loadingVerses ? (
+        <div className="flex flex-col">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => {
+            return <ShimmerLoader />;
+          })}
+        </div>
+      ) : (
+        <TranslationList
+          verses={verses}
+          translations={translations}
+          audioLinks={audioLinks}
+        />
+      )}
     </div>
   );
 };
