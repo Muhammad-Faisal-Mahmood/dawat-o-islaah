@@ -2,7 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./Outlet";
 import Home from "../../pages/home";
 import Quran from "../../pages/quran";
-import Surah from "../../pages/surah";
+import Surah from "../../pages/quran/surah";
+import Hadith from "../../pages/hadith";
+import HadithBookChapters from "../../pages/hadith/HadithBookChapters";
+import HadithList from "../../pages/hadith/HadithList";
 export default function AppRouter() {
   return (
     <Routes>
@@ -10,6 +13,9 @@ export default function AppRouter() {
         <Route index element={<Home />} />
         <Route path="alQuran" element={<Quran />} />
         <Route path="surah/:surahNumber" element={<Surah />} />
+        <Route path="alHadith" element={<Hadith />} />
+        <Route path="alHadith/:bookSlug" element={<HadithBookChapters />} />
+        <Route path="alHadith/:bookSlug/:chapterNo" element={<HadithList />} />
       </Route>
     </Routes>
   );

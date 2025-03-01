@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import useSurah from "../../hooks/useSurah";
-import TranslationList from "./TranslationList"; // Import TranslationList
+import useSurah from "../../../hooks/useSurah";
+import VerseCard from "./VerseCard";
 import { FaChevronDown } from "react-icons/fa"; // Icons
 import ShimmerLoader from "./SurahShimmer";
 
@@ -100,7 +100,7 @@ const SurahDetails = () => {
       {loadingVerses ? (
         <ShimmerLoader />
       ) : (
-        <TranslationList
+        <VerseCard
           verses={verses}
           surahNo={surahDetails.number}
           translations={translations}

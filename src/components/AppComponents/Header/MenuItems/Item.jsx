@@ -6,7 +6,14 @@ const Item = ({ item }) => {
   const translation = useTranslation();
   const itemWord = translation?.header?.[item];
   const [isHovered, setIsHovered] = useState(false);
-  let route = item === "home" ? "/" : item === "alQuran" ? "alQuran" : "#";
+  let route =
+    item === "home"
+      ? "/"
+      : item === "alQuran"
+      ? "alQuran"
+      : item === "alHadith"
+      ? "alHadith"
+      : "#";
 
   return (
     <div

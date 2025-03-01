@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa"; // Icons
 
-const TranslationList = ({ verses, translations, audioLinks, surahNo }) => {
+const VerseCard = ({ verses, translations, audioLinks, surahNo }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [playingIndex, setPlayingIndex] = useState(null);
 
@@ -94,4 +94,4 @@ const TranslationList = ({ verses, translations, audioLinks, surahNo }) => {
   );
 };
 
-export default TranslationList;
+export default VerseCard;
