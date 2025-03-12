@@ -1,9 +1,32 @@
 import React, { useState } from "react";
-import { FaPlay, FaPause } from "react-icons/fa"; // Icons
+import { FaPlay, FaPause, FaTimes } from "react-icons/fa";
+import tafsirData from "../../../../data/tafsir/tafsirByAyah.json"; // Import the Tafsir JSON
+import { IoBookOutline } from "react-icons/io5";
+
+const ayahsPerSurah = [
+  0, 7, 286, 200, 176, 120, 165, 206, 75, 129, 109, 123, 111, 43, 52, 99, 128,
+  111, 110, 98, 135, 112, 78, 118, 64, 77, 227, 93, 88, 69, 60, 34, 30, 73, 54,
+  45, 83, 182, 88, 75, 85, 54, 53, 89, 59, 37, 35, 38, 29, 18, 45, 60, 49, 62,
+  55, 78, 96, 29, 22, 24, 13, 14, 11, 11, 18, 12, 12, 30, 52, 52, 44, 28, 28,
+  20, 56, 40, 31, 50, 40, 46, 42, 29, 19, 36, 25, 22, 17, 19, 26, 30, 20, 15,
+  21, 11, 8, 8, 19, 5, 8, 8, 11, 11, 8, 3, 9, 5, 4, 7, 3, 6, 3, 5, 4, 5, 6,
+];
+
+console.log("length of tafsir", tafsirData.ayat.length);
+
+const getTafsirIndex = (surahNo, verseNo) => {
+  if (surahNo <= 0 || surahNo >= ayahsPerSurah.length) return -1;
+  const previousAyahCount = ayahsPerSurah
+    .slice(0, surahNo)
+    .reduce((acc, ayahs) => acc + ayahs, 0);
+  return previousAyahCount + verseNo - 1; // Adjust for 0-based index
+};
 
 const VerseCard = ({ verses, translations, audioLinks, surahNo }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [playingIndex, setPlayingIndex] = useState(null);
+  const [selectedTafsir, setSelectedTafsir] = useState(null); // Store selected Tafsir
+  const [showModal, setShowModal] = useState(false); // Modal state
 
   // Function to handle audio playback
   const playAudio = (index) => {
@@ -23,7 +46,16 @@ const VerseCard = ({ verses, translations, audioLinks, surahNo }) => {
       };
     }
   };
-  console.log("verses: ", verses);
+
+  // Function to show Tafsir in a modal
+  const openTafsirModal = (verseNo) => {
+    const tafsirIndex = getTafsirIndex(surahNo, verseNo);
+    setSelectedTafsir(
+      tafsirData.ayat[tafsirIndex]?.ayat_text || "Tafsir not available"
+    );
+    setShowModal(true);
+  };
+
   return (
     <div className="space-y-10">
       {verses.map((ayah, index) => (
@@ -54,7 +86,7 @@ const VerseCard = ({ verses, translations, audioLinks, surahNo }) => {
           </p>
 
           {/* Arabic Ayah (Always Centered) */}
-          <p className="text-2xl md:text-3xl text-blue-700 text-center pt-5 font-semibold">
+          <p className="text-2xl/8 md:text-3xl/16 text-[#1E3A5F] text-center pt-10 font-semibold">
             {ayah.text}
           </p>
 
@@ -78,7 +110,7 @@ const VerseCard = ({ verses, translations, audioLinks, surahNo }) => {
             <div className="text-right">
               {Object.entries(translations.ur).map(([identifier, ayahList]) => (
                 <div key={identifier} className="mb-4">
-                  <p className="text-gray-700 text-lg">
+                  <p className="text-gray-700 text-lg/10">
                     {ayahList[index]?.text || "ترجمہ دستیاب نہیں"}
                   </p>
                   <p className="text-sm text-gray-500 mt-1">
@@ -88,8 +120,45 @@ const VerseCard = ({ verses, translations, audioLinks, surahNo }) => {
               ))}
             </div>
           </div>
+
+          {/* Tafsir Button */}
+          <div className="flex justify-center">
+            <button
+              onClick={() => openTafsirModal(ayah.numberInSurah)}
+              className="mt-4 flex cursor-pointer items-center gap-2 bg-[#1E3A5F] text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+            >
+              <IoBookOutline className="text-white" size={24} />
+              Check Tafsir
+            </button>
+          </div>
         </div>
       ))}
+
+      {/* Tafsir Modal */}
+      {showModal && (
+        <div
+          className="custom-backdrop fixed inset-0 flex items-center justify-center z-50"
+          onClick={() => setShowModal(false)} // Close modal when clicking outside
+        >
+          <div
+            className="bg-white p-6 rounded-lg w-11/12 md:w-2/3 lg:w-1/2 shadow-lg max-h-[80vh] overflow-y-auto relative"
+            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
+          >
+            {/* Close Icon */}
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-4 left-4 text-red-600 hover:text-red-700 cursor-pointer transition"
+            >
+              <FaTimes className="text-2xl" />
+            </button>
+
+            <h2 className="text-xl font-bold text-center mb-4">Tafsir</h2>
+            <p className="text-gray-800 text-lg/9 urdu-text">
+              {selectedTafsir}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
