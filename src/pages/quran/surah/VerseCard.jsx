@@ -22,7 +22,13 @@ const getTafsirIndex = (surahNo, verseNo) => {
   return previousAyahCount + verseNo - 1; // Adjust for 0-based index
 };
 
-const VerseCard = ({ verses, translations, audioLinks, surahNo }) => {
+const VerseCard = ({
+  verses,
+  translations,
+  audioLinks,
+  surahNo,
+  isTranslation,
+}) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [playingIndex, setPlayingIndex] = useState(null);
   const [selectedTafsir, setSelectedTafsir] = useState(null); // Store selected Tafsir
@@ -57,11 +63,11 @@ const VerseCard = ({ verses, translations, audioLinks, surahNo }) => {
   };
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-6">
       {verses.map((ayah, index) => (
         <div
           key={ayah.number}
-          className="bg-white shadow-lg rounded-lg p-6 md:p-8 relative"
+          className="bg-white shadow-lg rounded-lg p-6 md:px-8  relative border-2 border-neutral-200"
         >
           {/* Play/Pause Button */}
           <button
@@ -86,46 +92,57 @@ const VerseCard = ({ verses, translations, audioLinks, surahNo }) => {
           </p>
 
           {/* Arabic Ayah (Always Centered) */}
-          <p className="text-2xl/8 md:text-3xl/16 text-[#1E3A5F] text-center pt-10 font-semibold">
+          <p className="text-2xl/8 md:text-3xl/16 text-[#1E3A5F] text-center mt-14 font-semibold">
             {ayah.text}
           </p>
 
           {/* Translations Grid */}
-          <div className="grid md:grid-cols-2 gap-6 mt-6">
-            {/* Left Column (English Translations) */}
-            <div className="text-left">
-              {Object.entries(translations.en).map(([identifier, ayahList]) => (
-                <div key={identifier} className="mb-4">
-                  <p className="text-gray-700 text-lg">
-                    {ayahList[index]?.text || "Translation Not Available"}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    - {identifier.replace("en.", "").toUpperCase()} (English)
-                  </p>
-                </div>
-              ))}
-            </div>
 
-            {/* Right Column (Urdu Translations) */}
-            <div className="text-right">
-              {Object.entries(translations.ur).map(([identifier, ayahList]) => (
-                <div key={identifier} className="mb-4">
-                  <p className="text-gray-700 text-lg/10">
-                    {ayahList[index]?.text || "ترجمہ دستیاب نہیں"}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    - {identifier.replace("ur.", "").toUpperCase()} (Urdu)
-                  </p>
+          <div className="grid md:grid-cols-2 md:gap-4 mt-6">
+            {/* Left Column (English Translations) */}
+            {isTranslation && (
+              <>
+                <div className="text-left">
+                  {Object.entries(translations.en).map(
+                    ([identifier, ayahList]) => (
+                      <div key={identifier} className="mb-4">
+                        <p className="text-gray-700 text-lg">
+                          {ayahList[index]?.text || "Translation Not Available"}
+                        </p>
+                        <p className="text-sm text-gray-500 mt-1">
+                          - {identifier.replace("en.", "").toUpperCase()}{" "}
+                          (English)
+                        </p>
+                      </div>
+                    )
+                  )}
                 </div>
-              ))}
-            </div>
+
+                {/* Right Column (Urdu Translations) */}
+                <div className="text-right">
+                  {Object.entries(translations.ur).map(
+                    ([identifier, ayahList]) => (
+                      <div key={identifier} className="mb-4">
+                        <p className="text-gray-700 text-lg/10">
+                          {ayahList[index]?.text || "ترجمہ دستیاب نہیں"}
+                        </p>
+                        <p className="text-sm text-gray-500 mt-1">
+                          - {identifier.replace("ur.", "").toUpperCase()} (Urdu)
+                        </p>
+                      </div>
+                    )
+                  )}
+                </div>
+              </>
+            )}
           </div>
 
           {/* Tafsir Button */}
+
           <div className="flex justify-center">
             <button
               onClick={() => openTafsirModal(ayah.numberInSurah)}
-              className="mt-4 flex cursor-pointer items-center gap-2 bg-[#1E3A5F] text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+              className="mt-2 flex cursor-pointer items-center gap-2 bg-[#1E3A5F] text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
             >
               <IoBookOutline className="text-white" size={24} />
               Check Tafsir

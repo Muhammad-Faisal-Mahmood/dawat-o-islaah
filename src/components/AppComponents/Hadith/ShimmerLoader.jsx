@@ -2,7 +2,7 @@ import React from "react";
 
 const ShimmerLoader = () => {
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 md:px-20 py-6">
       {/* Heading Placeholder */}
       <div className="h-8 bg-gray-300 rounded w-48 mx-auto mb-6 animate-pulse"></div>
 

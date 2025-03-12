@@ -51,7 +51,7 @@ const ZikrOAzkar = () => {
 
       <div
         ref={tickerRef}
-        className="flex items-center gap-x-20 overflow-x-auto hide-scrollbar  whitespace-nowrap"
+        className="flex items-center gap-x-20 overflow-x-auto hide-scrollbar whitespace-nowrap"
         style={{ scrollBehavior: "smooth" }}
       >
         {[...posts, ...posts].map((post, index) => (

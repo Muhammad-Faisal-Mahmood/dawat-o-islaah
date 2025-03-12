@@ -15,7 +15,7 @@ const HadithBookChapters = () => {
     );
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 md:px-20 py-6">
       <h2 className="text-2xl font-bold text-center mb-6">
         Chapters of {bookSlug.replace("-", " ")}
       </h2>

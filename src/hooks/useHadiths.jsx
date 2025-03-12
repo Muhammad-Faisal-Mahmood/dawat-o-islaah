@@ -24,7 +24,9 @@ const useHadiths = () => {
           setError("Failed to fetch Hadiths");
         }
       } catch (err) {
-        setError(err.message);
+        // console.log("error", err);
+
+        setError(err.response.data.message);
       } finally {
         setLoading(false);
         setIsFetchingMore(false);

@@ -17,15 +17,12 @@ const HadithList = () => {
   } = useHadiths();
 
   if (loading && currentPage === 1) return <ShimmerLoader />;
-  if (error)
-    return (
-      <p className="text-center text-red-500 mt-6">Error: {error.message}</p>
-    );
+  if (error) return <p className="text-center text-red-600 my-6">{error}</p>;
 
   console.log("hadiths data", hadiths);
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 md:px-20 py-6">
       <h2 className="text-2xl font-bold text-center mb-6">
         Hadiths in {bookSlug.replace("-", " ")} - Chapter {chapterNo}
       </h2>

@@ -13,7 +13,7 @@ const SurahCard = ({
     <Link to={`/surah/${number}`} className="block">
       <div
         className="grid grid-cols-2 items-center px-4 md:px-6 py-4 md:py-6 text-md md:text-lg 
-        transition-all duration-300 transform hover:scale-105 hover:shadow-lg cursor-pointer relative"
+        transition-all duration-300 transform hover:scale-102 rounded-lg border-neutral-200 border-2 hover:shadow-lg cursor-pointer relative"
       >
         {/* Left Side - English Name & Details */}
         <div className="pr-2">

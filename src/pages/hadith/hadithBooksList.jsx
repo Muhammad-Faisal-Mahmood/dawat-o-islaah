@@ -11,12 +11,13 @@ const HadithBooksList = () => {
     return <p className="text-center text-red-500">Error: {error.message}</p>;
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 md:px-20 py-6">
       <h2 className="text-2xl font-bold text-center mb-6">Hadith Books</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {books?.books?.map((book) => (
-          <HadithBookCard key={book.id} book={book} />
-        ))}
+        {books?.books?.length > 0 &&
+          books.books
+            .filter((book) => book.hadiths_count > 0)
+            .map((book) => <HadithBookCard key={book.id} book={book} />)}
       </div>
     </div>
   );
