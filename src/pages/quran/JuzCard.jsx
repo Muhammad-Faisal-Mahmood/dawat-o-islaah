@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const SurahCard = ({
+const JuzCard = ({
   number,
   englishName,
-  englishNameTranslation,
   numberOfAyahs,
-  revelationType,
   arabicName,
+  startingSurah,
+  endingSurah,
 }) => {
   return (
-    <Link to={`/surah/${number}`} className="block">
+    <Link to={`/juz/${number}`} className="block">
       <div
         className="grid grid-cols-2 items-center px-4 md:px-6 py-4 md:py-6 text-md md:text-lg 
         transition-all duration-300 transform hover:scale-102 rounded-lg border-neutral-200 border-2 hover:shadow-lg cursor-pointer relative"
@@ -20,11 +20,9 @@ const SurahCard = ({
           <h3 className="text-lg md:text-xl font-semibold leading-tight">
             {number}. {englishName}
           </h3>
-          <p className="text-sm md:text-md text-gray-500">
-            {englishNameTranslation && englishNameTranslation}
-          </p>
+
           <p className="text-xs md:text-sm text-gray-400">
-            {revelationType} | {numberOfAyahs} Verses
+            {startingSurah} - {endingSurah} | {numberOfAyahs} Verses
           </p>
         </div>
 
@@ -40,4 +38,4 @@ const SurahCard = ({
   );
 };
 
-export default SurahCard;
+export default JuzCard;

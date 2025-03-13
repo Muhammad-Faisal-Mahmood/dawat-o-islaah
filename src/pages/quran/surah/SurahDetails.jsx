@@ -4,6 +4,7 @@ import useSurah from "../../../hooks/useSurah";
 import VerseCard from "./VerseCard";
 import { FaChevronDown } from "react-icons/fa";
 import ShimmerLoader from "./SurahShimmer";
+import AudioPlayer from "../../../components/AppComponents/audioPlayer";
 
 const SurahDetails = () => {
   const { surahNumber } = useParams();
@@ -13,12 +14,15 @@ const SurahDetails = () => {
     verses,
     translations,
     audioLinks,
+    fullSurahAudio, // Full Surah audio added
     selectedTranslations,
     setSelectedTranslations,
     loadingDetails,
     loadingVerses,
     error,
   } = useSurah(surahNumber);
+
+  // console.log("fullSurahAudio", fullSurahAudio);
 
   const [showDropdown, setShowDropdown] = useState({ en: false, ur: false });
   const [translationsEnabled, setTranslationsEnabled] = useState(false);
@@ -66,6 +70,15 @@ const SurahDetails = () => {
         <p className="text-3xl text-blue-600 font-bold mt-4">
           {surahDetails.name}
         </p>
+
+        {/* 🎵 Full Surah Audio Player */}
+        {fullSurahAudio && (
+          <div className="mt-4">
+            <AudioPlayer
+              audioFiles={fullSurahAudio.map((ayah) => ayah.audio)}
+            />
+          </div>
+        )}
 
         <div className="flex items-center space-x-2 justify-center my-4 md:my-6">
           <span className="md:text-xl">Translations</span>

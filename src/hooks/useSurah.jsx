@@ -10,6 +10,7 @@ const useSurah = (surahNumber) => {
   const [verses, setVerses] = useState([]);
   const [translations, setTranslations] = useState({ en: {}, ur: {} });
   const [audioLinks, setAudioLinks] = useState([]);
+  const [fullSurahAudio, setFullSurahAudio] = useState(null);
   const [selectedTranslations, setSelectedTranslations] = useState({
     en: ["en.sahih"], // Default English translations
     ur: ["ur.junagarhi"], // Default Urdu translations
@@ -46,9 +47,9 @@ const useSurah = (surahNumber) => {
     fetchSurahDetails();
   }, [surahNumber]); // Only runs once when component mounts
 
-  // Fetch Selected Translations Dynamically
+  // Fetch Selected Translations & Audio
   useEffect(() => {
-    const fetchVerses = async () => {
+    const fetchVersesAndAudio = async () => {
       setLoadingVerses(true);
       try {
         let englishTranslations = {};
@@ -71,25 +72,33 @@ const useSurah = (surahNumber) => {
           urduTranslations[identifier] = response.data.data.ayahs;
         }
 
-        // Fetch Audio (Only Once)
-        if (audioLinks.length === 0) {
-          const audioResponse = await apiClient.get(
-            `/surah/${surahNumber}/ar.alafasy`
-          );
-          audioData = audioResponse.data.data.ayahs.map((ayah) => ayah.audio);
-        }
+        // Fetch Ayah-wise Audio
+        const audioResponse = await apiClient.get(
+          `/surah/${surahNumber}/ar.alafasy`
+        );
+        audioData = audioResponse.data.data.ayahs.map((ayah) => ayah.audio);
+
+        // Fetch Full Surah Audio
+        const fullSurahResponse = await apiClient.get(
+          `/surah/${surahNumber}/ar.alafasy`
+        );
+        // console.log("fullSurahResponse", fullSurahResponse);
+
+        const fullAudioLink = fullSurahResponse.data.data.ayahs;
 
         setVerses(surahDetails.ayahs); // Preserve original Arabic text
         setTranslations({ en: englishTranslations, ur: urduTranslations });
-        if (audioData.length > 0) setAudioLinks(audioData);
+        setAudioLinks(audioData);
+        setFullSurahAudio(fullAudioLink);
       } catch (err) {
-        setError("Failed to fetch translations");
+        console.error("Failed to fetch translations/audio:", err);
+        setError("Failed to fetch translations/audio");
       } finally {
         setLoadingVerses(false);
       }
     };
 
-    if (surahDetails) fetchVerses();
+    if (surahDetails) fetchVersesAndAudio();
   }, [selectedTranslations, surahDetails]); // Only runs when translations change
 
   return {
@@ -98,6 +107,7 @@ const useSurah = (surahNumber) => {
     verses,
     translations,
     audioLinks,
+    fullSurahAudio,
     selectedTranslations,
     setSelectedTranslations,
     loadingDetails,

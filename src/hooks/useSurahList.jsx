@@ -10,7 +10,7 @@ const useSurahList = () => {
     const fetchSurahs = async () => {
       try {
         const data = await quranApi.get("/surah");
-        console.log("data = ", data?.data?.data);
+        // console.log("data = ", data?.data?.data);
         setSurahs(data?.data?.data);
       } catch (err) {
         setError("Failed to fetch Surahs");
