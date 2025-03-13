@@ -6,7 +6,7 @@ const AudioPlayer = ({ audioFiles }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
-  // Load new audio when track changes
+  // Load new audio when track changess
   useEffect(() => {
     if (audioFiles.length > 0 && audioRef.current) {
       audioRef.current.src = audioFiles[currentTrackIndex];
