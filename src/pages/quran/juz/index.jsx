@@ -1,4 +1,4 @@
-import JuzDetails from "./juzDetails";
+import JuzDetails from "./JuzDetails";
 
 const index = () => {
   return <JuzDetails />;
