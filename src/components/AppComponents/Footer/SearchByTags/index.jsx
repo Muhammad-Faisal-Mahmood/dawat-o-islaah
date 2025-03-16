@@ -18,7 +18,7 @@ const SearchByTags = () => {
             key={index}
             className="p-2 border hover:border-amber-500 rounded  transition-all "
           >
-            <text className="hover:text-amber-500 transition-all">{item}</text>
+            <div className="hover:text-amber-500 transition-all">{item}</div>
           </Link>
         ))}
       </div>

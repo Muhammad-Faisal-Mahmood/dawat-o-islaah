@@ -9,7 +9,6 @@ const MenuItems = ({ isMobile }) => {
     { name: "alQuran" },
     { name: "alHadith" },
     { name: "islamicBooks" },
-    { name: "islamicTools" },
     { name: "masnoonDuas" },
     { name: "masail" },
     { name: "questionAnswer" },

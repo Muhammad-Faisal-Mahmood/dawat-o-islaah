@@ -73,26 +73,31 @@ const SurahDetails = () => {
 
         {/* 🎵 Full Surah Audio Player */}
         {fullSurahAudio && (
-          <div className="mt-4">
-            <AudioPlayer
+          <div className="mt-4 justify-center flex">
+            {/* <AudioPlayer
               audioFiles={fullSurahAudio.map((ayah) => ayah.audio)}
-            />
+            /> */}
+            <audio className="w-full" controls>
+              <source
+                src={`https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${surahNumber}.mp3`}
+                type="audio/mpeg"
+              />
+              Your browser does not support the audio element.
+            </audio>
           </div>
         )}
 
         <div className="flex items-center space-x-2 justify-center my-4 md:my-6">
-          <span className="md:text-xl">Translations</span>
+          <span className="text-xl">Translations</span>
           <div
-            className={`w-8 h-6 md:w-14 md:h-8 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer transition-all duration-300 ${
+            className={`w-14 h-8 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer transition-all duration-300 ${
               translationsEnabled ? "bg-green-500" : "bg-gray-400"
             }`}
             onClick={() => setTranslationsEnabled(!translationsEnabled)}
           >
             <div
-              className={`w-4 h-4 md:w-6 md:h-6 bg-white rounded-full shadow-md transform transition-all duration-300 ${
-                translationsEnabled
-                  ? "translate-x-2 md:translate-x-6"
-                  : "translate-x-0"
+              className={`w-6 h-6 bg-white rounded-full shadow-md transform transition-all duration-300 ${
+                translationsEnabled ? "translate-x-6" : "translate-x-0"
               }`}
             ></div>
           </div>

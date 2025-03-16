@@ -25,11 +25,9 @@ const SearchByPosts = () => {
           <div key={index} className="">
             {/* <div className="border-2 border-white" /> */}
 
-            <Link className="">
-              <span className="border-l-4 mr-3"></span>
-              <text className="hover:text-amber-400 transition-all">
-                {item}
-              </text>
+            <Link className="flex items-center space-x-2">
+              <span className="border-l-4 h-5 " />
+              <div className="hover:text-amber-400 transition-all">{item}</div>
             </Link>
             {index < itemsSearchByPosts.length - 1 && (
               <div className="border border-amber-500 my-3" />

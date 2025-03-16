@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaPlay, FaPause, FaTimes } from "react-icons/fa";
 import tafsirData from "../../../../data/tafsir/tafsirByAyah.json"; // Import the Tafsir JSON
 import { IoBookOutline } from "react-icons/io5";
