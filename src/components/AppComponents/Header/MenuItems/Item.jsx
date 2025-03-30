@@ -13,6 +13,8 @@ const Item = ({ item }) => {
       ? "alQuran"
       : item === "alHadith"
       ? "alHadith"
+      : item === "islamicBooks"
+      ? "islamicBooks"
       : "#";
 
   return (

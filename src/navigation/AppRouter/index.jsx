@@ -13,6 +13,7 @@ import InheritanceCalculator from "../../pages/IslamicTools/InheritanceCalculato
 import PrayerTimings from "../../pages/IslamicTools/PrayerTimings";
 import QiblaDirection from "../../pages/IslamicTools/QiblaDirection";
 import NearestMosquesMap from "../../pages/IslamicTools/NearestMosque";
+import IslamicBooks from "../../pages/islamicBooks";
 export default function AppRouter() {
   return (
     <ScrollToTopWrapper>
@@ -28,6 +29,7 @@ export default function AppRouter() {
             path="alHadith/:bookSlug/:chapterNo"
             element={<HadithList />}
           />
+          <Route path="islamicBooks" element={<IslamicBooks />} />
         </Route>
       </Routes>
       <Routes>
