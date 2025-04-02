@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-const apiKey = import.meta.env.VITE_MAPS_API_KEY;
+const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 // Shared function to load Google Maps API.
 const loadGoogleMapsScript = (callback) => {
