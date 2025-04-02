@@ -14,6 +14,7 @@ import PrayerTimings from "../../pages/IslamicTools/PrayerTimings";
 import QiblaDirection from "../../pages/IslamicTools/QiblaDirection";
 import NearestMosquesMap from "../../pages/IslamicTools/NearestMosque";
 import IslamicBooks from "../../pages/islamicBooks";
+import BookDetails from "../../pages/islamicBooks/BookDetails";
 export default function AppRouter() {
   return (
     <ScrollToTopWrapper>
@@ -30,6 +31,7 @@ export default function AppRouter() {
             element={<HadithList />}
           />
           <Route path="islamicBooks" element={<IslamicBooks />} />
+          <Route path="islamicBooks/:bookId" element={<BookDetails />} />
         </Route>
       </Routes>
       <Routes>

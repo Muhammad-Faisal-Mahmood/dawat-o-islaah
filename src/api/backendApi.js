@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8000/api/";
+const BACKEND_BASE_URL = "http://localhost:8000/api/";
 
 const backendApiClient = axios.create({
-  baseURL: BASE_URL,
+  baseURL: BACKEND_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -18,4 +18,4 @@ const setAuthToken = (token) => {
   }
 };
 
-export { backendApiClient, setAuthToken };
+export { backendApiClient, setAuthToken, BACKEND_BASE_URL };

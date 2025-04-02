@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { backendApiClient } from "../api/backendApi";
+import { useBookContext } from "../context/BookContext";
 
 const useIslamicBooks = (searchQuery = "", token = null) => {
-  const [books, setBooks] = useState([]);
+  const { books, setBooks } = useBookContext();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const useIslamicBooks = (searchQuery = "", token = null) => {
     };
 
     fetchBooks();
-  }, [searchQuery, token]);
+  }, [searchQuery, token, setBooks]);
 
   return { books, loading };
 };
