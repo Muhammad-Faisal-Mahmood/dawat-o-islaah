@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 const BookCard = ({
   title,
@@ -10,107 +10,179 @@ const BookCard = ({
   coverImage,
   pdfFile,
   uploadedAt,
-  id,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Set initial value
+    checkMobile();
+
+    // Add event listener
+    window.addEventListener("resize", checkMobile);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Animation variants
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
+  const drawerVariants = {
+    hidden: {
+      x: isMobile ? 0 : "100%",
+      y: isMobile ? "100%" : 0,
+    },
+    visible: {
+      x: 0,
+      y: 0,
+      transition: { type: "spring", damping: 25, stiffness: 300 },
+    },
+    exit: {
+      x: isMobile ? 0 : "100%",
+      y: isMobile ? "100%" : 0,
+      transition: { duration: 0.3 },
+    },
+  };
+
+  const handleDownload = (e) => {
+    e.preventDefault();
+    window.open(pdfFile, "_blank", "noopener,noreferrer");
+  };
 
   return (
-    <>
-      <Link to={id ? `/islamicBooks/${id}` : "#"}>
-        <div className="bg-white shadow-lg rounded-xl p-4 flex flex-col justify-between h-[450px]">
-          {/* Book Cover */}
-          <img
-            src={coverImage}
-            alt={title}
-            className="w-full h-48 object-cover rounded-lg"
-          />
+    <div className="relative">
+      <div className="bg-white shadow-lg rounded-xl p-4 flex flex-col justify-between h-[450px]">
+        {/* Book Cover */}
+        <img
+          src={coverImage}
+          alt={title}
+          className="w-full h-48 object-cover rounded-lg"
+        />
 
-          {/* Book Details */}
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold mt-3">{title}</h3>
-            <p className="text-gray-600">By {author}</p>
-            <p className="text-base text-gray-500 mt-2 line-clamp-3">
-              {description}
-            </p>
-          </div>
-
-          {/* Uploaded Date */}
-          <p className="text-sm text-gray-600 mt-2">
-            Published: {new Date(uploadedAt).toLocaleDateString()}
+        {/* Book Details */}
+        <div className="flex-1">
+          <h3 className="text-lg font-semibold mt-3">{title}</h3>
+          <p className="text-gray-600">By {author}</p>
+          <p className="text-base text-gray-500 mt-2 line-clamp-3">
+            {description}
           </p>
-
-          {/* Buttons */}
-          <div className="mt-4 flex gap-3">
-            {/* Download Button */}
-            <a
-              href={pdfFile}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 text-center bg-[#1E3A5F] text-white py-2 rounded-lg 
-              transition-all duration-300 ease-in-out transform hover:bg-blue-950 hover:scale-105"
-            >
-              Download PDF
-            </a>
-
-            {/* Read Button */}
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setIsOpen(true);
-              }}
-              className="flex-1 text-center bg-green-600 text-white py-2 rounded-lg
-              transition-all duration-300 ease-in-out transform hover:bg-green-800 hover:scale-105"
-            >
-              Read
-            </button>
-          </div>
         </div>
-      </Link>
 
-      {/* PDF Viewer Modal */}
-      {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="w-full h-full md:w-4/5 md:h-4/5 bg-white rounded-lg overflow-hidden flex flex-col">
-            {/* Header with close button */}
-            <div className="flex justify-between items-center p-4 border-b">
-              <h3 className="text-lg font-semibold">{title}</h3>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                ✕
-              </button>
-            </div>
+        {/* Uploaded Date */}
+        <p className="text-sm text-gray-600 mt-2">
+          Published: {new Date(uploadedAt).toLocaleDateString()}
+        </p>
 
-            {/* PDF Viewer */}
-            <div className="flex-1 overflow-auto">
-              <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-                <Viewer
-                  fileUrl={pdfFile}
-                  defaultScale={1.0}
-                  renderError={(error) => (
-                    <div className="flex flex-col items-center justify-center h-full text-red-500 p-4">
-                      <p>Failed to load PDF: {error.message}</p>
-                      <button
-                        onClick={() => setIsOpen(false)}
-                        className="mt-4 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-                      >
-                        Close
-                      </button>
-                    </div>
-                  )}
-                  renderLoader={() => (
-                    <div className="flex items-center justify-center h-full">
-                      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-                    </div>
-                  )}
-                />
-              </Worker>
-            </div>
-          </div>
+        {/* Buttons */}
+        <div className="mt-4 flex gap-3">
+          <button
+            onClick={handleDownload}
+            className="flex-1 text-center bg-[#1E3A5F] text-white py-2 rounded-lg 
+            transition-all duration-300 ease-in-out transform hover:bg-blue-950 hover:scale-105"
+          >
+            Download
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setIsOpen(true);
+            }}
+            className="flex-1 text-center bg-green-600 text-white py-2 rounded-lg
+            transition-all duration-300 ease-in-out transform hover:bg-green-800 hover:scale-105"
+          >
+            Read
+          </button>
         </div>
-      )}
-    </>
+      </div>
+
+      {/* PDF Viewer Modal with Framer Motion */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              className="fixed inset-0 overlay-class z-40"
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={overlayVariants}
+              onClick={() => setIsOpen(false)}
+            />
+
+            {/* Drawer */}
+            <motion.div
+              className={`fixed z-50 bg-white shadow-xl ${
+                isMobile
+                  ? "inset-x-0 bottom-0 h-[90vh] rounded-t-3xl"
+                  : "top-0 right-0 h-full w-full md:w-1/2 lg:w-2/5"
+              }`}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={drawerVariants}
+            >
+              {/* Header */}
+              <div className="flex justify-between items-center p-4 border-b sticky top-0 bg-white z-10">
+                <h3 className="text-lg font-semibold">{title}</h3>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-1 rounded-full hover:bg-gray-100"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              {/* PDF Viewer */}
+              <div className="h-[calc(100%-56px)] overflow-auto">
+                <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+                  <Viewer
+                    fileUrl={pdfFile}
+                    defaultScale={1.0}
+                    renderError={(error) => (
+                      <div className="flex flex-col items-center justify-center h-full text-red-500 p-4">
+                        <p>Failed to load PDF: {error.message}</p>
+                        <button
+                          onClick={() => setIsOpen(false)}
+                          className="mt-4 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    )}
+                    renderLoader={() => (
+                      <div className="flex items-center justify-center h-full">
+                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                      </div>
+                    )}
+                  />
+                </Worker>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 
