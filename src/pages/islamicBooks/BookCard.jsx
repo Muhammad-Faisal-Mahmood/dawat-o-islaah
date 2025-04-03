@@ -134,14 +134,14 @@ const BookCard = ({
                 <h3 className="text-lg font-semibold">{title}</h3>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1 rounded-full hover:bg-gray-100"
+                  className="p-1 rounded-full hover:bg-red-200 bg-red-100 transition-all duration-200 cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className="h-7 w-7"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    stroke="red"
                   >
                     <path
                       strokeLinecap="round"

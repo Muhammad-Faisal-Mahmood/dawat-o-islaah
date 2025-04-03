@@ -14,7 +14,9 @@ import PrayerTimings from "../../pages/IslamicTools/PrayerTimings";
 import QiblaDirection from "../../pages/IslamicTools/QiblaDirection";
 import NearestMosquesMap from "../../pages/IslamicTools/NearestMosque";
 import IslamicBooks from "../../pages/islamicBooks";
-import BookDetails from "../../pages/islamicBooks/BookDetails";
+import Masail from "../../pages/masail";
+import { BookProvider } from "../../context/BookContext";
+import { MasailProvider } from "../../context/MasailContext";
 export default function AppRouter() {
   return (
     <ScrollToTopWrapper>
@@ -30,22 +32,26 @@ export default function AppRouter() {
             path="alHadith/:bookSlug/:chapterNo"
             element={<HadithList />}
           />
-          <Route path="islamicBooks" element={<IslamicBooks />} />
-          <Route path="islamicBooks/:bookId" element={<BookDetails />} />
         </Route>
       </Routes>
-      <Routes>
-        <Route path="/" element={<WithoutHeroLayout />}>
-          <Route path="zakat-calculator" element={<ZakatCalculator />} />
-          <Route
-            path="inheritance-calculator"
-            element={<InheritanceCalculator />}
-          />
-          <Route path="prayer-timings" element={<PrayerTimings />} />
-          <Route path="qibla-direction" element={<QiblaDirection />} />
-          <Route path="nearest-mosque" element={<NearestMosquesMap />} />
-        </Route>
-      </Routes>
+      <BookProvider>
+        <MasailProvider>
+          <Routes>
+            <Route path="/" element={<WithoutHeroLayout />}>
+              <Route path="zakat-calculator" element={<ZakatCalculator />} />
+              <Route
+                path="inheritance-calculator"
+                element={<InheritanceCalculator />}
+              />
+              <Route path="prayer-timings" element={<PrayerTimings />} />
+              <Route path="qibla-direction" element={<QiblaDirection />} />
+              <Route path="nearest-mosque" element={<NearestMosquesMap />} />
+              <Route path="islamicBooks" element={<IslamicBooks />} />
+              <Route path="masail" element={<Masail />} />
+            </Route>
+          </Routes>
+        </MasailProvider>
+      </BookProvider>
     </ScrollToTopWrapper>
   );
 }

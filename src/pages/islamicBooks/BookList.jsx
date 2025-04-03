@@ -9,9 +9,9 @@ const BookList = () => {
   const { books, loading } = useIslamicBooks(query);
 
   return (
-    <div className="max-w-6xl mx-auto p-4 min-h-[80vh] flex flex-col">
+    <div className="max-w-6xl mx-auto p-4 my-12 min-h-[80vh] flex flex-col">
       {/* Page Title and Search */}
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">
+      <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">
         Islamic Books Collection
       </h2>
       <BookSearchBar query={query} setQuery={setQuery} />
