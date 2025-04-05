@@ -17,23 +17,28 @@ import IslamicBooks from "../../pages/islamicBooks";
 import Masail from "../../pages/masail";
 import { BookProvider } from "../../context/BookContext";
 import { MasailProvider } from "../../context/MasailContext";
+import { BlogProvider } from "../../context/BlogContext";
+import BlogDetail from "../../pages/blog";
 export default function AppRouter() {
   return (
     <ScrollToTopWrapper>
-      <Routes>
-        <Route path="/" element={<WithHeroLayout />}>
-          <Route index element={<Home />} />
-          <Route path="alQuran" element={<Quran />} />
-          <Route path="surah/:surahNumber" element={<Surah />} />
-          <Route path="juz/:juzNumber" element={<Juz />} />
-          <Route path="alHadith" element={<Hadith />} />
-          <Route path="alHadith/:bookSlug" element={<HadithBookChapters />} />
-          <Route
-            path="alHadith/:bookSlug/:chapterNo"
-            element={<HadithList />}
-          />
-        </Route>
-      </Routes>
+      <BlogProvider>
+        <Routes>
+          <Route path="/" element={<WithHeroLayout />}>
+            <Route index element={<Home />} />
+            <Route path="alQuran" element={<Quran />} />
+            <Route path="surah/:surahNumber" element={<Surah />} />
+            <Route path="juz/:juzNumber" element={<Juz />} />
+            <Route path="alHadith" element={<Hadith />} />
+            <Route path="alHadith/:bookSlug" element={<HadithBookChapters />} />
+            <Route
+              path="alHadith/:bookSlug/:chapterNo"
+              element={<HadithList />}
+            />
+            <Route path="blog/:blogid" element={<BlogDetail />} />
+          </Route>
+        </Routes>
+      </BlogProvider>
       <BookProvider>
         <MasailProvider>
           <Routes>
