@@ -14,7 +14,7 @@ const SurahList = () => {
   if (error) return <p className="text-center text-red-500 py-4">{error}</p>;
 
   const surahList = (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:mx-20">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:mx-20 mb-8">
       {surahs.map((surah) => (
         <SurahCard
           key={surah.number}

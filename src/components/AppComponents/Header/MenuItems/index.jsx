@@ -1,19 +1,31 @@
 import { useLanguage } from "../../../../context/LanguageContext";
 import Item from "./Item";
 
-const MenuItems = ({ isMobile }) => {
+const MenuItems = ({ isMobile, isUser }) => {
   const { language } = useLanguage();
 
-  const items = [
+  // Base items always visible to everyone
+  const baseItems = [
     { name: "home" },
     { name: "alQuran" },
     { name: "alHadith" },
     { name: "islamicBooks" },
-    { name: "masnoonDuas" },
     { name: "masail" },
-    { name: "questionAnswer" },
   ];
 
+  // Items that depend on authentication status
+  let authDependentItems = [];
+
+  if (isUser) {
+    authDependentItems = [{ name: "questionAnswer" }];
+  } else if (!isUser && isMobile) {
+    authDependentItems = [{ name: "login" }];
+  }
+
+  // Combine the base items with authentication-dependent items
+  const items = [...baseItems, ...authDependentItems];
+
+  // Handle Arabic/Urdu right-to-left ordering if needed
   const renderedItems = language === "ur" ? [...items].reverse() : items;
 
   return (

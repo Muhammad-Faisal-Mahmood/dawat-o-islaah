@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
-import Header from "../../components/AppComponents/Header";
-import Footer from "../../components/AppComponents/Footer";
-import HeaderBanner from "../../components/AppComponents/Banner/HeaderBanner";
-import FooterBanner from "../../components/AppComponents/Banner/FooterBanner";
-import Hero from "../../pages/home/Hero";
+import Header from "../components/AppComponents/Header";
+import Footer from "../components/AppComponents/Footer";
+import HeaderBanner from "../components/AppComponents/Banner/HeaderBanner";
+import FooterBanner from "../components/AppComponents/Banner/FooterBanner";
+import Hero from "../pages/home/Hero";
 
 export function WithHeroLayout() {
   return (

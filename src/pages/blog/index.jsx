@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useBlogContext } from "../../context/BlogContext";
+import { useAuthData } from "../../context/AuthContext";
 
 const BlogDetail = () => {
   const { blog } = useBlogContext();
   const { blogid } = useParams();
   const [commentInput, setCommentInput] = useState("");
+  const { user } = useAuthData();
+  const isUser = !!user;
 
   const selectedBlog = blog.find((b) => String(b.id) === String(blogid));
 
@@ -80,15 +83,30 @@ const BlogDetail = () => {
         </h2>
         <div className="flex gap-2 items-center">
           <input
+            disabled={!isUser}
             type="text"
             value={commentInput}
             onChange={(e) => setCommentInput(e.target.value)}
-            placeholder="Write your comment..."
-            className="flex-1 border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
+            placeholder={
+              isUser
+                ? "Write your comment..."
+                : "To post a comment, you need to be logged in..."
+            }
+            className={`flex-1 border p-2 rounded focus:outline-none focus:ring-2
+        ${
+          isUser
+            ? "border-gray-300 focus:ring-green-400"
+            : "bg-gray-100 border-gray-200 text-gray-500 cursor-not-allowed"
+        }`}
           />
           <button
-            className="px-4 py-2 rounded text-white"
-            style={{ backgroundColor: "#1E3A5F" }}
+            disabled={!isUser}
+            className={`px-4 py-2 rounded text-white transition
+        ${
+          isUser
+            ? "bg-[#1E3A5F] hover:bg-[#16324d]"
+            : "bg-gray-400 cursor-not-allowed"
+        }`}
           >
             Post
           </button>
