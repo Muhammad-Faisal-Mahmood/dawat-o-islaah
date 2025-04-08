@@ -1,23 +1,18 @@
 import React from "react";
 import DailyCard from "../../components/AppComponents/Home/DailyCard";
+import verses from "../../../data/dailyHadithVerse/dailyVerse.json";
+import hadiths from "../../../data/dailyHadithVerse/dailyHadith.json";
 
 const DailyVerseHadees = () => {
-  const verse = {
-    arabic: "يَدْعُونَ فِيهَا بِكُلِّ فَاكِهَةٍ آمِنِينَ",
-    urdu: "وہ ہر قسم کے پھلوں کو بلا خوف و خطر طلب کریں گے۔",
-    english:
-      "They will call therein for every kind of fruit, secure from all harm.",
-    reference: "Surah Waqiah - Verse 32",
-  };
+  const currentDay = new Date().getDate();
 
-  const hadees = {
-    arabic:
-      "إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
-    urdu: "اعمال کا دارومدار نیتوں پر ہے، اور ہر آدمی کو وہی ملے گا جس کی اس نے نیت کی۔",
-    english:
-      "Actions are judged by intentions, and everyone will get what was intended.",
-    reference: "Sahih Bukhari - Hadith 1",
-  };
+  // Use modulo to ensure we stay within array bounds
+  const verseIndex = (currentDay - 1) % verses.length;
+  const hadeesIndex = (currentDay - 1) % hadiths.length;
+
+  // Get today's verse and hadith
+  const verse = verses[verseIndex];
+  const hadees = hadiths[hadeesIndex];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-6 lg:px-32 px-10 sm:px-14 md:px-20">
