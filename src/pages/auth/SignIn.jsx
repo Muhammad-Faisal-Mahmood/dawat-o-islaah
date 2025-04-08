@@ -86,7 +86,7 @@ const SignIn = () => {
               </div>
             )}
 
-            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-4" onSubmit={handleSubmit}>
               {/* Email Input */}
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -184,7 +184,7 @@ const SignIn = () => {
               </button>
 
               {/* Google Login Button */}
-              <button
+              {/* <button
                 type="button"
                 onClick={handleGoogleLogin}
                 disabled={isLoading}
@@ -192,10 +192,10 @@ const SignIn = () => {
               >
                 <FcGoogle className="w-5 h-5" />
                 Sign in with Google
-              </button>
+              </button> */}
 
               {/* Sign Up Link */}
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-4">
+              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don&apos;t have an account yet?{" "}
                 <Link
                   to="/signup"

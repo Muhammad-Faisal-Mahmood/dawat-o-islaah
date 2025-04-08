@@ -23,7 +23,7 @@ const Books = () => {
       title: "ISLAMIC BOOKS",
       description: "Read Popular Islamic books according to your interest",
       linkText: "Read Books",
-      link: "#",
+      link: "islamicBooks",
       icon: "📚",
     },
   ];

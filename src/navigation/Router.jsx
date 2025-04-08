@@ -29,6 +29,7 @@ import SetNewPassword from "../pages/auth/SetNewPassword";
 import { useAuthData } from "../context/AuthContext";
 import QuestionsPage from "../pages/qna/QuestionsPage";
 import { QNAProvider } from "../context/QnaContext";
+import { Toaster } from "react-hot-toast";
 
 export default function Router() {
   const { isAuthenticated } = useAuthData();
@@ -42,6 +43,7 @@ export default function Router() {
               <BookProvider>
                 <MasailProvider>
                   <QNAProvider>
+                    <Toaster />
                     <Routes>
                       <Route path="/" element={<WithHeroLayout />}>
                         <Route index element={<Home />} />

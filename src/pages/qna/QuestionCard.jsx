@@ -154,7 +154,7 @@ const QuestionCard = ({ question, highlightSearchTerm }) => {
       {isOpen && isAnswered && (
         <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
           <button
-            className="text-emerald-600 hover:text-emerald-700 text-sm font-medium"
+            className="text-emerald-600 hover:text-emerald-700 text-sm font-medium cursor-pointer"
             onClick={toggleFullAnswer}
           >
             {isFullAnswerVisible ? "Read less" : "Read full answer"}

@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogoSection from "./LogoSection";
+import { backendApiClient } from "../../api/backendApi";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   // State for form inputs
   const [formData, setFormData] = useState({
     email: "",
@@ -14,8 +17,10 @@ const SignUp = () => {
     acceptTerms: false,
   });
 
-  // State for password validation
+  // State for form errors
   const [passwordError, setPasswordError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -25,31 +30,40 @@ const SignUp = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
 
-    // Clear password error when typing
+    // Clear errors when typing
     if (name === "password" || name === "confirmPassword") {
       setPasswordError("");
+    }
+    if (name === "email") {
+      setEmailError("");
     }
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setPasswordError("");
+    setEmailError("");
 
     // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
       setPasswordError("Passwords do not match");
+      setIsSubmitting(false);
       return;
     }
 
     // Validate password strength (optional)
     if (formData.password.length < 8) {
       setPasswordError("Password must be at least 8 characters");
+      setIsSubmitting(false);
       return;
     }
 
     // Validate terms accepted
     if (!formData.acceptTerms) {
       alert("Please accept the terms and conditions");
+      setIsSubmitting(false);
       return;
     }
 
@@ -61,20 +75,26 @@ const SignUp = () => {
       password: formData.password,
     };
 
-    console.log("API-ready data:", apiData);
+    try {
+      const response = await backendApiClient.post("auth/register/", apiData);
 
-    // Example API call:
-    // try {
-    //   const response = await fetch('/api/signup', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(apiData)
-    //   });
-    //   const data = await response.json();
-    //   // Handle response
-    // } catch (error) {
-    //   console.error('Signup error:', error);
-    // }
+      // If registration is successful
+      console.log("Registration successful:", response.data);
+      toast.success("User created successfully");
+      navigate("/signin");
+    } catch (error) {
+      console.error("Signup error:", error);
+
+      // Handle email already exists error
+      if (error.response && error.response.data.email) {
+        setEmailError(error.response.data.email[0]);
+      } else {
+        // Handle other errors
+        setEmailError("Registration failed. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Handle Google login
@@ -92,7 +112,7 @@ const SignUp = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create your account
             </h1>
-            <form className="space-y-4 md:space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid md:grid-cols-2 gap-2 md:gap-4">
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -139,6 +159,11 @@ const SignUp = () => {
                   placeholder="name@company.com"
                   required
                 />
+                {emailError && (
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                    {emailError}
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -175,48 +200,50 @@ const SignUp = () => {
                   </p>
                 )}
               </div>
-              {/* <div className="flex items-start">
-                    <div className="flex items-center h-5">
-                    <input
-                        id="terms"
-                        name="acceptTerms"
-                        type="checkbox"
-                        checked={formData.acceptTerms}
-                        onChange={handleChange}
-                        className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 outline-none cursor-pointer"
-                        required
-                    />
-                    </div>
-                    <div className="ml-3 text-sm">
-                    <label className="font-light text-gray-500 dark:text-gray-300">
-                        I accept the{" "}
-                        <a
-                        className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                        href="#"
-                        >
-                        Terms and Conditions
-                        </a>
-                    </label>
-                    </div>
-                </div> */}
+              <div className="flex items-start">
+                <div className="flex items-center h-5">
+                  <input
+                    id="terms"
+                    name="acceptTerms"
+                    type="checkbox"
+                    checked={formData.acceptTerms}
+                    onChange={handleChange}
+                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 outline-none cursor-pointer"
+                    required
+                  />
+                </div>
+                <div className="ml-3 text-sm">
+                  <label className="font-light text-gray-500 dark:text-gray-300">
+                    I accept the{" "}
+                    {/* <a className="font-medium text-blue-600 hover:underline dark:text-blue-500"> */}
+                    Terms and Conditions
+                    {/* </a> */}
+                  </label>
+                </div>
+              </div>
               <button
                 type="submit"
-                className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer"
+                disabled={isSubmitting}
+                className={`w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ${
+                  isSubmitting
+                    ? "opacity-70 cursor-not-allowed"
+                    : "cursor-pointer"
+                }`}
               >
-                Create account
+                {isSubmitting ? "Creating account..." : "Create account"}
               </button>
 
               {/* Google Sign Up Button */}
-              <button
+              {/* <button
                 type="button"
                 onClick={handleGoogleLogin}
                 className="w-full flex items-center justify-center gap-2 text-gray-700 bg-white hover:bg-gray-100 border border-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800 cursor-pointer"
               >
                 <FcGoogle className="w-5 h-5" />
                 Sign up with Google
-              </button>
+              </button> */}
 
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-4">
+              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account?{" "}
                 <Link
                   to={"/signin"}

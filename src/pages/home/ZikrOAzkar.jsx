@@ -53,14 +53,14 @@ const ZikrOAzkar = () => {
           ))}
         </motion.div>
       </div>
-      <div className="ml-auto flex items-center space-x-2 pl-10">
+      {/* <div className="ml-auto flex items-center space-x-2 pl-10">
         <button className="hover:text-black p-2 rounded-full text-white bg-[#C9A227]">
           <FaArrowLeft />
         </button>
         <button className="hover:text-black p-2 rounded-full text-white bg-[#C9A227]">
           <FaArrowRight />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

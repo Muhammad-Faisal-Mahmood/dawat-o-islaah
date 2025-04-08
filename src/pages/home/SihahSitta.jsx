@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SihahSittaGrid from "../../components/AppComponents/Home/SihahSittaGrid";
 
 const SihahSitta = () => {
@@ -17,9 +18,12 @@ const SihahSitta = () => {
       </h2>
       <SihahSittaGrid books={sihahSitta} />
       <div className="text-center mt-4">
-        <button className="px-4 py-2 bg-[#1E3A5F] uppercase font-bold text-white rounded">
-          View All Books
-        </button>
+        <Link
+          to={"alHadith"}
+          className="px-4 py-2 bg-[#1E3A5F] uppercase font-bold text-white rounded"
+        >
+          Read All Hadith Books
+        </Link>
       </div>
     </div>
   );
