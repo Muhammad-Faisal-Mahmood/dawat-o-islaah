@@ -1,63 +1,71 @@
-// AuthContext.js
-import React, { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect, useContext, useMemo } from "react";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("accessToken")
-  );
+  const getToken = () =>
+    sessionStorage.getItem("accessToken") ||
+    localStorage.getItem("accessToken");
+
+  const getUser = () =>
+    sessionStorage.getItem("user") || localStorage.getItem("user");
+
+  const [isAuthenticated, setIsAuthenticated] = useState(!!getToken());
+  const [token, setToken] = useState(getToken());
+  const [user, setUser] = useState(getUser());
 
   useEffect(() => {
-    // Update auth status if token changes externally
     const checkAuth = () => {
-      setIsAuthenticated(!!localStorage.getItem("accessToken"));
+      const freshToken = getToken();
+      const freshUser = getUser();
+
+      setIsAuthenticated(!!freshToken);
+      setToken(freshToken);
+      setUser(freshUser);
     };
+
     window.addEventListener("storage", checkAuth);
     return () => window.removeEventListener("storage", checkAuth);
   }, []);
 
+  const login = (newToken, newUser, remember) => {
+    if (remember) {
+      localStorage.setItem("accessToken", newToken);
+      localStorage.setItem("user", newUser);
+    } else {
+      sessionStorage.setItem("accessToken", newToken);
+      sessionStorage.setItem("user", newUser);
+    }
+
+    setIsAuthenticated(true);
+    setToken(newToken);
+    setUser(newUser);
+  };
+
   const logout = () => {
     localStorage.removeItem("accessToken");
-    sessionStorage.removeItem("accessToken");
     localStorage.removeItem("user");
+    sessionStorage.removeItem("accessToken");
     sessionStorage.removeItem("user");
+
     setIsAuthenticated(false);
-
-    console.log("logoutTriggered");
-  };
-  const login = (token, user, remember) => {
-    if (remember) {
-      localStorage.setItem("accessToken", token);
-      localStorage.setItem("user", user);
-    } else {
-      sessionStorage.setItem("accessToken", token);
-      sessionStorage.setItem("user", user);
-    }
-    setIsAuthenticated(true);
+    setToken(null);
+    setUser(null);
   };
 
-  const user = sessionStorage.getItem("user") || localStorage.getItem("user");
-  const token =
-    sessionStorage.getItem("accessToken") ||
-    localStorage.getItem("accessToken");
-
-  return (
-    <AuthContext.Provider
-      value={{
-        isAuthenticated,
-        setIsAuthenticated,
-        logout,
-        login,
-        token,
-        user,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+  const value = useMemo(
+    () => ({
+      isAuthenticated,
+      token,
+      user,
+      login,
+      logout,
+      setIsAuthenticated, // optional: can be removed if not needed outside
+    }),
+    [isAuthenticated, token, user]
   );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export const useAuthData = () => {
-  return useContext(AuthContext);
-};
+export const useAuthData = () => useContext(AuthContext);

@@ -19,6 +19,8 @@ const Item = ({ item }) => {
       ? "masail"
       : item === "login"
       ? "signin"
+      : item === "questionAnswer"
+      ? "questions-and-answers"
       : "#";
 
   return (

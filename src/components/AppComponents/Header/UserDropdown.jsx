@@ -1,12 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import { User } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAuthData } from "../../../context/AuthContext";
 
 const UserDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const { logout } = useAuthData();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/");
+  const lastSegment = pathSegments[pathSegments.length - 1];
 
   // Handle clicking outside to close dropdown
   useEffect(() => {
@@ -29,6 +33,7 @@ const UserDropdown = () => {
   const handleLogout = () => {
     logout();
     setIsOpen(false);
+    lastSegment == "questions-and-answers" && navigate("/");
 
     // Optional: Redirect to login page
     // window.location.href = '/login';

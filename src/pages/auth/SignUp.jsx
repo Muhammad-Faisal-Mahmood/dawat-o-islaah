@@ -86,13 +86,13 @@ const SignUp = () => {
   return (
     <section className="flex flex-col md:flex-row bg-gray-50 dark:bg-gray-900 py-8 md:h-screen">
       <LogoSection />
-      <div className="flex flex-col justify-center px-6 md:py-8 mx-auto lg:py-0 md:w-[50%]">
+      <div className="flex flex-col justify-center px-6 w-full  md:py-8 mx-auto lg:py-0 md:w-[50%]">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-2 md:space-y-4 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create your account
             </h1>
-            <form className="space-y-2 md:space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-4 md:space-y-4" onSubmit={handleSubmit}>
               <div className="grid md:grid-cols-2 gap-2 md:gap-4">
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -216,7 +216,7 @@ const SignUp = () => {
                 Sign up with Google
               </button>
 
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+              <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-4">
                 Already have an account?{" "}
                 <Link
                   to={"/signin"}
