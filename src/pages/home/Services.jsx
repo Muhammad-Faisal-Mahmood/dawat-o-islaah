@@ -6,21 +6,33 @@ import OnTimeIcon from "../../../assets/Icons/On_time.svg";
 import QiblaIcon from "../../../assets/Icons/Qibla.svg";
 import MosqueIcon from "../../../assets/Icons/The_prophets_mosque.svg";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 const Services = () => {
+  const { t } = useLanguage();
   const cards = [
     {
       id: 1,
       icon: (
-        <img src={LoansIcon} alt="Zakat Calculator" className="w-18 h-18" />
+        <img
+          src={LoansIcon}
+          alt={t("services.zakatCalculator")}
+          className="w-18 h-18"
+        />
       ),
-      title: "Zakat Calculator",
+      title: t("services.zakatCalculator"),
       route: "zakat-calculator",
     },
     {
       id: 2,
-      icon: <img src={OnTimeIcon} alt="Prayer Timing" className="w-18 h-18" />,
-      title: "Prayer Timing",
+      icon: (
+        <img
+          src={OnTimeIcon}
+          alt={t("services.prayerTiming")}
+          className="w-18 h-18"
+        />
+      ),
+      title: t("services.prayerTiming"),
       route: "prayer-timings",
     },
     {
@@ -28,23 +40,35 @@ const Services = () => {
       icon: (
         <img
           src={InheritanceIcon}
-          alt="Inheritance Calculator"
+          alt={t("services.inheritanceCalculator")}
           className="w-18 h-18"
         />
       ),
-      title: "Inheritance Calculator",
+      title: t("services.inheritanceCalculator"),
       route: "inheritance-calculator",
     },
     {
       id: 4,
-      icon: <img src={QiblaIcon} alt="Qibla Direction" className="w-18 h-18" />,
-      title: "Qibla Direction",
+      icon: (
+        <img
+          src={QiblaIcon}
+          alt={t("services.qiblaDirection")}
+          className="w-18 h-18"
+        />
+      ),
+      title: t("services.qiblaDirection"),
       route: "qibla-direction",
     },
     {
       id: 5,
-      icon: <img src={MosqueIcon} alt="Nearest Mosque" className="w-18 h-18" />,
-      title: "Nearest Mosque",
+      icon: (
+        <img
+          src={MosqueIcon}
+          alt={t("services.nearestMosque")}
+          className="w-18 h-18"
+        />
+      ),
+      title: t("services.nearestMosque"),
       route: "nearest-mosque",
     },
   ];
@@ -53,7 +77,7 @@ const Services = () => {
     <div className="bg-[#157347] py-10">
       <div className="text-center mb-10">
         <h2 className="uppercase text-white text-2xl lg:text-3xl font-bold">
-          Islamic Tools
+          {t("services.sectionTitle")}
         </h2>
       </div>
       <div className="flex flex-wrap justify-center gap-6 px-4">

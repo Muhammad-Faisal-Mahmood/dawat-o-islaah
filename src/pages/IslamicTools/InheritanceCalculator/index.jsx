@@ -1,11 +1,54 @@
 import React, { useState } from "react";
+import { useLanguage } from "../../../context/LanguageContext";
+
+const formFields = [
+  {
+    name: "totalLandArea",
+    type: "number",
+    min: 0,
+  },
+  {
+    name: "landUnit",
+    type: "select",
+    options: ["acres", "kanal", "marla"],
+  },
+  {
+    name: "totalCashAmount",
+    type: "number",
+    min: 0,
+  },
+  {
+    name: "spouse",
+    type: "select",
+    options: ["noSpouse", "wife", "husband"],
+  },
+  {
+    name: "numberOfSons",
+    type: "number",
+    min: 0,
+  },
+  {
+    name: "numberOfDaughters",
+    type: "number",
+    min: 0,
+  },
+  {
+    name: "motherAlive",
+    type: "checkbox",
+  },
+  {
+    name: "fatherAlive",
+    type: "checkbox",
+  },
+];
 
 const InheritanceCalculator = () => {
+  const { t } = useLanguage();
   const [values, setValues] = useState({
     totalLandArea: null,
-    landUnit: "acres", // Default land unit
+    landUnit: "acres",
     totalCashAmount: null,
-    spouse: "noSpouse", // Default spouse option
+    spouse: "noSpouse",
     numberOfSons: null,
     numberOfDaughters: null,
     motherAlive: false,
@@ -16,8 +59,7 @@ const InheritanceCalculator = () => {
     const { name, value, type, checked } = e.target;
     setValues({
       ...values,
-      [name]:
-        type === "checkbox" ? checked : value === "" ? null : parseFloat(value),
+      [name]: type === "checkbox" ? checked : value === "" ? null : value,
     });
   };
 
@@ -158,81 +200,12 @@ const InheritanceCalculator = () => {
   const convertLandShares = (landInAcres, unit) =>
     landInAcres ? convertFromAcres(landInAcres, unit).toFixed(2) : 0;
 
-  const formFields = [
-    {
-      label: "Total Land Area:",
-      name: "totalLandArea",
-      type: "number",
-      placeholder: "Enter land area",
-      min: 0,
-      handler: handleChange,
-    },
-    {
-      label: "Land Unit:",
-      name: "landUnit",
-      type: "select",
-      options: [
-        { value: "acres", label: "Acres" },
-        { value: "kanal", label: "Kanal" },
-        { value: "marla", label: "Marla" },
-      ],
-      handler: handleSelectChange,
-    },
-    {
-      label: "Total Cash Amount (PKR):",
-      name: "totalCashAmount",
-      type: "number",
-      placeholder: "Enter cash amount",
-      min: 0,
-      handler: handleChange,
-    },
-    {
-      label: "Spouse:",
-      name: "spouse",
-      type: "select",
-      options: [
-        { value: "noSpouse", label: "No Spouse" },
-        { value: "wife", label: "Wife" },
-        { value: "husband", label: "Husband" },
-      ],
-      handler: handleSelectChange,
-    },
-    {
-      label: "Number of Sons:",
-      name: "numberOfSons",
-      type: "number",
-      placeholder: "Enter number of sons",
-      min: 0,
-      handler: handleChange,
-    },
-    {
-      label: "Number of Daughters:",
-      name: "numberOfDaughters",
-      type: "number",
-      placeholder: "Enter number of daughters",
-      min: 0,
-      handler: handleChange,
-    },
-    {
-      label: "Mother Alive:",
-      name: "motherAlive",
-      type: "checkbox",
-      handler: handleChange,
-    },
-    {
-      label: "Father Alive:",
-      name: "fatherAlive",
-      type: "checkbox",
-      handler: handleChange,
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden">
         <div className="bg-green-500 py-4 sm:py-12">
           <h2 className="text-4xl font-extrabold text-center text-white">
-            🕌 Virasat Inheritance Calculator
+            🕌 {t("islamicTools.inheritanceCalculator.title")}
           </h2>
         </div>
         <div className="p-8 sm:p-10">
@@ -243,23 +216,25 @@ const InheritanceCalculator = () => {
                   className="font-semibold text-gray-700 text-lg"
                   htmlFor={field.name}
                 >
-                  {field.label}
+                  {t(`islamicTools.inheritanceCalculator.fields.${field.name}`)}
                 </label>
                 {field.type === "select" ? (
                   <select
                     id={field.name}
                     name={field.name}
                     value={values[field.name]}
-                    onChange={field.handler}
+                    onChange={handleChange}
                     className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all hover:shadow-md"
                   >
                     {field.options.map((option) => (
-                      <option
-                        className=""
-                        key={option.value}
-                        value={option.value}
-                      >
-                        {option.label}
+                      <option key={option} value={option}>
+                        {field.name === "landUnit"
+                          ? t(
+                              `islamicTools.inheritanceCalculator.units.${option}`
+                            )
+                          : t(
+                              `islamicTools.inheritanceCalculator.spouseOptions.${option}`
+                            )}
                       </option>
                     ))}
                   </select>
@@ -269,7 +244,7 @@ const InheritanceCalculator = () => {
                     id={field.name}
                     name={field.name}
                     checked={values[field.name]}
-                    onChange={field.handler}
+                    onChange={handleChange}
                     className="w-5 h-5 accent-green-400 cursor-pointer "
                   />
                 ) : (
@@ -278,8 +253,10 @@ const InheritanceCalculator = () => {
                     id={field.name}
                     name={field.name}
                     value={values[field.name] || ""}
-                    onChange={field.handler}
-                    placeholder={field.placeholder}
+                    onChange={handleChange}
+                    placeholder={t(
+                      "islamicTools.inheritanceCalculator.placeholder"
+                    )}
                     min={field.min}
                     className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all hover:shadow-md"
                   />
@@ -290,88 +267,108 @@ const InheritanceCalculator = () => {
 
           <div className="mt-10 bg-gradient-to-r from-green-500 to-amber-600 p-8 rounded-lg text-white">
             <h3 className="text-2xl font-semibold text-center mb-6">
-              Inheritance Shares
+              {t("islamicTools.inheritanceCalculator.shares")}
             </h3>
             <div className="space-y-4">
               <p className="text-xl font-medium">
-                Total Wealth - Cash:{" "}
+                {t("islamicTools.inheritanceCalculator.totalWealth")} -{" "}
+                {t("islamicTools.inheritanceCalculator.cash")}:{" "}
                 <span className="font-bold">
                   PKR {totalWealth.cash.toFixed(2)}
                 </span>
-                , Land:{" "}
+                , {t("islamicTools.inheritanceCalculator.land")}:{" "}
                 <span className="font-bold">
                   {convertLandShares(totalWealth.land, values.landUnit)}{" "}
-                  {values.landUnit}
+                  {t(
+                    `islamicTools.inheritanceCalculator.units.${values.landUnit}`
+                  )}
                 </span>
               </p>
               {spouseShare !== null && (
                 <p className="text-xl font-medium">
-                  {values.spouse === "wife" ? "Wife" : "Husband"} - Cash:{" "}
+                  {t(
+                    `islamicTools.inheritanceCalculator.spouseOptions.${values.spouse}`
+                  )}{" "}
+                  - {t("islamicTools.inheritanceCalculator.cash")}:{" "}
                   <span className="font-bold">
                     PKR {spouseShare.cash.toFixed(2)}
                   </span>
-                  , Land:{" "}
+                  , {t("islamicTools.inheritanceCalculator.land")}:{" "}
                   <span className="font-bold">
                     {convertLandShares(spouseShare.land, values.landUnit)}{" "}
-                    {values.landUnit}
+                    {t(
+                      `islamicTools.inheritanceCalculator.units.${values.landUnit}`
+                    )}
                   </span>
                 </p>
               )}
               {motherShare !== null && (
                 <p className="text-xl font-medium">
-                  Mother - Cash:{" "}
+                  {t("islamicTools.inheritanceCalculator.mother")} -{" "}
+                  {t("islamicTools.inheritanceCalculator.cash")}:{" "}
                   <span className="font-bold">
                     PKR {motherShare.cash.toFixed(2)}
                   </span>
-                  , Land:{" "}
+                  , {t("islamicTools.inheritanceCalculator.land")}:{" "}
                   <span className="font-bold">
                     {convertLandShares(motherShare.land, values.landUnit)}{" "}
-                    {values.landUnit}
+                    {t(
+                      `islamicTools.inheritanceCalculator.units.${values.landUnit}`
+                    )}
                   </span>
                 </p>
               )}
               {fatherShare !== null && (
                 <p className="text-xl font-medium">
-                  Father - Cash:{" "}
+                  {t("islamicTools.inheritanceCalculator.father")} -{" "}
+                  {t("islamicTools.inheritanceCalculator.cash")}:{" "}
                   <span className="font-bold">
                     PKR {fatherShare.cash.toFixed(2)}
                   </span>
-                  , Land:{" "}
+                  , {t("islamicTools.inheritanceCalculator.land")}:{" "}
                   <span className="font-bold">
                     {convertLandShares(fatherShare.land, values.landUnit)}{" "}
-                    {values.landUnit}
+                    {t(
+                      `islamicTools.inheritanceCalculator.units.${values.landUnit}`
+                    )}
                   </span>
                 </p>
               )}
               {childrenShare.sons !== null && (
                 <p className="text-xl font-medium">
-                  Sons - Cash:{" "}
+                  {t("islamicTools.inheritanceCalculator.sons")} -{" "}
+                  {t("islamicTools.inheritanceCalculator.cash")}:{" "}
                   <span className="font-bold">
                     PKR {childrenShare.sons.cash.toFixed(2)}
                   </span>
-                  , Land:{" "}
+                  , {t("islamicTools.inheritanceCalculator.land")}:{" "}
                   <span className="font-bold">
                     {convertLandShares(
                       childrenShare.sons.land,
                       values.landUnit
                     )}{" "}
-                    {values.landUnit}
+                    {t(
+                      `islamicTools.inheritanceCalculator.units.${values.landUnit}`
+                    )}
                   </span>
                 </p>
               )}
               {childrenShare.daughters !== null && (
                 <p className="text-xl font-medium">
-                  Daughters - Cash:{" "}
+                  {t("islamicTools.inheritanceCalculator.daughters")} -{" "}
+                  {t("islamicTools.inheritanceCalculator.cash")}:{" "}
                   <span className="font-bold">
                     PKR {childrenShare.daughters.cash.toFixed(2)}
                   </span>
-                  , Land:{" "}
+                  , {t("islamicTools.inheritanceCalculator.land")}:{" "}
                   <span className="font-bold">
                     {convertLandShares(
                       childrenShare.daughters.land,
                       values.landUnit
                     )}{" "}
-                    {values.landUnit}
+                    {t(
+                      `islamicTools.inheritanceCalculator.units.${values.landUnit}`
+                    )}
                   </span>
                 </p>
               )}

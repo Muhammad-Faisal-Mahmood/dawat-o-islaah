@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 
 const MasailSearchBar = ({ query, setQuery, loading }) => {
+  const { t } = useLanguage();
   const [search, setSearch] = useState(query);
 
   const handleSearch = () => {
@@ -24,7 +26,7 @@ const MasailSearchBar = ({ query, setQuery, loading }) => {
     <div className="flex justify-between items-center mb-4 space-y-2 md:space-x-2 md:space-y-0 flex-col md:flex-row">
       <input
         type="text"
-        placeholder="Search masail..."
+        placeholder={t("masail.searchPlaceholder")}
         value={search}
         onChange={(e) => {
           setSearch(e.target.value);
@@ -40,7 +42,7 @@ const MasailSearchBar = ({ query, setQuery, loading }) => {
         onClick={handleSearch}
         className={`flex-1 text-center py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 px-8 w-full cursor-pointer ${disabledClass}`}
       >
-        Search
+        {t("masail.searchButton")}
       </button>
     </div>
   );

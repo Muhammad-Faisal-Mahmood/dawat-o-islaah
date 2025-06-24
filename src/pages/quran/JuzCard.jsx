@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 const JuzCard = ({
   number,
@@ -9,6 +10,8 @@ const JuzCard = ({
   startingSurah,
   endingSurah,
 }) => {
+  const { t } = useLanguage();
+
   return (
     <Link to={`/juz/${number}`} className="block">
       <div
@@ -22,7 +25,8 @@ const JuzCard = ({
           </h3>
 
           <p className="text-xs md:text-sm text-gray-400">
-            {startingSurah} - {endingSurah} | {numberOfAyahs} Verses
+            {startingSurah} - {endingSurah} | {numberOfAyahs}{" "}
+            {t("quran.verses")}
           </p>
         </div>
 

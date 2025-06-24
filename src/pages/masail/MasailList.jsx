@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 
 const MasailList = ({
   masail,
@@ -7,6 +8,7 @@ const MasailList = ({
   selectedCategoryName,
   setSelectedCategory,
 }) => {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [selectedMasail, setSelectedMasail] = useState(false);
@@ -199,7 +201,7 @@ const MasailList = ({
 
                     {/* Category */}
                     <div className="text-sm text-gray-500 italic">
-                      Category: {selectedMasail.category?.name}
+                      {t("masail.category")}: {selectedMasail.category?.name}
                     </div>
 
                     {/* Content */}

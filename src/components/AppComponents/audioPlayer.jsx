@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import "../../../style/audioStyles.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const AudioPlayer = ({ audioFiles }) => {
+  const { t } = useLanguage();
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
-  // Load new audio when track changess
+  // Load new audio when track changes
   useEffect(() => {
     if (audioFiles.length > 0 && audioRef.current) {
       audioRef.current.src = audioFiles[currentTrackIndex];
@@ -73,10 +75,10 @@ const AudioPlayer = ({ audioFiles }) => {
           controlsList="noplaybackrate"
           onEnded={handleEnded}
         >
-          Your browser does not support the audio element.
+          {t("audioPlayer.notSupported")}
         </audio>
       ) : (
-        <p className="text-red-500">No audio files available.</p>
+        <p className="text-red-500">{t("audioPlayer.noAudio")}</p>
       )}
       <div className="mt-4 space-x-2">
         <button
@@ -88,21 +90,21 @@ const AudioPlayer = ({ audioFiles }) => {
               : "bg-blue-900 cursor-pointer"
           } text-white px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-sm sm:text-base w-20 sm:w-34 text-center`}
         >
-          Previous
+          {t("audioPlayer.previous")}
         </button>
         <button
           onClick={handlePlay}
           disabled={isPlaying}
           className="bg-green-500 text-white px-4 py-2 rounded mr-2"
         >
-          Play
+          {t("audioPlayer.play")}
         </button>
         <button
           onClick={handlePause}
           disabled={!isPlaying}
           className="bg-red-500 text-white px-4 py-2 rounded mr-2"
         >
-          Pause
+          {t("audioPlayer.pause")}
         </button>
         <button
           onClick={handleNext}
@@ -113,7 +115,7 @@ const AudioPlayer = ({ audioFiles }) => {
               : "bg-blue-900 cursor-pointer"
           } text-white px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-sm sm:text-base w-20 sm:w-34 text-center`}
         >
-          Next
+          {t("audioPlayer.next")}
         </button>
       </div>
     </div>

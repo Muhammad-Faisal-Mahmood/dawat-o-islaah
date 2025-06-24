@@ -1,9 +1,12 @@
 import React from "react";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const FooterBanner = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="w-full bg-[#C9A227] text-center text-white uppercase py-5">
-      © 2025 Dawat o Islaah | Follow us on Social Media
+      {t("footerBanner.copyright")}
     </div>
   );
 };

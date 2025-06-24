@@ -1,10 +1,14 @@
+import { useLanguage } from "../../context/LanguageContext";
+
 const MasailCategoryList = ({ masail, loading, setSelectedCategory }) => {
+  const { t } = useLanguage();
+
   // Show shimmer effect while masail is loading
   if (loading) {
     return (
       <div className="my-4">
         <h2 className="text-2xl md:text-xl font-bold text-gray-800 mb-4">
-          Masail Categories
+          {t("masail.categories")}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {Array.from({ length: 4 }).map((_, index) => (
@@ -34,7 +38,7 @@ const MasailCategoryList = ({ masail, loading, setSelectedCategory }) => {
   return (
     <div className="my-4">
       <h2 className="text-2xl md:text-xl font-bold text-gray-800 mb-4">
-        Masail Categories
+        {t("masail.categories")}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {categories.map((category) => (

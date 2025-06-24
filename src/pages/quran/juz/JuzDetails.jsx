@@ -6,10 +6,11 @@ import VerseCard from "../surah/VerseCard";
 import ShimmerLoader from "../surah/SurahShimmer";
 import allJuzData from "../../../../assets/juzData.json";
 import AudioPlayer from "../../../components/AppComponents/audioPlayer";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const JuzDetails = () => {
+  const { t, language } = useLanguage();
   const { juzNumber } = useParams();
-  //   console.log("juzNumber", juzNumber);
   const juzData = allJuzData.juz[juzNumber - 1];
 
   const {
@@ -29,9 +30,7 @@ const JuzDetails = () => {
   const [showDropdown, setShowDropdown] = useState({ en: false, ur: false });
   const [translationsEnabled, setTranslationsEnabled] = useState(false);
 
-  //   console.log("fullJuzAudio", fullJuzAudio);
-
-  const dropdownRef = useRef(null); // Ref for detecting outside click
+  const dropdownRef = useRef(null);
 
   const toggleDropdown = (lang) => {
     setShowDropdown((prev) => ({ ...prev, [lang]: !prev[lang] }));
@@ -46,7 +45,6 @@ const JuzDetails = () => {
     }));
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -70,7 +68,7 @@ const JuzDetails = () => {
         </h1>
         <p className="text-lg text-gray-500 mt-2">
           {juzData.start_surah} - {juzData.end_surah} | {juzData.total_ayahs}{" "}
-          Verses
+          {t("quranDetails.verses")}
         </p>
         <p className="text-3xl text-blue-600 font-bold mt-6">
           {juzData.juz_name_ar}
@@ -84,7 +82,7 @@ const JuzDetails = () => {
         )}
 
         <div className="flex items-center space-x-2 justify-center my-4 md:my-6">
-          <span className="md:text-xl">Translations</span>
+          <span className="md:text-xl">{t("quranDetails.translations")}</span>
           <div
             className={`w-8 h-6 md:w-14 md:h-8 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer transition-all duration-300 ${
               translationsEnabled ? "bg-green-500" : "bg-gray-400"
@@ -112,7 +110,16 @@ const JuzDetails = () => {
                 translationsEnabled ? "text-black" : "text-gray-500"
               }`}
             >
-              Select {lang === "en" ? "English" : "Urdu"} Translations
+              {t("quranDetails.selectTranslations").replace(
+                "{lang}",
+                lang === "en"
+                  ? language === "en"
+                    ? "English"
+                    : "انگریزی"
+                  : language === "en"
+                  ? "Urdu"
+                  : "اردو"
+              )}
               <FaChevronDown />
             </button>
 

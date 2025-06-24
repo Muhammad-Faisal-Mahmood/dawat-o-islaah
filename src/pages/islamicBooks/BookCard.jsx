@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../../context/LanguageContext";
 
 const BookCard = ({
   title,
@@ -11,6 +12,7 @@ const BookCard = ({
   pdfFile,
   uploadedAt,
 }) => {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -70,7 +72,9 @@ const BookCard = ({
         {/* Book Details */}
         <div className="flex-1">
           <h3 className="text-lg font-semibold mt-3">{title}</h3>
-          <p className="text-gray-600">By {author}</p>
+          <p className="text-gray-600">
+            {t("islamicBooks.by")} {author}
+          </p>
           <p className="text-base text-gray-500 mt-2 line-clamp-3">
             {description}
           </p>
@@ -78,7 +82,8 @@ const BookCard = ({
 
         {/* Uploaded Date */}
         <p className="text-sm text-gray-600 mt-2">
-          Published: {new Date(uploadedAt).toLocaleDateString()}
+          {t("islamicBooks.published")}:{" "}
+          {new Date(uploadedAt).toLocaleDateString()}
         </p>
 
         {/* Buttons */}
@@ -88,7 +93,7 @@ const BookCard = ({
             className="flex-1 text-center bg-[#1E3A5F] text-white py-2 rounded-lg 
             transition-all duration-300 ease-in-out transform hover:bg-blue-950 hover:scale-105"
           >
-            Download
+            {t("islamicBooks.download")}
           </button>
           <button
             onClick={(e) => {
@@ -98,7 +103,7 @@ const BookCard = ({
             className="flex-1 text-center bg-green-600 text-white py-2 rounded-lg
             transition-all duration-300 ease-in-out transform hover:bg-green-800 hover:scale-105"
           >
-            Read
+            {t("islamicBooks.read")}
           </button>
         </div>
       </div>
@@ -161,18 +166,23 @@ const BookCard = ({
                     defaultScale={1.0}
                     renderError={(error) => (
                       <div className="flex flex-col items-center justify-center h-full text-red-500 p-4">
-                        <p>Failed to load PDF: {error.message}</p>
+                        <p>
+                          {t("islamicBooks.failedToLoad")}: {error.message}
+                        </p>
                         <button
                           onClick={() => setIsOpen(false)}
                           className="mt-4 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
                         >
-                          Close
+                          {t("islamicBooks.close")}
                         </button>
                       </div>
                     )}
                     renderLoader={() => (
                       <div className="flex items-center justify-center h-full">
                         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                        <span className="ml-2">
+                          {t("islamicBooks.loading")}
+                        </span>
                       </div>
                     )}
                   />

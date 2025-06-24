@@ -1,27 +1,42 @@
-// src/context/LanguageContext.js
 import { createContext, useState, useContext } from "react";
+import en from "../../assets/languages/en.json";
+import ur from "../../assets/languages/ur.json";
 
-// Create the context for language management
 const LanguageContext = createContext();
 
-// LanguageProvider component that will provide language state and toggle function
-export function LanguageProvider({ children }) {
-  // Default language is English (en)
-  const [language, setLanguage] = useState("en");
+const translations = { en, ur };
 
-  // Function to toggle language between 'en' (English) and 'ur' (Urdu)
+export function LanguageProvider({ children }) {
+  const [language, setLanguage] = useState(
+    localStorage.getItem("language") || "en"
+  );
+
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === "en" ? "ur" : "en"));
+    setLanguage((prev) => {
+      const newLang = prev === "en" ? "ur" : "en";
+      localStorage.setItem("language", newLang);
+      return newLang;
+    });
+  };
+
+  // Translation function
+  const t = (key) => {
+    const keys = key.split(".");
+    let value = translations[language];
+    for (let k of keys) {
+      value = value?.[k];
+      if (value === undefined) return key;
+    }
+    return value;
   };
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage }}>
+    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
 }
 
-// Custom hook to access language context
 export function useLanguage() {
   return useContext(LanguageContext);
 }

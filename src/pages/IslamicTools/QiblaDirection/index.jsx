@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useLanguage } from "../../../context/LanguageContext";
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 // Shared function to load Google Maps API.
@@ -17,6 +18,7 @@ const loadGoogleMapsScript = (callback) => {
 
 // Main QiblaDirection component: decides between mobile and desktop.
 const QiblaDirection = () => {
+  const { t } = useLanguage();
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
 
@@ -33,12 +35,18 @@ const QiblaDirection = () => {
             longitude: position.coords.longitude,
           });
         },
-        (err) => setError(`Error getting location: ${err.message}`),
+        (err) =>
+          setError(
+            `${t("islamicTools.qiblaDirection.errorGettingLocation")} ${
+              err.message
+            }`
+          ),
         { enableHighAccuracy: true }
       );
     } else {
-      setError("Geolocation is not supported by your browser.");
+      setError(t("islamicTools.qiblaDirection.notSupported"));
     }
+    // eslint-disable-next-line
   }, []);
 
   if (error) {
@@ -52,7 +60,7 @@ const QiblaDirection = () => {
   if (!location) {
     return (
       <div style={{ textAlign: "center", marginTop: "50px" }}>
-        <p>Loading location...</p>
+        <p>{t("islamicTools.qiblaDirection.loadingLocation")}</p>
       </div>
     );
   }
@@ -69,6 +77,7 @@ const QiblaDirection = () => {
 // Uses device orientation (with fallback) and displays the map with a rotating user marker.
 // ------------------------
 const MobileQibla = ({ location }) => {
+  const { t } = useLanguage();
   const [heading, setHeading] = useState(null);
   const [isManual, setIsManual] = useState(false);
   const mapRef = useRef(null);
@@ -204,13 +213,21 @@ const MobileQibla = ({ location }) => {
 
   return (
     <div style={{ textAlign: "center", marginTop: "20px" }}>
-      <h2>Qibla Direction: {Math.round(qiblaDirection)}°</h2>
+      <h2>
+        {t("islamicTools.qiblaDirection.qiblaDirectionLabel")}:{" "}
+        {Math.round(qiblaDirection)}
+        {t("islamicTools.qiblaDirection.degree")}
+      </h2>
       <p>
-        Your Device Heading: {heading !== null ? Math.round(heading) : "N/A"}°
+        {t("islamicTools.qiblaDirection.deviceHeading")}:{" "}
+        {heading !== null
+          ? Math.round(heading)
+          : t("islamicTools.qiblaDirection.nA")}
+        {t("islamicTools.qiblaDirection.degree")}
       </p>
       {isManual && (
         <div style={{ marginBottom: "20px" }}>
-          <p>Device orientation not available. Adjust heading manually:</p>
+          <p>{t("islamicTools.qiblaDirection.manualAdjust")}</p>
           <input
             type="range"
             min="0"
@@ -233,8 +250,7 @@ const MobileQibla = ({ location }) => {
         }}
       ></div>
       <p className="mx-4 mb-4">
-        Rotate your device until your location arrow (blue) aligns with the
-        Qibla direction.
+        {t("islamicTools.qiblaDirection.rotateInstruction")}
       </p>
     </div>
   );
@@ -243,9 +259,10 @@ const MobileQibla = ({ location }) => {
 // ------------------------
 // Desktop Qibla Component
 // Loads the Google Maps API and displays a map with a line (polyline)
-// from the user’s location to the Kaaba.
+// from the user's location to the Kaaba.
 // ------------------------
 const DesktopQibla = ({ location }) => {
+  const { t } = useLanguage();
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -288,7 +305,7 @@ const DesktopQibla = ({ location }) => {
 
   return (
     <div style={{ textAlign: "center", marginTop: "20px" }}>
-      <h2 className="text-xl my-4">Qibla Direction on Map</h2>
+      <h2 className="text-xl my-4">{t("islamicTools.qiblaDirection.onMap")}</h2>
       <div className="flex justify-center">
         <div
           ref={mapRef}

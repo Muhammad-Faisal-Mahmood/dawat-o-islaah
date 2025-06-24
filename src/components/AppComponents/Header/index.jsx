@@ -4,10 +4,14 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import UserDropdown from "./UserDropdown";
 import { useAuthData } from "../../../context/AuthContext";
+import { useTranslation } from "../../../hooks/useTranslation";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user } = useAuthData();
+
+  const translation = useTranslation();
+  const login = translation?.header?.login;
 
   const isUser = !!user;
 
@@ -44,7 +48,7 @@ const Header = () => {
     hover:shadow-md 
   "
           >
-            Login
+            {login}
           </Link>
         )}
 

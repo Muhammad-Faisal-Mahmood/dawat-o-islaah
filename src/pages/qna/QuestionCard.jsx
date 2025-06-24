@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { CheckCircle, Clock, User, ChevronDown, ChevronUp } from "lucide-react";
+import { useLanguage } from "../../context/LanguageContext";
 
 const QuestionCard = ({ question, highlightSearchTerm }) => {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
   const [isFullAnswerVisible, setIsFullAnswerVisible] = useState(false);
@@ -68,15 +70,15 @@ const QuestionCard = ({ question, highlightSearchTerm }) => {
             >
               {isApproved ? (
                 <>
-                  <CheckCircle size={16} className="mr-1" /> Approved
+                  <CheckCircle size={16} className="mr-1" /> {t("qna.approved")}
                 </>
               ) : isAnswered ? (
                 <>
-                  <Clock size={16} className="mr-1" /> Pending
+                  <Clock size={16} className="mr-1" /> {t("qna.pending")}
                 </>
               ) : (
                 <>
-                  <Clock size={16} className="mr-1" /> Awaiting
+                  <Clock size={16} className="mr-1" /> {t("qna.awaiting")}
                 </>
               )}
             </div>
@@ -96,7 +98,9 @@ const QuestionCard = ({ question, highlightSearchTerm }) => {
 
         <div className="flex flex-wrap items-center text-xs sm:text-sm text-gray-600 mb-2 gap-1">
           <User size={12} className="mr-1" />
-          <span>Asked by {question.user_name}</span>
+          <span>
+            {t("qna.askedBy")} {question.user_name}
+          </span>
           <span className="mx-1 sm:mx-2">•</span>
           <span>{formatDate(question.created_at)}</span>
         </div>
@@ -123,7 +127,7 @@ const QuestionCard = ({ question, highlightSearchTerm }) => {
           <div className="px-4 py-3 sm:px-6 sm:py-4 border-t border-gray-100">
             <div className="mb-3">
               <h3 className="font-medium text-gray-800 text-sm sm:text-base">
-                Answer:
+                {t("qna.answer")}
               </h3>
               <div className="prose prose-sm mt-2 text-gray-700 whitespace-pre-line text-xs sm:text-sm">
                 {isFullAnswerVisible
@@ -137,7 +141,7 @@ const QuestionCard = ({ question, highlightSearchTerm }) => {
             {question?.answer.mufti_name && (
               <div className="flex flex-wrap items-center mt-4 text-xs sm:text-sm gap-1">
                 <span className="text-gray-600">
-                  Answered by{" "}
+                  {t("qna.answeredBy")}{" "}
                   <span className="font-medium">
                     {question.answer.mufti_name}
                   </span>
@@ -157,7 +161,7 @@ const QuestionCard = ({ question, highlightSearchTerm }) => {
             className="text-emerald-600 hover:text-emerald-700 text-sm font-medium cursor-pointer"
             onClick={toggleFullAnswer}
           >
-            {isFullAnswerVisible ? "Read less" : "Read full answer"}
+            {isFullAnswerVisible ? t("qna.readLess") : t("qna.readFullAnswer")}
           </button>
         </div>
       )}

@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { User } from "lucide-react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthData } from "../../../context/AuthContext";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const UserDropdown = () => {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const { logout } = useAuthData();
@@ -70,13 +72,13 @@ const UserDropdown = () => {
             className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
             onClick={handleChangePassword}
           >
-            Change Password
+            {t("userDropdown.changePassword")}
           </Link>
           <button
             className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 cursor-pointer"
             onClick={handleLogout}
           >
-            Logout
+            {t("userDropdown.logout")}
           </button>
         </div>
       )}

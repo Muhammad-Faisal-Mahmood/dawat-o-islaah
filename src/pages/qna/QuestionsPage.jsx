@@ -2,11 +2,13 @@ import { useState, useEffect, Suspense, lazy } from "react";
 import { Search } from "lucide-react";
 import { useQnaContext } from "../../context/QnaContext";
 import useQnas from "../../hooks/useQnas";
+import { useLanguage } from "../../context/LanguageContext";
 
 const QuestionCard = lazy(() => import("./QuestionCard"));
 const LoadingSpinner = lazy(() => import("./LoadingSpinner"));
 
 const QuestionsPage = () => {
+  const { t } = useLanguage();
   const { questions, isLoading, error } = useQnas();
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -59,13 +61,15 @@ const QuestionsPage = () => {
     return (
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="bg-red-50 p-6 rounded-lg border border-red-200">
-          <h2 className="text-xl font-semibold text-red-700">Error</h2>
+          <h2 className="text-xl font-semibold text-red-700">
+            {t("qna.error")}
+          </h2>
           <p className="mt-2 text-red-600">{error}</p>
           <button
             className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
             onClick={() => window.location.reload()}
           >
-            Try Again
+            {t("qna.tryAgain")}
           </button>
         </div>
       </div>
@@ -75,7 +79,7 @@ const QuestionsPage = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-4 md:py-8">
       <h1 className="text-2xl ms:text-3xl font-bold text-gray-800 mb-4 md:mb-8 text-center">
-        Islamic Questions & Answers
+        {t("qna.pageTitle")}
       </h1>
 
       {/* Search Bar */}
@@ -83,7 +87,7 @@ const QuestionsPage = () => {
         <div className="relative">
           <input
             type="text"
-            placeholder="Search questions..."
+            placeholder={t("qna.searchPlaceholder")}
             value={searchTerm}
             onChange={handleSearchChange}
             className="w-full pl-12 pr-4 py-2 md:py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
@@ -110,8 +114,8 @@ const QuestionsPage = () => {
           <div className="text-center py-12">
             <p className="text-lg text-gray-600">
               {searchTerm
-                ? `No questions found matching "${searchTerm}"`
-                : "No questions available"}
+                ? t("qna.noQuestionsFound").replace("{term}", searchTerm)
+                : t("qna.noQuestionsAvailable")}
             </p>
           </div>
         ) : (

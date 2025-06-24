@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 const SurahCard = ({
   number,
@@ -9,6 +10,10 @@ const SurahCard = ({
   revelationType,
   arabicName,
 }) => {
+  const { t } = useLanguage();
+  // Use translation for revelationType if available
+  const revType = t(`quran.revelationType.${revelationType}`) || revelationType;
+
   return (
     <Link to={`/surah/${number}`} className="block">
       <div
@@ -24,7 +29,7 @@ const SurahCard = ({
             {englishNameTranslation && englishNameTranslation}
           </p>
           <p className="text-xs md:text-sm text-gray-400">
-            {revelationType} | {numberOfAyahs} Verses
+            {revType} | {numberOfAyahs} {t("quran.verses")}
           </p>
         </div>
 

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const PrayerTimings = () => {
+  const { t } = useLanguage();
   const [city, setCity] = useState("Lahore"); // default city
   const [timings, setTimings] = useState(null);
 
@@ -47,11 +49,13 @@ const PrayerTimings = () => {
   return (
     <div className="flex justify-center items-center my-12 ">
       <div className="bg-white p-6 rounded shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4 text-center">Prayer Timings</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center">
+          {t("islamicTools.prayerTimings.title")}
+        </h1>
 
         {/* City Dropdown */}
         <label htmlFor="citySelect" className="block mb-2 font-semibold">
-          Select City:
+          {t("islamicTools.prayerTimings.selectCity")}
         </label>
         <select
           id="citySelect"
@@ -59,10 +63,18 @@ const PrayerTimings = () => {
           value={city}
           onChange={(e) => setCity(e.target.value)}
         >
-          <option value="Lahore">Lahore</option>
-          <option value="Islamabad">Islamabad</option>
-          <option value="Karachi">Karachi</option>
-          <option value="Dubai">Dubai</option>
+          <option value="Lahore">
+            {t("islamicTools.prayerTimings.cities.Lahore")}
+          </option>
+          <option value="Islamabad">
+            {t("islamicTools.prayerTimings.cities.Islamabad")}
+          </option>
+          <option value="Karachi">
+            {t("islamicTools.prayerTimings.cities.Karachi")}
+          </option>
+          <option value="Dubai">
+            {t("islamicTools.prayerTimings.cities.Dubai")}
+          </option>
         </select>
 
         {/* Button to fetch timings */}
@@ -70,7 +82,7 @@ const PrayerTimings = () => {
           onClick={handleGetTimings}
           className="w-full bg-green-500 cursor-pointer text-white py-2 px-4 rounded "
         >
-          Get Timings
+          {t("islamicTools.prayerTimings.getTimings")}
         </button>
 
         {/* Display Timings Table if timings are available */}
@@ -79,15 +91,19 @@ const PrayerTimings = () => {
             <table className="min-w-full border-collapse border border-gray-200">
               <thead className="bg-green-500 text-white">
                 <tr>
-                  <th className="p-2 border border-gray-200">Prayer</th>
-                  <th className="p-2 border border-gray-200">Time</th>
+                  <th className="p-2 border border-gray-200">
+                    {t("islamicTools.prayerTimings.prayer")}
+                  </th>
+                  <th className="p-2 border border-gray-200">
+                    {t("islamicTools.prayerTimings.time")}
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {prayersOrder.map((prayer) => (
                   <tr key={prayer} className="hover:bg-gray-100">
                     <td className="p-2 border border-gray-200 font-semibold">
-                      {prayer}
+                      {t(`islamicTools.prayerTimings.prayerNames.${prayer}`)}
                     </td>
                     <td className="p-2 border border-gray-200">
                       {timings[prayer] || "N/A"}

@@ -5,8 +5,10 @@ import VerseCard from "./VerseCard";
 import { FaChevronDown } from "react-icons/fa";
 import ShimmerLoader from "./SurahShimmer";
 import AudioPlayer from "../../../components/AppComponents/audioPlayer";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const SurahDetails = () => {
+  const { t, language } = useLanguage();
   const { surahNumber } = useParams();
   const {
     surahDetails,
@@ -14,7 +16,7 @@ const SurahDetails = () => {
     verses,
     translations,
     audioLinks,
-    fullSurahAudio, // Full Surah audio added
+    fullSurahAudio,
     selectedTranslations,
     setSelectedTranslations,
     loadingDetails,
@@ -65,7 +67,8 @@ const SurahDetails = () => {
           {surahDetails.englishName} ({surahDetails.englishNameTranslation})
         </h1>
         <p className="text-lg text-gray-500 mt-2">
-          {surahDetails.revelationType} | {surahDetails.numberOfAyahs} Verses
+          {surahDetails.revelationType} | {surahDetails.numberOfAyahs}{" "}
+          {t("quranDetails.verses")}
         </p>
         <p className="text-3xl text-blue-600 font-bold mt-4">
           {surahDetails.name}
@@ -88,7 +91,7 @@ const SurahDetails = () => {
         )}
 
         <div className="flex items-center space-x-2 justify-center my-4 md:my-6">
-          <span className="text-xl">Translations</span>
+          <span className="text-xl">{t("quranDetails.translations")}</span>
           <div
             className={`w-14 h-8 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer transition-all duration-300 ${
               translationsEnabled ? "bg-green-500" : "bg-gray-400"
@@ -114,7 +117,16 @@ const SurahDetails = () => {
                 translationsEnabled ? "text-black" : "text-gray-500"
               }`}
             >
-              Select {lang === "en" ? "English" : "Urdu"} Translations
+              {t("quranDetails.selectTranslations").replace(
+                "{lang}",
+                lang === "en"
+                  ? language === "en"
+                    ? "English"
+                    : "انگریزی"
+                  : language === "en"
+                  ? "Urdu"
+                  : "اردو"
+              )}
               <FaChevronDown />
             </button>
 

@@ -1,20 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../../../context/LanguageContext";
 
 const SearchByPosts = () => {
-  const itemsSearchByPosts = [
-    "Ahadith",
-    "Duaen",
-    "General Posts",
-    "Islamic Books",
-    "Masail",
-    "Zikr",
-  ];
+  const { t } = useLanguage();
+  const itemsSearchByPosts = t("footer.itemsSearchByPosts");
 
   return (
     <div className=" flex-1 text-white space-y-4">
       <div className="space-y-1">
-        <div className="text-2xl font-bold">Search By Posts</div>
+        <div className="text-2xl font-bold">{t("footer.searchByItems")}</div>
         <div className="flex w-full ">
           <div className="border-[1px] border-amber-500 w-[40%]" />
           <div className="border-[1px] border-whitw w-[60%]" />

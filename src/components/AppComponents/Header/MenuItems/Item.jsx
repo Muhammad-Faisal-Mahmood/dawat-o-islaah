@@ -25,7 +25,7 @@ const Item = ({ item }) => {
 
   return (
     <div
-      className="relative group text-center py-2 cursor-pointer w-25"
+      className="relative group text-center py-2 cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

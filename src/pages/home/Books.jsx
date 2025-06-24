@@ -1,28 +1,29 @@
 import React from "react";
 import BookInfoCard from "../../components/AppComponents/Home/BookInfoCard";
+import { useLanguage } from "../../context/LanguageContext";
 
 const Books = () => {
+  const { t } = useLanguage();
+
   const books = [
     {
-      title: "Al-QURAN",
-      description:
-        "Recite Quran Kareem with 2 Translations, Words by Words Translation & Tafaseer",
-      linkText: "Recite Quran",
+      title: t("booksSection.quranTitle"),
+      description: t("booksSection.quranDesc"),
+      linkText: t("booksSection.quranLink"),
       link: "quran",
       icon: "📖",
     },
     {
-      title: "AL-HADITH",
-      description:
-        "Explore 18 Books of Nabi Kareem ﷺ ahadees in Arabic, Urdu & English",
-      linkText: "Recite Hadith",
+      title: t("booksSection.hadithTitle"),
+      description: t("booksSection.hadithDesc"),
+      linkText: t("booksSection.hadithLink"),
       link: "hadith",
       icon: "📜",
     },
     {
-      title: "ISLAMIC BOOKS",
-      description: "Read Popular Islamic books according to your interest",
-      linkText: "Read Books",
+      title: t("booksSection.islamicBooksTitle"),
+      description: t("booksSection.islamicBooksDesc"),
+      linkText: t("booksSection.islamicBooksLink"),
       link: "islamicBooks",
       icon: "📚",
     },

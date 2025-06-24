@@ -1,8 +1,9 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 const ChapterCard = ({ chapter }) => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   return (
     <div
       onClick={() =>
@@ -18,7 +19,9 @@ const ChapterCard = ({ chapter }) => {
       </p>
       <p className="text-gray-500 text-xl text-right">{chapter.chapterUrdu}</p>
       <div className="mt-2 flex justify-between text-sm  text-gray-600">
-        <span>Book: {chapter.bookSlug.replace("-", " ")}</span>
+        <span>
+          {t("chapterCard.book")}: {chapter.bookSlug.replace("-", " ")}
+        </span>
       </div>
     </div>
   );

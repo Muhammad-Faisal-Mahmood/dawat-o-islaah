@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import useHadiths from "../../hooks/useHadiths";
 import HadithCard from "./HadithCard";
 import ShimmerLoader from "../../components/AppComponents/Hadith/ShimmerLoader";
+import { useLanguage } from "../../context/LanguageContext";
 
 const HadithList = () => {
+  const { t } = useLanguage();
   const { bookSlug, chapterNo } = useParams();
   const {
     hadiths,
@@ -24,7 +26,8 @@ const HadithList = () => {
   return (
     <div className="container mx-auto px-4 md:px-20 py-6">
       <h2 className="text-2xl font-bold text-center mb-6">
-        Hadiths in {bookSlug.replace("-", " ")} - Chapter {chapterNo}
+        {t("hadithList.title")} {bookSlug.replace("-", " ")} -{" "}
+        {t("hadithList.chapter")} {chapterNo}
       </h2>
       <h2 className="text-2xl font-bold text-center mb-6">
         " {hadiths[0]?.chapter?.chapterEnglish} "
@@ -47,7 +50,7 @@ const HadithList = () => {
                 <div className="w-5 h-5 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
               </div>
             ) : (
-              "Load More"
+              t("hadithList.loadMore")
             )}
           </button>
         </div>

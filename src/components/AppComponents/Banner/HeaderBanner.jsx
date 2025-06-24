@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaLocationDot, FaLocationCrosshairs } from "react-icons/fa6";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const HeaderBanner = () => {
   // Try to load saved location from localStorage
@@ -28,7 +29,7 @@ const HeaderBanner = () => {
   const [locationError, setLocationError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const languages = ["English", "اردو"];
+  const { language, toggleLanguage, t } = useLanguage();
 
   // Save location data to localStorage whenever it changes
   useEffect(() => {
@@ -234,8 +235,8 @@ const HeaderBanner = () => {
           >
             <FaLocationCrosshairs />
             {loading
-              ? "Getting Location..."
-              : "Allow Location for Accurate Prayer Times"}
+              ? t("headerBanner.gettingLocation")
+              : t("headerBanner.allowLocation")}
           </button>
         </div>
       )}
@@ -243,7 +244,7 @@ const HeaderBanner = () => {
       {/* Error Message */}
       {locationError && (
         <div className="text-red-300 text-center py-1 mb-2">
-          {locationError}
+          {t("headerBanner.locationError")}
         </div>
       )}
 
@@ -261,15 +262,17 @@ const HeaderBanner = () => {
 
           {/* Current Prayer Status */}
           <div className="hidden sm:flex items-center gap-2">
-            <span className="text-green-300">Current: {currentPrayer}</span>
+            <span className="text-green-300">
+              {t("headerBanner.current")}: {currentPrayer}
+            </span>
             <span className="text-orange-300">
-              Next: {nextPrayer} ({prayerTimes[nextPrayer]})
+              {t("headerBanner.next")}: {nextPrayer} ({prayerTimes[nextPrayer]})
             </span>
           </div>
 
           {/* Prayer Times - Hidden on mobile, shown on larger screens */}
           <div className="hidden lg:flex items-center">
-            <h1 className="mr-2">Prayer times:</h1>
+            <h1 className="mr-2">{t("headerBanner.prayerTimes")}</h1>
             {Object.entries(prayerTimes).map(([prayer, time], index, array) => (
               <h1
                 key={prayer}
@@ -290,25 +293,26 @@ const HeaderBanner = () => {
 
         {/* Right Section: Language Selector */}
         <div className="flex gap-2 items-center">
-          <h1>Language:</h1>
-          {languages.map((lang, index, array) => (
-            <h1
-              key={index}
-              className="cursor-pointer hover:text-green-300 transition-colors"
-            >
-              {lang}
-              {index < array.length - 1 ? " |" : ""}
-            </h1>
-          ))}
+          <h1
+            className="cursor-pointer hover:text-green-300 transition-colors"
+            onClick={toggleLanguage}
+          >
+            {language === "en"
+              ? t("headerBanner.urdu")
+              : t("headerBanner.english")}
+          </h1>
         </div>
       </div>
 
       {/* Mobile Prayer Summary */}
       <div className="sm:hidden mt-2 pt-2 border-t border-[#2A4A6B]">
         <div className="flex justify-between items-center">
-          <span className="text-green-300">Current: {currentPrayer}</span>
+          <span className="text-green-300">
+            {t("headerBanner.current")}: {currentPrayer}
+          </span>
           <span className="text-orange-300">
-            Next: {nextPrayer} at {prayerTimes[nextPrayer]}
+            {t("headerBanner.next")}: {nextPrayer} {t("headerBanner.at")}{" "}
+            {prayerTimes[nextPrayer]}
           </span>
         </div>
       </div>

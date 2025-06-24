@@ -9,5 +9,294 @@
     "masail": "مسائل",
     "questionAnswer": "سوال جواب",
     "login": "لاگ ان"
+  },
+  "headerBanner": {
+    "allowLocation": "درست نماز کے اوقات کے لیے لوکیشن کی اجازت دیں",
+    "gettingLocation": "لوکیشن حاصل کی جا رہی ہے...",
+    "locationError": "لوکیشن کی معلومات حاصل کرنے میں ناکامی",
+    "current": "موجودہ",
+    "next": "اگلا",
+    "prayerTimes": "نماز کے اوقات:",
+    "at": "پر",
+    "urdu": "اردو",
+    "english": "انگریزی"
+  },
+  "hero": {
+    "title": "اسلام کے نور کو دریافت کریں",
+    "date": "پیر، 11 شعبان 1446 ہجری - پاکستان"
+  },
+  "sourceSearch": {
+    "placeholder": "تلاش کریں...",
+    "options": {
+      "quran": "القرآن",
+      "hadith": "حدیث",
+      "articles": "مضامین"
+    }
+  },
+  "booksSection": {
+    "quranTitle": "القرآن",
+    "quranDesc": "قرآن کریم کو دو تراجم، لفظ بہ لفظ ترجمہ اور تفاسیر کے ساتھ پڑھیں",
+    "quranLink": "قرآن پڑھیں",
+    "hadithTitle": "الحدیث",
+    "hadithDesc": "نبی کریم ﷺ کی 18 کتب احادیث کو عربی، اردو اور انگریزی میں دریافت کریں",
+    "hadithLink": "حدیث پڑھیں",
+    "islamicBooksTitle": "اسلامی کتب",
+    "islamicBooksDesc": "اپنی دلچسپی کے مطابق مشہور اسلامی کتب پڑھیں",
+    "islamicBooksLink": "کتب پڑھیں"
+  },
+  "sihahSitta": {
+    "sectionTitle": "صحاح ستہ",
+    "readAll": "تمام کتب حدیث پڑھیں",
+    "books": [
+      {
+        "title": "جامع الترمذی",
+        "transliteration": "Jami' at-Tirmidhi"
+      },
+      {
+        "title": "صحیح البخاری",
+        "transliteration": "Sahih al-Bukhari"
+      },
+      {
+        "title": "صحیح مسلم",
+        "transliteration": "Sahih Muslim"
+      },
+      {
+        "title": "سنن ابی داود",
+        "transliteration": "Sunan Abi Dawood"
+      },
+      {
+        "title": "سنن النسائی",
+        "transliteration": "Sunan an-Nasa'i"
+      },
+      {
+        "title": "سنن ابن ماجہ",
+        "transliteration": "Sunan Ibn Majah"
+      }
+    ]
+  },
+  "dailyVerseHadees": {
+    "verseOfTheDay": "آج کی آیت",
+    "hadeesOfTheDay": "آج کی حدیث"
+  },
+  "footer": {
+    "brand": "دعوت و اصلاح",
+    "intro": "ہماری دعوت و اصلاح ویب سائٹ میں خوش آمدید، جو اسلام کے پیغام کو پھیلانے اور مستند تعلیمات کے ذریعے ذاتی اور اجتماعی ترقی کو فروغ دینے کے لیے وقف ہے۔ ہمارے وسائل روحانی نشوونما، اتحاد کو فروغ دینے اور اسلامی اصولوں کے مطابق مثبت تبدیلی کی حوصلہ افزائی کے لیے ہیں۔",
+    "searchByItems": "آئٹمز کے ذریعے تلاش کریں",
+    "searchByTags": "ٹیگز کے ذریعے تلاش کریں",
+    "itemsSearchByPosts": ["قرآن", "احادیث", "بلاگز", "اسلامی کتب", "مسائل"],
+    "itemsSearchByTags": ["اصلاح", "اسلامی", "اسلامی پوسٹس", "نماز"]
+  },
+  "footerBanner": {
+    "copyright": "© 2025 دعوت و اصلاح | ہمیں سوشل میڈیا پر فالو کریں"
+  },
+  "services": {
+    "sectionTitle": "اسلامی آلات",
+    "zakatCalculator": "زکوة کیلکولیٹر",
+    "prayerTiming": "نماز کے اوقات",
+    "inheritanceCalculator": "وراثت کیلکولیٹر",
+    "qiblaDirection": "قبلہ سمت",
+    "nearestMosque": "قریب ترین مسجد"
+  },
+  "quran": {
+    "surahListTitle": "قرآن سورتیں",
+    "tabSurah": "سورت",
+    "tabJuz": "جز",
+    "verses": "آیات",
+    "revelationType": {
+      "Meccan": "مکی",
+      "Medinan": "مدنی"
+    }
+  },
+  "quranDetails": {
+    "verses": "آیات",
+    "translations": "تراجم",
+    "selectTranslations": "منتخب کریں {lang} تراجم",
+    "playVerse": "آیت چلائیں",
+    "pauseVerse": "آیت روکیں",
+    "checkTafsir": "تفسیر دیکھیں",
+    "tafsir": "تفسیر"
+  },
+  "audioPlayer": {
+    "previous": "پچھلا",
+    "play": "چلائیں",
+    "pause": "روکیں",
+    "next": "اگلا",
+    "noAudio": "آڈیو فائلیں دستیاب نہیں ہیں۔",
+    "notSupported": "آپ کا براؤزر آڈیو عنصر کو سپورٹ نہیں کرتا۔"
+  },
+  "hadithList": {
+    "title": "احادیث",
+    "chapter": "باب",
+    "loadMore": "مزید لوڈ کریں"
+  },
+  "hadithCard": {
+    "showMore": "مزید دکھائیں",
+    "showLess": "کم دکھائیں",
+    "hadithNumber": "حدیث نمبر",
+    "status": "درجہ"
+  },
+  "chapterCard": {
+    "book": "کتاب"
+  },
+  "hadithBookChapters": {
+    "title": "ابواب",
+    "error": "خرابی"
+  },
+  "hadithBookCard": {
+    "died": "وفات",
+    "hadiths": "احادیث",
+    "chapters": "ابواب"
+  },
+  "hadith": {
+    "booksTitle": "کتب حدیث",
+    "error": "خرابی"
+  },
+  "islamicBooks": {
+    "collectionTitle": "اسلامی کتب کا مجموعہ",
+    "showingBooks": "{count} کتب دکھائی جا رہی ہیں",
+    "noBooks": "کوئی کتاب نہیں ملی۔",
+    "by": "مصنف",
+    "published": "اشاعت",
+    "download": "ڈاؤن لوڈ",
+    "read": "پڑھیں",
+    "searchPlaceholder": "کتب تلاش کریں...",
+    "close": "بند کریں",
+    "failedToLoad": "PDF لوڈ کرنے میں ناکامی",
+    "loading": "لوڈ ہو رہا ہے..."
+  },
+  "masail": {
+    "pageTitle": "اسلامی مسائل",
+    "categories": "مسائل کی اقسام",
+    "searchPlaceholder": "مسائل تلاش کریں...",
+    "searchButton": "تلاش کریں",
+    "showingMasail": "{count} مسائل دکھائے جا رہے ہیں",
+    "noMasail": "کوئی مسئلہ نہیں ملا۔",
+    "category": "زمرہ",
+    "close": "بند کریں",
+    "loading": "لوڈ ہو رہا ہے...",
+    "error": "خرابی"
+  },
+  "islamicTools": {
+    "zakatCalculator": {
+      "title": "زکوة کیلکولیٹر",
+      "subtitle": "اس ٹول کے ذریعے اپنی زکوة آسانی سے حساب کریں۔",
+      "reset": "ویلیوز ری سیٹ کریں",
+      "totalSummary": "مکمل خلاصہ",
+      "eligibleAmount": "زکوة کے لیے قابل رقم",
+      "yourZakat": "آپ کی زکوة (2.5%)",
+      "fields": {
+        "cashAtHome": "گھر میں نقدی",
+        "bankAccountBalance": "بینک اکاؤنٹ بیلنس",
+        "stocksAndEquities": "اسٹاکس اور حصص",
+        "profitsAndInventory": "منافع اور انوینٹری",
+        "goldAndSilver": "سونا اور چاندی",
+        "investmentProperty": "سرمایہ کاری کی جائیداد",
+        "AnyOtherIncome": "کوئی اور آمدنی",
+        "debts": "قرضے",
+        "expenses": "اخراجات"
+      },
+      "placeholder": "رقم درج کریں"
+    },
+    "prayerTimings": {
+      "title": "نماز کے اوقات",
+      "selectCity": "شہر منتخب کریں:",
+      "getTimings": "اوقات حاصل کریں",
+      "prayer": "نماز",
+      "time": "وقت",
+      "loading": "لوڈ ہو رہا ہے...",
+      "cities": {
+        "Lahore": "لاہور",
+        "Islamabad": "اسلام آباد",
+        "Karachi": "کراچی",
+        "Dubai": "دبئی"
+      },
+      "prayerNames": {
+        "Fajr": "فجر",
+        "Sunrise": "طلوع آفتاب",
+        "Dhuhr": "ظہر",
+        "Asr": "عصر",
+        "Sunset": "غروب آفتاب",
+        "Maghrib": "مغرب",
+        "Isha": "عشاء",
+        "Imsak": "امساک",
+        "Midnight": "آدھی رات",
+        "Firstthird": "پہلا تہائی",
+        "Lastthird": "آخری تہائی"
+      }
+    },
+    "qiblaDirection": {
+      "title": "قبلہ سمت",
+      "onMap": "نقشے پر قبلہ سمت",
+      "loadingLocation": "لوکیشن لوڈ ہو رہی ہے...",
+      "errorGettingLocation": "لوکیشن حاصل کرنے میں خرابی:",
+      "notSupported": "آپ کا براؤزر جیو لوکیشن کو سپورٹ نہیں کرتا۔",
+      "deviceHeading": "آپ کے آلے کی سمت",
+      "manualAdjust": "ڈیوائس کی سمت دستیاب نہیں۔ دستی طور پر ایڈجسٹ کریں:",
+      "rotateInstruction": "اپنے آلے کو گھمائیں جب تک آپ کا مقام تیر (نیلا) قبلہ سمت کے ساتھ نہ مل جائے۔",
+      "qiblaDirectionLabel": "قبلہ سمت",
+      "degree": "°",
+      "nA": "دستیاب نہیں"
+    },
+    "nearestMosque": {
+      "loading": "نقشہ لوڈ ہو رہا ہے...",
+      "error": "آپ کا مقام حاصل نہیں ہو سکا۔ براہ کرم لوکیشن سروسز فعال کریں۔",
+      "notSupported": "آپ کا براؤزر جیو لوکیشن کو سپورٹ نہیں کرتا۔",
+      "rating": "درجہ بندی"
+    },
+    "inheritanceCalculator": {
+      "title": "وراثت کیلکولیٹر",
+      "shares": "وراثتی حصے",
+      "totalWealth": "کل دولت",
+      "cash": "نقدی",
+      "land": "زمین",
+      "published": "اشاعت",
+      "wife": "بیوی",
+      "husband": "شوہر",
+      "mother": "ماں",
+      "father": "باپ",
+      "sons": "بیٹے",
+      "daughters": "بیٹیاں",
+      "fields": {
+        "totalLandArea": "کل رقبہ زمین",
+        "landUnit": "زمین کی اکائی",
+        "totalCashAmount": "کل نقد رقم (PKR)",
+        "spouse": "شریک حیات",
+        "numberOfSons": "بیٹوں کی تعداد",
+        "numberOfDaughters": "بیٹیوں کی تعداد",
+        "motherAlive": "ماں زندہ ہے",
+        "fatherAlive": "باپ زندہ ہے"
+      },
+      "units": {
+        "acres": "ایکڑ",
+        "kanal": "کنال",
+        "marla": "مرلہ"
+      },
+      "spouseOptions": {
+        "noSpouse": "کوئی شریک حیات نہیں",
+        "wife": "بیوی",
+        "husband": "شوہر"
+      },
+      "placeholder": "ویلیو درج کریں"
+    }
+  },
+  "qna": {
+    "pageTitle": "اسلامی سوالات و جوابات",
+    "searchPlaceholder": "سوالات تلاش کریں...",
+    "noQuestionsFound": "\"{term}\" سے متعلق کوئی سوال نہیں ملا",
+    "noQuestionsAvailable": "کوئی سوال دستیاب نہیں",
+    "error": "خرابی",
+    "tryAgain": "دوبارہ کوشش کریں",
+    "askedBy": "نے پوچھا",
+    "answer": "جواب:",
+    "answeredBy": "جواب دیا",
+    "readLess": "کم پڑھیں",
+    "readFullAnswer": "مکمل جواب پڑھیں",
+    "approved": "منظور شدہ",
+    "pending": "زیر التواء",
+    "awaiting": "منتظر"
+  },
+  "userDropdown": {
+    "changePassword": "پاس ورڈ تبدیل کریں",
+    "logout": "لاگ آؤٹ"
   }
 }

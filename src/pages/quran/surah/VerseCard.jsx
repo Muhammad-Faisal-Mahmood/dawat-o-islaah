@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaPlay, FaPause, FaTimes } from "react-icons/fa";
 import tafsirData from "../../../../data/tafsir/tafsirByAyah.json"; // Import the Tafsir JSON
 import { IoBookOutline } from "react-icons/io5";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const ayahsPerSurah = [
   0, 7, 286, 200, 176, 120, 165, 206, 75, 129, 109, 123, 111, 43, 52, 99, 128,
@@ -29,6 +30,7 @@ const VerseCard = ({
   surahNo,
   isTranslation,
 }) => {
+  const { t } = useLanguage();
   const [currentAudio, setCurrentAudio] = useState(null);
   const [playingIndex, setPlayingIndex] = useState(null);
   const [selectedTafsir, setSelectedTafsir] = useState(null); // Store selected Tafsir
@@ -57,7 +59,8 @@ const VerseCard = ({
   const openTafsirModal = (verseNo) => {
     const tafsirIndex = getTafsirIndex(surahNo, verseNo);
     setSelectedTafsir(
-      tafsirData.ayat[tafsirIndex]?.ayat_text || "Tafsir not available"
+      tafsirData.ayat[tafsirIndex]?.ayat_text ||
+        t("quranDetails.tafsir") + " not available"
     );
     setShowModal(true);
   };
@@ -77,12 +80,12 @@ const VerseCard = ({
             {playingIndex === index ? (
               <span className="flex gap-2 items-center">
                 <FaPause className="text-lg" />
-                <h3>Pause Verse</h3>
+                <h3>{t("quranDetails.pauseVerse")}</h3>
               </span>
             ) : (
               <span className="flex gap-2 items-center">
                 <FaPlay className="text-lg" />
-                <h3>Play Verse</h3>
+                <h3>{t("quranDetails.playVerse")}</h3>
               </span>
             )}
           </button>
@@ -145,7 +148,7 @@ const VerseCard = ({
               className="mt-2 flex cursor-pointer items-center gap-2 bg-[#1E3A5F] text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
             >
               <IoBookOutline className="text-white" size={24} />
-              Check Tafsir
+              {t("quranDetails.checkTafsir")}
             </button>
           </div>
         </div>
@@ -169,7 +172,9 @@ const VerseCard = ({
               <FaTimes className="text-2xl" />
             </button>
 
-            <h2 className="text-xl font-bold text-center mb-4">Tafsir</h2>
+            <h2 className="text-xl font-bold text-center mb-4">
+              {t("quranDetails.tafsir")}
+            </h2>
             <p className="text-gray-800 text-lg/9 urdu-text">
               {selectedTafsir}
             </p>

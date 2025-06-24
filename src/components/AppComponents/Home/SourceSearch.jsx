@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import { FaSearch, FaChevronDown } from "react-icons/fa";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const SourceSearch = () => {
-  const [selectedOption, setSelectedOption] = useState("Al-Quran");
+  const { t } = useLanguage();
+  const [selectedOption, setSelectedOption] = useState(
+    t("sourceSearch.options.quran")
+  );
   const [showDropdown, setShowDropdown] = useState(false);
-  const searchOptions = ["Al-Quran", "Hadith", "Articles"];
+
+  // Use translation for options
+  const searchOptions = [
+    t("sourceSearch.options.quran"),
+    t("sourceSearch.options.hadith"),
+    t("sourceSearch.options.articles"),
+  ];
 
   const handleSelect = (option) => {
     setSelectedOption(option);
@@ -16,7 +26,7 @@ const SourceSearch = () => {
       {/* Search Input */}
       <input
         type="text"
-        placeholder="Search for..."
+        placeholder={t("sourceSearch.placeholder")}
         className="px-4 py-2 w-full max-w-[200px] sm:max-w-[300px] outline-none text-black"
       />
 

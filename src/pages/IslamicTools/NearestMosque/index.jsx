@@ -5,6 +5,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+import { useLanguage } from "../../../context/LanguageContext";
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 const containerStyle = {
@@ -13,12 +14,12 @@ const containerStyle = {
 };
 
 const NearestMosqueMap = () => {
+  const { t } = useLanguage();
   const [userLocation, setUserLocation] = useState(null);
   const [mosques, setMosques] = useState([]);
   const [error, setError] = useState(null);
   const [selectedMosque, setSelectedMosque] = useState(null);
 
-  // Replace with your Google Maps API key
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: apiKey,
@@ -35,16 +36,14 @@ const NearestMosqueMap = () => {
           });
         },
         (error) => {
-          setError(
-            "Unable to retrieve your location. Please enable location services."
-          );
+          setError(t("islamicTools.nearestMosque.error"));
           console.error("Geolocation error:", error);
         }
       );
     } else {
-      setError("Geolocation is not supported by your browser.");
+      setError(t("islamicTools.nearestMosque.notSupported"));
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     if (isLoaded && userLocation) {
@@ -56,7 +55,7 @@ const NearestMosqueMap = () => {
           userLocation.lat,
           userLocation.lng
         ),
-        radius: 5000, // 5km radius
+        radius: 5000,
         type: "mosque",
       };
 
@@ -78,7 +77,9 @@ const NearestMosqueMap = () => {
   }
 
   if (!isLoaded || !userLocation) {
-    return <div className="loading">Loading map...</div>;
+    return (
+      <div className="loading">{t("islamicTools.nearestMosque.loading")}</div>
+    );
   }
 
   return (
@@ -111,7 +112,12 @@ const NearestMosqueMap = () => {
                 <div>
                   <h3>{mosque.name}</h3>
                   <p>{mosque.vicinity}</p>
-                  {mosque.rating && <p>Rating: {mosque.rating} ★</p>}
+                  {mosque.rating && (
+                    <p>
+                      {t("islamicTools.nearestMosque.rating")}: {mosque.rating}{" "}
+                      ★
+                    </p>
+                  )}
                 </div>
               </InfoWindow>
             )}

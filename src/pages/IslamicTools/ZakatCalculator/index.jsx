@@ -1,6 +1,20 @@
 import React, { useState } from "react";
+import { useLanguage } from "../../../context/LanguageContext";
+
+const formFields = [
+  "cashAtHome",
+  "bankAccountBalance",
+  "stocksAndEquities",
+  "profitsAndInventory",
+  "goldAndSilver",
+  "investmentProperty",
+  "AnyOtherIncome",
+  "debts",
+  "expenses",
+];
 
 const ZakatCalculator = () => {
+  const { t } = useLanguage();
   const [values, setValues] = useState({
     cashAtHome: null,
     bankAccountBalance: null,
@@ -55,26 +69,23 @@ const ZakatCalculator = () => {
               💰
             </h2>
             <h2 className="text-2xl sm:text-4xl font-extrabold tracking-wide">
-              Zakat Calculator
+              {t("islamicTools.zakatCalculator.title")}
             </h2>
           </div>
           <p className="text-base sm:text-lg font-light mt-2">
-            Calculate your Zakat easily with this tool.
+            {t("islamicTools.zakatCalculator.subtitle")}
           </p>
         </div>
 
         <div className="p-8 sm:p-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {Object.keys(values).map((key) => (
+            {formFields.map((key) => (
               <div key={key} className="flex flex-col space-y-2">
                 <label
                   className="font-semibold text-gray-700 text-lg"
                   htmlFor={key}
                 >
-                  {key
-                    .replace(/([A-Z])/g, " $1")
-                    .replace("cash At", "Cash at")
-                    .replace(/^\w/, (c) => c.toUpperCase())}
+                  {t(`islamicTools.zakatCalculator.fields.${key}`)}
                 </label>
                 <input
                   type="text"
@@ -83,7 +94,7 @@ const ZakatCalculator = () => {
                   value={formatNumber(values[key])} // Show formatted value
                   onChange={handleChange}
                   className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all hover:shadow-md"
-                  placeholder="Enter amount"
+                  placeholder={t("islamicTools.zakatCalculator.placeholder")}
                 />
               </div>
             ))}
@@ -91,17 +102,17 @@ const ZakatCalculator = () => {
 
           <div className="mt-12 bg-gradient-to-r from-amber-500 to-green-600 p-6 sm:p-8 rounded-xl text-white shadow-lg">
             <h3 className="text-2xl font-semibold text-center mb-2 sm:mb-6">
-              Total Summary
+              {t("islamicTools.zakatCalculator.totalSummary")}
             </h3>
             <div className="space-y-2 sm:space-y-4">
               <p className="text-xl font-medium text-center">
-                Amount Eligible for Zakat:{" "}
+                {t("islamicTools.zakatCalculator.eligibleAmount")}:{" "}
                 <span className="font-bold">
                   PKR {formatNumber(eligibleAmount)}
                 </span>
               </p>
               <p className="text-2xl sm:text-3xl font-bold text-center">
-                Your Zakat (2.5%):{" "}
+                {t("islamicTools.zakatCalculator.yourZakat")}:{" "}
                 <span className="text-yellow-300">
                   PKR {formatNumber(Math.ceil(zakatAmount))}
                 </span>
@@ -126,7 +137,7 @@ const ZakatCalculator = () => {
                 })
               }
             >
-              Reset Values
+              {t("islamicTools.zakatCalculator.reset")}
             </button>
           </div>
         </div>

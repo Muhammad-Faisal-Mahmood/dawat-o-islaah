@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 
 const HadithCard = ({ hadith }) => {
+  const { t } = useLanguage();
   const [showFull, setShowFull] = useState(false);
   const isTruncated = hadith?.hadithEnglish?.length > 250;
 
@@ -40,14 +42,17 @@ const HadithCard = ({ hadith }) => {
           onClick={() => setShowFull(!showFull)}
           className="text-blue-500 text-sm mt-2 underline"
         >
-          {showFull ? "Show Less" : "Show More"}
+          {showFull ? t("hadithCard.showLess") : t("hadithCard.showMore")}
         </button>
       )}
 
       <div className="mt-2 text-sm text-gray-500 flex justify-between">
-        <span>Hadith Number: {hadith?.hadithNumber}</span>
         <span>
-          Status: <span className="text-green-600">{hadith?.status}</span>
+          {t("hadithCard.hadithNumber")}: {hadith?.hadithNumber}
+        </span>
+        <span>
+          {t("hadithCard.status")}:{" "}
+          <span className="text-green-600">{hadith?.status}</span>
         </span>
       </div>
     </div>
