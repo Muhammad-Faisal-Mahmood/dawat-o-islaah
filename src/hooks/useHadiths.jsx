@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchHadith } from "../api/hadithApi";
 import { useParams } from "react-router-dom";
+import { backendApiClient, getWithParams } from "../api/backendApi";
 
 const useHadiths = () => {
   const { bookSlug, chapterNo } = useParams();
@@ -14,9 +15,10 @@ const useHadiths = () => {
   useEffect(() => {
     const getHadiths = async () => {
       try {
-        const data = await fetchHadith(
-          `hadiths/?book=${bookSlug}&chapter=${chapterNo}&page=${currentPage}`
+        const data = await getWithParams(
+          `hadith/get-hadith/?book=${bookSlug}&chapter=${chapterNo}&page=${currentPage}`
         );
+
         if (data.status === 200) {
           setHadiths((prevHadiths) => [...prevHadiths, ...data.hadiths.data]);
           setTotalPages(data.hadiths.last_page);

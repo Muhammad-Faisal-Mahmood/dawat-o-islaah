@@ -30,6 +30,7 @@ import { useAuthData } from "../context/AuthContext";
 import QuestionsPage from "../pages/qna/QuestionsPage";
 import { QNAProvider } from "../context/QnaContext";
 import { Toaster } from "react-hot-toast";
+import NotFound from "../components/AppComponents/NotFound";
 
 export default function Router() {
   const { isAuthenticated } = useAuthData();
@@ -50,13 +51,13 @@ export default function Router() {
                         <Route path="alQuran" element={<Quran />} />
                         <Route path="surah/:surahNumber" element={<Surah />} />
                         <Route path="juz/:juzNumber" element={<Juz />} />
-                        <Route path="alHadith" element={<Hadith />} />
+                        <Route path="hadith" element={<Hadith />} />
                         <Route
-                          path="alHadith/:bookSlug"
+                          path="hadith/:bookSlug"
                           element={<HadithBookChapters />}
                         />
                         <Route
-                          path="alHadith/:bookSlug/:chapterNo"
+                          path="hadith/:bookSlug/:chapterNo"
                           element={<HadithList />}
                         />
                         <Route path="blog/:blogid" element={<BlogDetail />} />
@@ -108,6 +109,7 @@ export default function Router() {
                           path="/set-new-password"
                           element={<SetNewPassword />}
                         />
+                        <Route path="*" element={<NotFound />} />
                       </Route>
                     </Routes>
                   </QNAProvider>

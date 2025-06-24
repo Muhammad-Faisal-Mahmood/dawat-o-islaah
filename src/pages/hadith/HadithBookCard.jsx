@@ -6,7 +6,7 @@ const HadithBookCard = ({ book }) => {
 
   return (
     <div
-      onClick={() => navigate(`/alHadith/${book.bookSlug}`)}
+      onClick={() => navigate(`/hadith/${book.bookSlug}`)}
       className="transition-transform transform hover:scale-105 shadow-lg bg-white p-4 rounded-lg text-center cursor-pointer"
     >
       <h3 className="text-xl font-semibold text-gray-900">{book.bookName}</h3>

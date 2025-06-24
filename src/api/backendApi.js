@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BACKEND_BASE_URL = "https://dawatoislaah.com/api/";
+// const BACKEND_BASE_URL = "https://dawatoislaah.com/api/";
+const BACKEND_BASE_URL = "http://127.0.0.1:8000/api/";
 
 const backendApiClient = axios.create({
   baseURL: BACKEND_BASE_URL,
@@ -18,4 +19,9 @@ const setAuthToken = (token) => {
   }
 };
 
-export { backendApiClient, setAuthToken, BACKEND_BASE_URL };
+// Utility function to handle GET requests with query params
+const getWithParams = (endpoint, params = {}) => {
+  return backendApiClient.get(endpoint, { params }).then((res) => res.data);
+};
+
+export { backendApiClient, setAuthToken, BACKEND_BASE_URL, getWithParams };

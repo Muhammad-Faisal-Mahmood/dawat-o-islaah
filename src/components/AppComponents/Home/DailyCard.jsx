@@ -37,10 +37,10 @@ const DailyCard = ({
       </div>
 
       {/* Horizontal Rule */}
-      <hr className="border-gray-300" />
+      {/* <hr className="border-gray-300" /> */}
 
       {/* Actions Section */}
-      <div className="flex flex-col items-center text-base md:text-sm gap-4 md:gap-0 md:flex-row md:justify-between mt-3 text-[#1E3A5F]">
+      {/* <div className="flex flex-col items-center text-base md:text-sm gap-4 md:gap-0 md:flex-row md:justify-between mt-3 text-[#1E3A5F]">
         <button className="flex items-center gap-2 font-medium">
           <FaShareAlt color="black" /> Share Now
         </button>
@@ -50,7 +50,7 @@ const DailyCard = ({
         <button className="flex items-center gap-2 font-medium">
           <FaBookOpen color="black" /> Read Complete
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -6,7 +6,7 @@ const ChapterCard = ({ chapter }) => {
   return (
     <div
       onClick={() =>
-        navigate(`/alHadith/${chapter.bookSlug}/${chapter.chapterNumber}`)
+        navigate(`/hadith/${chapter.bookSlug}/${chapter.chapterNumber}`)
       }
       className="transition-transform cursor-pointer transform hover:scale-105 shadow-md bg-white p-4 rounded-lg border-b border-gray-300 hover:border-none"
     >

@@ -16,7 +16,7 @@ const Books = () => {
       description:
         "Explore 18 Books of Nabi Kareem ﷺ ahadees in Arabic, Urdu & English",
       linkText: "Recite Hadith",
-      link: "alHadith",
+      link: "hadith",
       icon: "📜",
     },
     {

@@ -19,7 +19,7 @@ const HadithList = () => {
   if (loading && currentPage === 1) return <ShimmerLoader />;
   if (error) return <p className="text-center text-red-600 my-6">{error}</p>;
 
-  console.log("hadiths data", hadiths);
+  // console.log("hadiths data", hadiths);
 
   return (
     <div className="container mx-auto px-4 md:px-20 py-6">

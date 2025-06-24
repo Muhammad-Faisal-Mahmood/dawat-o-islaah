@@ -8,7 +8,7 @@ const MenuItems = ({ isMobile, isUser }) => {
   const baseItems = [
     { name: "home" },
     { name: "alQuran" },
-    { name: "alHadith" },
+    { name: "hadith" },
     { name: "islamicBooks" },
     { name: "masail" },
   ];
