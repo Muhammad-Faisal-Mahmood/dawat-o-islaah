@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import { FaLocationDot, FaLocationCrosshairs } from "react-icons/fa6";
 
 const HeaderBanner = () => {
-  const [locationData, setLocationData] = useState({
-    city: "Islamabad",
-    country: "Pakistan",
-    latitude: null,
-    longitude: null,
-  });
+  // Try to load saved location from localStorage
+  const savedLocation = JSON.parse(localStorage.getItem("prayerTimesLocation"));
+
+  const [locationData, setLocationData] = useState(
+    savedLocation || {
+      city: "Islamabad",
+      country: "Pakistan",
+      latitude: null,
+      longitude: null,
+    }
+  );
+
   const [prayerTimes, setPrayerTimes] = useState({
     Fajr: "5:20 AM",
     Dhuhr: "12:35 PM",
@@ -15,13 +21,21 @@ const HeaderBanner = () => {
     Maghrib: "6:15 PM",
     Isha: "7:30 PM",
   });
+
   const [currentPrayer, setCurrentPrayer] = useState("Fajr");
   const [nextPrayer, setNextPrayer] = useState("Dhuhr");
-  const [locationRequested, setLocationRequested] = useState(false);
+  const [locationRequested, setLocationRequested] = useState(!!savedLocation);
   const [locationError, setLocationError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const languages = ["English", "اردو"];
+
+  // Save location data to localStorage whenever it changes
+  useEffect(() => {
+    if (locationData.latitude && locationData.longitude) {
+      localStorage.setItem("prayerTimesLocation", JSON.stringify(locationData));
+    }
+  }, [locationData]);
 
   // Convert 12-hour time to minutes for comparison
   const timeToMinutes = (timeStr) => {
@@ -196,10 +210,22 @@ const HeaderBanner = () => {
     return () => clearInterval(interval);
   }, [prayerTimes]);
 
+  // Fetch prayer times if we have saved location but no prayer times yet
+  useEffect(() => {
+    if (savedLocation && savedLocation.latitude && savedLocation.longitude) {
+      fetchPrayerTimes(
+        savedLocation.latitude,
+        savedLocation.longitude,
+        savedLocation.city,
+        savedLocation.country
+      );
+    }
+  }, []);
+
   return (
     <div className="bg-[#1E3A5F] py-2 px-5 md:px-10 text-white text-sm">
-      {/* Location Request Section */}
-      {!locationRequested && (
+      {/* Location Request Section - Only show if location not requested and not saved */}
+      {!locationRequested && !savedLocation && (
         <div className="flex items-center justify-center py-2 mb-2 bg-[#2A4A6B] rounded">
           <button
             onClick={requestLocation}
