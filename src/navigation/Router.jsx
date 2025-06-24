@@ -48,7 +48,7 @@ export default function Router() {
                     <Routes>
                       <Route path="/" element={<WithHeroLayout />}>
                         <Route index element={<Home />} />
-                        <Route path="alQuran" element={<Quran />} />
+                        <Route path="quran" element={<Quran />} />
                         <Route path="surah/:surahNumber" element={<Surah />} />
                         <Route path="juz/:juzNumber" element={<Juz />} />
                         <Route path="hadith" element={<Hadith />} />

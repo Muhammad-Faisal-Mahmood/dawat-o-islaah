@@ -7,7 +7,7 @@ const MenuItems = ({ isMobile, isUser }) => {
   // Base items always visible to everyone
   const baseItems = [
     { name: "home" },
-    { name: "alQuran" },
+    { name: "quran" },
     { name: "hadith" },
     { name: "islamicBooks" },
     { name: "masail" },

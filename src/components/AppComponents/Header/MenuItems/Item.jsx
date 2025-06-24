@@ -9,8 +9,8 @@ const Item = ({ item }) => {
   let route =
     item === "home"
       ? "/"
-      : item === "alQuran"
-      ? "alQuran"
+      : item === "quran"
+      ? "quran"
       : item === "hadith"
       ? "hadith"
       : item === "islamicBooks"
@@ -25,13 +25,13 @@ const Item = ({ item }) => {
 
   return (
     <div
-      className="relative group text-center py-2 cursor-pointer"
+      className="relative group text-center py-2 cursor-pointer w-25"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link
         to={route}
-        className={`cursor-pointer uppercase font-bold tracking-tight text-base transition-all duration-300 ${
+        className={`cursor-pointer uppercase font-bold  tracking-tight text-base transition-all duration-300 ${
           isHovered ? "text-white" : "text-[#1E3A5F]"
         }`}
       >
