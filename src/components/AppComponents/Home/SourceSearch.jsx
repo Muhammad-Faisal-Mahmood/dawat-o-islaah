@@ -13,7 +13,7 @@ const SourceSearch = () => {
   const searchOptions = [
     t("sourceSearch.options.quran"),
     t("sourceSearch.options.hadith"),
-    t("sourceSearch.options.articles"),
+    // t("sourceSearch.options.articles"),
   ];
 
   const handleSelect = (option) => {

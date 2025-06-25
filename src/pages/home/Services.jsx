@@ -74,18 +74,18 @@ const Services = () => {
   ];
 
   return (
-    <div className="bg-[#157347] py-10">
+    <div className="bg-[#157347] py-10 px-10 sm:px-14 md:px-20 lg:px-32">
       <div className="text-center mb-10">
         <h2 className="uppercase text-white text-2xl lg:text-3xl font-bold">
           {t("services.sectionTitle")}
         </h2>
       </div>
-      <div className="flex flex-wrap justify-center gap-6 px-4">
+      <div className="flex flex-wrap justify-center xl:justify-between gap-6">
         {cards.map((card) => (
           <Link
             to={card.route}
             key={card.id}
-            className="w-[80%] h-44 sm:w-52 sm:h-44 flex flex-col items-center justify-center bg-[#C9A227] rounded-lg  hover:shadow-md hover:shadow-yellow-200 transition duration-300 cursor-pointer px-4"
+            className="w-[80%] h-44 sm:w-52 sm:h-44 flex flex-col items-center justify-center bg-[#C9A227] rounded-lg  hover:shadow-md hover:shadow-yellow-200 transition duration-300 cursor-pointer px-2"
           >
             <div className=" mb-4 ">{card.icon}</div>
             <p className="text-[#1E3A5F] text-lg text-center">{card.title}</p>

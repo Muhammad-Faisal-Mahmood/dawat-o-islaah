@@ -43,8 +43,8 @@ const RecentArticles = () => {
     );
 
   return (
-    <div className="p-8 flex flex-col items-center md:block">
-      <div className="w-full flex items-center justify-center mb-8 px-2 md:px-5 py-2">
+    <div className="px-10 sm:px-14 md:px-20 lg:px-32 flex flex-col items-center md:block">
+      <div className="w-full flex items-center justify-center mb-8 px-2 md:px-5">
         <h2 className="text-2xl md:text-3xl text-[#222222] font-bold uppercase tracking-tight">
           Recent articles
         </h2>
