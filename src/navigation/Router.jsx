@@ -28,6 +28,7 @@ import SignIn from "../pages/auth/SignIn";
 import SetNewPassword from "../pages/auth/SetNewPassword";
 import { useAuthData } from "../context/AuthContext";
 import QuestionsPage from "../pages/qna/QuestionsPage";
+import Search from "../pages/search";
 import { QNAProvider } from "../context/QnaContext";
 import { Toaster } from "react-hot-toast";
 import NotFound from "../components/AppComponents/NotFound";
@@ -61,6 +62,7 @@ export default function Router() {
                           element={<HadithList />}
                         />
                         <Route path="blog/:blogid" element={<BlogDetail />} />
+                        <Route path="search" element={<Search />} />
                       </Route>
                       <Route path="/" element={<WithoutHeroLayout />}>
                         <Route

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuItems from "./MenuItems";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -18,11 +18,13 @@ const Header = () => {
   return (
     <div className="flex justify-between px-4 lg:px-20 items-center p-4 bg-[#C9A227]">
       {/* Logo */}
-      <img
-        src="/assets/img/logo.jpeg"
-        className="w-14 items-center"
-        alt="Logo"
-      />
+      <Link to="/">
+        <img
+          src="/assets/img/logo.jpeg"
+          className="w-14 items-center"
+          alt="Logo"
+        />
+      </Link>
 
       <div className="flex items-center">
         {/* Desktop Menu - Hidden on small screens */}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaSearch, FaChevronDown } from "react-icons/fa";
 import { useLanguage } from "../../../context/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 const SourceSearch = () => {
   const { t } = useLanguage();
@@ -8,6 +9,8 @@ const SourceSearch = () => {
     t("sourceSearch.options.quran")
   );
   const [showDropdown, setShowDropdown] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   // Use translation for options
   const searchOptions = [
@@ -18,16 +21,31 @@ const SourceSearch = () => {
 
   const handleSelect = (option) => {
     setSelectedOption(option);
-    setShowDropdown(false); // Close dropdown after selection
+    setShowDropdown(false);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    // Pass both source and query as query params
+    navigate(
+      `/search?source=${encodeURIComponent(
+        selectedOption
+      )}&q=${encodeURIComponent(searchTerm)}`
+    );
   };
 
   return (
-    <div className="flex items-center bg-white rounded-md overflow-visible shadow-md relative">
+    <form
+      className="flex items-center bg-white rounded-md overflow-visible shadow-md relative"
+      onSubmit={handleSearch}
+    >
       {/* Search Input */}
       <input
         type="text"
         placeholder={t("sourceSearch.placeholder")}
         className="px-4 py-2 w-full max-w-[200px] sm:max-w-[300px] outline-none text-black"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
 
       {/* Dropdown for Desktop and Icon for Mobile */}
@@ -51,6 +69,7 @@ const SourceSearch = () => {
         <div className="block sm:hidden relative">
           <button
             className="px-4 py-2 bg-gray-100 border-l"
+            type="button"
             onClick={() => setShowDropdown(!showDropdown)}
             aria-label="Select Option"
           >
@@ -65,7 +84,7 @@ const SourceSearch = () => {
                   key={index}
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-black"
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevent event propagation
+                    e.stopPropagation();
                     handleSelect(option);
                   }}
                 >
@@ -78,10 +97,10 @@ const SourceSearch = () => {
       </div>
 
       {/* Search Button */}
-      <button className="px-4 py-2 bg-gray-100 border-l">
+      <button type="submit" className="px-4 py-2 bg-gray-100 border-l">
         <FaSearch className="text-gray-600" />
       </button>
-    </div>
+    </form>
   );
 };
 
