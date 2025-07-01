@@ -27,7 +27,7 @@ export function WithoutHeroLayout() {
         <HeaderBanner />
         <Header />
       </div>
-      <div className="h-32" />
+      <div className="h-48 md:h-44 lg:h-32" />
       <Outlet />
       <Footer />
       <FooterBanner />
