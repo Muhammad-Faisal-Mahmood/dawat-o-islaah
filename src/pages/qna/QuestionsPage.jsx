@@ -171,18 +171,20 @@ const QuestionsPage = () => {
             >
               <X size={20} />
             </button>
-            <h2 className="text-xl font-semibold mb-4">Post a New Question</h2>
+            <h2 className="text-xl font-semibold mb-4">
+              {t("postQnaPopup.title")}
+            </h2>
 
             <input
               type="text"
-              placeholder="Question Title"
+              placeholder={t("postQnaPopup.TitlePlaceHolder")}
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
               className="w-full border border-gray-300 rounded px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
 
             <textarea
-              placeholder="Question Details"
+              placeholder={t("postQnaPopup.DetailsPlaceHolder")}
               value={newContent}
               onChange={(e) => setNewContent(e.target.value)}
               rows={5}
@@ -198,7 +200,7 @@ const QuestionsPage = () => {
                   : "bg-emerald-600 hover:bg-emerald-700"
               }`}
             >
-              {posting ? "Posting..." : "Submit Question"}
+              {t("postQnaPopup.submitBtn")}
             </button>
           </div>
         </div>

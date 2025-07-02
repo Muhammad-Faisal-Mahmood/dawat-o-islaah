@@ -1,21 +1,37 @@
+import { lazy, Suspense } from "react";
 import ZikrOAzkar from "./ZikrOAzkar";
-import RecentArticles from "./RecentArticles";
-import Services from "./Services";
 import Books from "./Books";
-import SihahSitta from "./SihahSitta";
-import DailyVerseHadees from "./DailyVerseHadees";
 
-const index = () => {
+// Lazy load all components
+const RecentArticles = lazy(() => import("./RecentArticles"));
+const Services = lazy(() => import("./Services"));
+const SihahSitta = lazy(() => import("./SihahSitta"));
+const DailyVerseHadees = lazy(() => import("./DailyVerseHadees"));
+
+// Create a fallback component for loading states
+const LoadingFallback = () => <div>Loading...</div>; // Customize this as needed
+
+const Index = () => {
   return (
     <div className="flex flex-col gap-y-28 mb-20">
       <ZikrOAzkar />
+
       <Books />
-      <SihahSitta />
-      <DailyVerseHadees />
-      <Services />
-      <RecentArticles />
+
+      <Suspense fallback={<LoadingFallback />}>
+        <SihahSitta />
+      </Suspense>
+      <Suspense fallback={<LoadingFallback />}>
+        <DailyVerseHadees />
+      </Suspense>
+      <Suspense fallback={<LoadingFallback />}>
+        <Services />
+      </Suspense>
+      <Suspense fallback={<LoadingFallback />}>
+        <RecentArticles />
+      </Suspense>
     </div>
   );
 };
 
-export default index;
+export default Index;

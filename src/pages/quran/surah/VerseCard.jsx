@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaPlay, FaPause, FaTimes } from "react-icons/fa";
-import tafsirData from "../../../../data/tafsir/tafsirByAyah.json"; // Import the Tafsir JSON
+// import tafsirData from "../../../../data/tafsir/tafsirByAyah.json"; // Import the Tafsir JSON
 import { IoBookOutline } from "react-icons/io5";
 import { useLanguage } from "../../../context/LanguageContext";
 
@@ -13,7 +13,7 @@ const ayahsPerSurah = [
   21, 11, 8, 8, 19, 5, 8, 8, 11, 11, 8, 3, 9, 5, 4, 7, 3, 6, 3, 5, 4, 5, 6,
 ];
 
-console.log("length of tafsir", tafsirData.ayat.length);
+// console.log("length of tafsir", tafsirData.ayat.length);
 
 const getTafsirIndex = (surahNo, verseNo) => {
   if (surahNo <= 0 || surahNo >= ayahsPerSurah.length) return -1;
@@ -56,7 +56,11 @@ const VerseCard = ({
   };
 
   // Function to show Tafsir in a modal
-  const openTafsirModal = (verseNo) => {
+  const openTafsirModal = async (verseNo) => {
+    const { default: tafsirData } = await import(
+      "../../../../data/tafsir/tafsirByAyah.json"
+    );
+
     const tafsirIndex = getTafsirIndex(surahNo, verseNo);
     setSelectedTafsir(
       tafsirData.ayat[tafsirIndex]?.ayat_text ||

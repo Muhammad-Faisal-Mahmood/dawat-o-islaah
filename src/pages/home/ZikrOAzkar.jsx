@@ -1,27 +1,29 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
 
 const ZikrOAzkar = () => {
+  const { t } = useLanguage();
   const posts = [
     {
       id: 1,
-      title: "The Power of Dua: Connecting with Allah",
+      title: t("zikroazkar.1"),
       img: "https://th.bing.com/th/id/R.e47b67a80a0887ff74c34fe4e51d79d4?rik=Am5Ghv77z3JChA&pid=ImgRaw&r=0",
     },
     {
       id: 2,
-      title: "Strengthening Family Bonds through Islamic Values",
+      title: t("zikroazkar.2"),
       img: "https://th.bing.com/th/id/R.e47b67a80a0887ff74c34fe4e51d79d4?rik=Am5Ghv77z3JChA&pid=ImgRaw&r=0",
     },
     {
       id: 3,
-      title: "The Importance of Sincerity in Worship (Ikhlas)",
+      title: t("zikroazkar.3"),
       img: "https://th.bing.com/th/id/R.e47b67a80a0887ff74c34fe4e51d79d4?rik=Am5Ghv77z3JChA&pid=ImgRaw&r=0",
     },
     {
       id: 4,
-      title: "The Journey of Self Purification (Tazkiyah al-Nafs)",
+      title: t("zikroazkar.4"),
       img: "https://th.bing.com/th/id/R.e47b67a80a0887ff74c34fe4e51d79d4?rik=Am5Ghv77z3JChA&pid=ImgRaw&r=0",
     },
   ];

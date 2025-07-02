@@ -4,8 +4,10 @@ import { useAuthData } from "../../context/AuthContext";
 import { backendApiClient, setAuthToken } from "../../api/backendApi";
 import useBlogs from "../../hooks/useBlogs";
 import { useBlogContext } from "../../context/BlogContext";
+import { useLanguage } from "../../context/LanguageContext";
 
 const BlogDetail = () => {
+  const { t } = useLanguage();
   const { blogs, loading: blogsLoading, error: blogsError } = useBlogs();
   const { blogid } = useParams();
   const { user, token } = useAuthData();
@@ -156,13 +158,13 @@ const BlogDetail = () => {
                             onClick={() => handleEdit(comment)}
                             className="text-green-600 cursor-pointer hover:text-green-800"
                           >
-                            Edit
+                            {t("Blog.edit")}
                           </button>
                           <button
                             onClick={() => handleDelete(comment.id)}
                             className="text-red-600 cursor-pointer hover:text-red-700"
                           >
-                            Delete
+                            {t("Blog.delete")}
                           </button>
                         </div>
                       )}
@@ -179,7 +181,7 @@ const BlogDetail = () => {
                           onClick={() => handleUpdateComment(comment.id)}
                           className="px-4 py-2 bg-green-600 cursor-pointer text-white rounded"
                         >
-                          Update
+                          {t("Blog.update")}
                         </button>
                         <button
                           onClick={() => {
@@ -188,7 +190,7 @@ const BlogDetail = () => {
                           }}
                           className="px-4 py-2 bg-gray-400 cursor-pointer text-white rounded"
                         >
-                          Cancel
+                          {t("Blog.cancel")}
                         </button>
                       </div>
                     ) : (
