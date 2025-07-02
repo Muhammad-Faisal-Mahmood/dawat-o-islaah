@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useTranslation } from "../../../../hooks/useTranslation";
 import { Link } from "react-router-dom";
 
-const Item = ({ item }) => {
+const Item = ({ item, closeMenu, isMobile }) => {
   const translation = useTranslation();
   const itemWord = translation?.header?.[item];
   const [isHovered, setIsHovered] = useState(false);
+
   let route =
     item === "home"
       ? "/"
@@ -25,14 +26,19 @@ const Item = ({ item }) => {
 
   return (
     <div
-      className="relative group text-center cursor-pointer"
+      className={`relative group ${isMobile ? "py-2" : ""}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link
         to={route}
-        className={`whitespace-nowrap cursor-pointer uppercase font-bold  tracking-tight text-base transition-all duration-300 ${
+        onClick={closeMenu}
+        className={`whitespace-nowrap cursor-pointer uppercase font-bold tracking-tight  transition-all duration-300 ${
           isHovered ? "text-white" : "text-[#1E3A5F]"
+        } ${
+          isMobile
+            ? "block text-xl py-1 px-4 hover:bg-[#1E3A5F]/10 rounded-lg"
+            : "text-base"
         }`}
       >
         {itemWord}
