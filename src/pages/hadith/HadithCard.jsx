@@ -8,12 +8,12 @@ const HadithCard = ({ hadith }) => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md mb-4">
-      <div className="flex justify-between">
-        <h3 className="text-xl font-bold text-gray-900">
+      <div className="flex justify-between gap-2">
+        <h3 className="text-xl font-bold text-gray-900 flex-1 leading-8">
           {hadith?.chapter?.chapterEnglish} {hadith?.headingEnglish && " - "}{" "}
           {hadith?.headingEnglish}
         </h3>
-        <p className="text-gray-500 text-2xl  pb-4 font-hadith">
+        <p className="text-gray-500 text-2xl  pb-4 font-hadith flex-1">
           {hadith?.headingArabic}
         </p>
       </div>

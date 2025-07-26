@@ -29,8 +29,8 @@ const HadithList = () => {
         {t("hadithList.title")} {bookSlug.replace("-", " ")} -{" "}
         {t("hadithList.chapter")} {chapterNo}
       </h2>
-      <h2 className="text-2xl font-bold text-center mb-6">
-        " {hadiths[0]?.chapter?.chapterEnglish} "
+      <h2 className="text-3xl font-bold text-center mb-6 text-blue-900">
+        &#34; {hadiths[0]?.chapter?.chapterEnglish} &#34;
       </h2>
       <div>
         {hadiths.map((hadith) => (
@@ -42,12 +42,12 @@ const HadithList = () => {
         <div className="text-center mt-4">
           <button
             onClick={loadMore}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 cursor-pointer"
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 cursor-pointer leading-10"
             disabled={isFetchingMore}
           >
             {isFetchingMore ? (
               <div className="flex justify-center items-center">
-                <div className="w-5 h-5 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+                <div className="w-5 h-5 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin "></div>
               </div>
             ) : (
               t("hadithList.loadMore")
