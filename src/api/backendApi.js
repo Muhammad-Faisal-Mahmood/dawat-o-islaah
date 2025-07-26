@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const BACKEND_BASE_URL = "https://dawatoislaah.com/api/";
-const BACKEND_BASE_URL = "http://127.0.0.1:8000/api/";
+const BACKEND_BASE_URL = "https://dawatoislaah.com/api/";
+// const BACKEND_BASE_URL = "http://127.0.0.1:8000/api/";
 
 const backendApiClient = axios.create({
   baseURL: BACKEND_BASE_URL,

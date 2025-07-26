@@ -70,7 +70,7 @@ const SurahDetails = () => {
           {surahDetails.revelationType} | {surahDetails.numberOfAyahs}{" "}
           {t("quranDetails.verses")}
         </p>
-        <p className="text-3xl text-blue-600 font-bold mt-4">
+        <p className="text-3xl text-blue-600 font-semibold mt-4 font-quran">
           {surahDetails.name}
         </p>
 

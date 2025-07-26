@@ -29,6 +29,7 @@ const DailyVerseHadees = () => {
           englishText={verse.english}
           reference={verse.reference}
           isVerse={true} // Pass `true` for verse
+          verse
         />
       </div>
 
@@ -43,6 +44,7 @@ const DailyVerseHadees = () => {
           englishText={hadees.english}
           reference={hadees.reference}
           isVerse={false} // Pass `false` for hadees
+          hadith
         />
       </div>
     </div>

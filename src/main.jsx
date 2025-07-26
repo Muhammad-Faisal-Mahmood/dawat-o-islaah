@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import "./fonts.css";
 import Router from "./navigation/Router";
 import { AuthProvider } from "./context/AuthContext";
 

@@ -13,7 +13,7 @@ const ayahsPerSurah = [
   21, 11, 8, 8, 19, 5, 8, 8, 11, 11, 8, 3, 9, 5, 4, 7, 3, 6, 3, 5, 4, 5, 6,
 ];
 
-console.log("length of tafsir", tafsirData.ayat.length);
+// console.log("length of tafsir", tafsirData.ayat.length);
 
 const getTafsirIndex = (surahNo, verseNo) => {
   if (surahNo <= 0 || surahNo >= ayahsPerSurah.length) return -1;
@@ -65,6 +65,61 @@ const VerseCard = ({
     setShowModal(true);
   };
 
+  function parseIslamicTextToJSX(text) {
+    // Split text by all bracket patterns while keeping the brackets
+    const parts = text.split(
+      /(\{[^}]*\}|\[[^\]]*\]|«[^»]*»|[➊➋➌➍➎➏➐➑➒➓⓫⓬⓭⓮⓯⓰⓱⓲⓳⓴㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿])/
+    );
+
+    return parts.map((part, index) => {
+      // Check if this part matches any bracket pattern
+      if (part.startsWith("«") && part.endsWith("»")) {
+        return (
+          <span key={index} className="text-red-600 font-quran text-2xl">
+            {part}
+          </span>
+        );
+      } else if (part.startsWith("{") && part.endsWith("}")) {
+        // Quran verse - remove brackets and apply green + font-quran
+
+        return (
+          <span key={index} className="text-green-600 font-quran text-2xl">
+            {part}
+          </span>
+        );
+      } else if (part.startsWith("[") && part.endsWith("]")) {
+        return (
+          <span key={index} className="text-blue-600 font-hadith text-2xl">
+            {part}
+          </span>
+        );
+      } else if (
+        /[➊➋➌➍➎➏➐➑➒➓⓫⓬⓭⓮⓯⓰⓱⓲⓳⓴㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿]/.test(
+          part
+        )
+      ) {
+        return (
+          <span key={index} className="text-[#C9A227] text-2xl">
+            {part}
+          </span>
+        );
+      } else {
+        // Regular text - no styling
+        return <span key={index}>{part}</span>;
+      }
+    });
+  }
+
+  // React component to render Islamic text
+  function IslamicTextRenderer({
+    text,
+    className = "text-gray-800 text-lg/9",
+  }) {
+    const parsedElements = parseIslamicTextToJSX(text);
+
+    return <p className={([className], "leading-10")}>{parsedElements}</p>;
+  }
+
   return (
     <div className="space-y-6">
       {verses.map((ayah, index) => (
@@ -95,7 +150,7 @@ const VerseCard = ({
           </p>
 
           {/* Arabic Ayah (Always Centered) */}
-          <p className="text-2xl/8 md:text-3xl/16 text-[#1E3A5F] text-center mt-14 font-semibold">
+          <p className="text-3xl md:text-4xl text-center mt-14 leading-relaxed font-quran">
             {ayah.text}
           </p>
 
@@ -125,8 +180,8 @@ const VerseCard = ({
                 <div className="text-right">
                   {Object.entries(translations.ur).map(
                     ([identifier, ayahList]) => (
-                      <div key={identifier} className="mb-4">
-                        <p className="text-gray-700 text-lg/10">
+                      <div key={identifier} className="mb-4 ">
+                        <p className="text-gray-700 text-lg/10 leading-10">
                           {ayahList[index]?.text || "ترجمہ دستیاب نہیں"}
                         </p>
                         <p className="text-sm text-gray-500 mt-1">
@@ -175,8 +230,8 @@ const VerseCard = ({
             <h2 className="text-xl font-bold text-center mb-4">
               {t("quranDetails.tafsir")}
             </h2>
-            <p className="text-gray-800 text-lg/9 urdu-text">
-              {selectedTafsir}
+            <p className="text-gray-800 text-lg/9">
+              <IslamicTextRenderer text={selectedTafsir} />
             </p>
           </div>
         </div>

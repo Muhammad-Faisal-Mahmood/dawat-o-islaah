@@ -7,6 +7,8 @@ const DailyCard = ({
   englishText,
   reference,
   isVerse,
+  verse,
+  hadith,
 }) => {
   return (
     <div
@@ -19,16 +21,18 @@ const DailyCard = ({
       <p className="text-xs text-gray-500 text-left mb-2">{reference}</p>
 
       {/* Content Section */}
-      <div className="flex-grow flex flex-col items-center justify-center">
+      <div className=" flex-grow flex flex-col items-center justify-center">
         {/* Arabic Text (center-aligned) */}
-        <p className="text-center font-arabic text-2xl text-gray-900 leading-loose">
+        <p
+          className={`text-center text-3xl text-gray-900  leading-loose ${
+            verse ? "font-quran" : "font-hadith"
+          } `}
+        >
           {arabicText}
         </p>
 
         {/* Urdu Translation (center-aligned) */}
-        <p className="text-center text-lg text-gray-800 mt-2 font-nastaliq">
-          {urduText}
-        </p>
+        <p className="text-center text-lg text-gray-800 mt-2 ">{urduText}</p>
 
         {/* English Translation (center-aligned) */}
         <p className="text-center text-sm text-gray-700 mt-4 mb-4">

@@ -70,7 +70,7 @@ const JuzDetails = () => {
           {juzData.start_surah} - {juzData.end_surah} | {juzData.total_ayahs}{" "}
           {t("quranDetails.verses")}
         </p>
-        <p className="text-3xl text-blue-600 font-bold mt-6">
+        <p className="text-3xl text-blue-600 font-bold mt-6 font-quran">
           {juzData.juz_name_ar}
         </p>
 

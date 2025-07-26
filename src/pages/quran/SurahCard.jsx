@@ -34,7 +34,7 @@ const SurahCard = ({
         </div>
 
         {/* Right Side - Arabic Name */}
-        <div className="text-blue-600 text-xl md:text-2xl font-bold text-right">
+        <div className="text-blue-600 text-2xl md:text-4xl text-right font-quran">
           {arabicName}
         </div>
 
