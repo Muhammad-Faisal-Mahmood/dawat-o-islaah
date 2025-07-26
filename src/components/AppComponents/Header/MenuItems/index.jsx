@@ -1,7 +1,7 @@
 import { useLanguage } from "../../../../context/LanguageContext";
 import Item from "./Item";
 
-const MenuItems = ({ isMobile, isUser }) => {
+const MenuItems = ({ isMobile, isUser, closeMenu }) => {
   const { language } = useLanguage();
 
   // Base items always visible to everyone
@@ -18,8 +18,6 @@ const MenuItems = ({ isMobile, isUser }) => {
 
   if (isUser) {
     authDependentItems = [{ name: "questionAnswer" }];
-  } else if (!isUser && isMobile) {
-    authDependentItems = [{ name: "login" }];
   }
 
   // Combine the base items with authentication-dependent items
@@ -31,16 +29,12 @@ const MenuItems = ({ isMobile, isUser }) => {
   return (
     <div
       className={`flex ${
-        isMobile ? "flex-col items-center" : "items-center space-x-8"
+        isMobile ? "flex-col space-y-6" : "items-center space-x-8"
       }`}
     >
-      {renderedItems.map((item, index) => (
+      {renderedItems.map((item) => (
         <div key={item.name} className="w-full">
-          <Item item={item.name} />
-          {/* Show dividers only in mobile view */}
-          {isMobile && index !== renderedItems.length - 1 && (
-            <div className="border-b border-neutral-300 w-full"></div>
-          )}
+          <Item closeMenu={closeMenu} item={item.name} isMobile={isMobile} />
         </div>
       ))}
     </div>

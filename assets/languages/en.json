@@ -301,8 +301,26 @@
     "pending": "Pending",
     "awaiting": "Awaiting"
   },
+  "postQnaPopup": {
+    "title": "Post a new question",
+    "submitBtn": "Submit Question",
+    "DetailsPlaceHolder": "Question Details",
+    "TitlePlaceHolder": "Question Title"
+  },
   "userDropdown": {
     "changePassword": "Change Password",
     "logout": "Logout"
+  },
+  "Blog": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "update": "Update"
+  },
+  "zikroazkar": {
+    "1": "The Power of Dua: Connecting with Allah",
+    "2": "Strengthening Family Bonds through Islamic Values",
+    "3": "The Importance of Sincerity in Worship (Ikhlas)",
+    "4": "The Journey of Self Purification (Tazkiyah al-Nafs)"
   }
 }
