@@ -123,8 +123,6 @@ const Search = () => {
         )
       : results;
 
-  console.log(paginatedResults);
-
   const handlePrev = () => {
     if (source && source.toLowerCase().includes("quran")) {
       setCurrentPage((p) => Math.max(1, p - 1));
@@ -157,7 +155,7 @@ const Search = () => {
             <p className="text-center text-gray-500">No results found.</p>
           ) : (
             <>
-              <ul className="space-y-6">
+              <ul className="space-y-4">
                 {source.toLowerCase().includes("quran")
                   ? paginatedResults.map((item) => (
                       <li
@@ -181,100 +179,44 @@ const Search = () => {
                   : paginatedResults.map((item) => (
                       <li
                         key={item.id}
-                        className="bg-white border-2 border-neutral-200 rounded-lg shadow p-6"
+                        className="bg-white border-2 border-neutral-200 rounded-lg shadow p-4"
                       >
-                        {/* Hadith Header Info */}
-                        <div className="mb-4 pb-3 border-b border-gray-200">
-                          <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
-                            {item?.book?.bookName && (
-                              <span>
-                                <span className="font-semibold">Book:</span>{" "}
-                                {item.book.bookName}
-                              </span>
+                        <div className="mb-2 flex flex-wrap items-center gap-2">
+                          <span className="font-bold text-[#157347]">
+                            {highlightText(
+                              item?.hadithEnglish ||
+                                item?.hadithUrdu ||
+                                item?.hadithArabic,
+                              keyword
                             )}
-                            {item?.chapter && (
-                              <span>
-                                {" "}
-                                |{" "}
-                                <span className="font-semibold">
-                                  Chapter:
-                                </span>{" "}
-                                {item?.chapter?.chapterEnglish}
-                              </span>
-                            )}
-                            {item?.hadithNumber && (
-                              <span>
-                                {" "}
-                                |{" "}
-                                <span className="font-semibold">
-                                  Hadith #:
-                                </span>{" "}
-                                {item?.hadithNumber}
-                              </span>
-                            )}
-                            {item?.status && (
-                              <span>
-                                {" "}
-                                | <span className="font-semibold">
-                                  Status:
-                                </span>{" "}
-                                <span className="text-green-600 font-medium">
-                                  {item?.status}
-                                </span>
-                              </span>
-                            )}
-                          </div>
-                          {item?.englishNarrator && (
-                            <div className="mt-2 text-sm text-[#157347] font-medium">
-                              {item.englishNarrator}
-                            </div>
+                          </span>
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {item?.book?.bookName && (
+                            <span>
+                              <span className="font-semibold">Book:</span>{" "}
+                              {item.book.bookName}
+                            </span>
+                          )}
+                          {item?.chapter && (
+                            <span>
+                              {" "}
+                              | <span className="font-semibold">
+                                Chapter:
+                              </span>{" "}
+                              {item?.chapter?.chapterEnglish}
+                            </span>
+                          )}
+                          {item?.hadithNumber && (
+                            <span>
+                              {" "}
+                              | <span className="font-semibold">
+                                Hadith #:
+                              </span>{" "}
+                              {item?.hadithNumber}
+                            </span>
                           )}
                         </div>
-
-                        {/* Arabic Hadith Text */}
-                        {item?.hadithArabic && (
-                          <div className="mb-4">
-                            <h4 className="text-sm font-semibold text-gray-700 mb-2">
-                              Arabic Text:
-                            </h4>
-                            <div className="text-right font-arabic p-3 bg-gray-50 rounded-lg font-hadith text-2xl leading-12 text-green-700">
-                              {item.hadithArabic}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* English Hadith Text */}
-                        {item?.hadithEnglish && (
-                          <div className="mb-4">
-                            <h4 className="text-sm font-semibold text-gray-700 mb-2">
-                              English Translation:
-                            </h4>
-                            <div className="text-lg text-gray-800 leading-relaxed p-3 bg-blue-50 rounded-lg">
-                              {highlightText(item.hadithEnglish, keyword)}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Chapter/Heading Information */}
-                        {(item?.headingEnglish || item?.headingArabic) && (
-                          <div className="mt-4 pt-3 border-t border-gray-200">
-                            <div className="text-sm text-gray-600">
-                              <span className="font-semibold">
-                                Chapter Topic:
-                              </span>
-                              {item?.headingEnglish && (
-                                <div className="mt-1 text-gray-700">
-                                  {item.headingEnglish}
-                                </div>
-                              )}
-                              {item?.headingArabic && (
-                                <div className="mt-1 text-right font-hadith text-2xl ">
-                                  {item.headingArabic}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        )}
                       </li>
                     ))}
               </ul>
@@ -283,7 +225,7 @@ const Search = () => {
                 <button
                   onClick={handlePrev}
                   disabled={currentPage === 1}
-                  className="px-4 py-2 bg-[#1E3A5F] text-white rounded disabled:opacity-50 hover:bg-[#2d4f73] transition-colors"
+                  className="px-4 py-2 bg-[#1E3A5F] text-white rounded disabled:opacity-50"
                 >
                   Previous
                 </button>
@@ -292,11 +234,6 @@ const Search = () => {
                   {source && source.toLowerCase().includes("quran")
                     ? totalPages
                     : hadithLastPage}
-                  {source && source.toLowerCase().includes("hadith") && (
-                    <span className="text-sm text-gray-600 ml-2">
-                      ({hadithTotal} total results)
-                    </span>
-                  )}
                 </span>
                 <button
                   onClick={handleNext}
@@ -305,7 +242,7 @@ const Search = () => {
                       ? currentPage === totalPages
                       : currentPage === hadithLastPage
                   }
-                  className="px-4 py-2 bg-[#1E3A5F] text-white rounded disabled:opacity-50 hover:bg-[#2d4f73] transition-colors"
+                  className="px-4 py-2 bg-[#1E3A5F] text-white rounded disabled:opacity-50"
                 >
                   Next
                 </button>
