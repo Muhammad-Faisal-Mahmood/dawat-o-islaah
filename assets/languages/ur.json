@@ -110,10 +110,10 @@
   "quranDetails": {
     "verses": "آیات",
     "translations": "تراجم",
-    "selectTranslations": "منتخب کریں {lang} تراجم",
+    "selectTranslations": "{lang} تراجم منتخب کریں ",
     "playVerse": "آیت چلائیں",
     "pauseVerse": "آیت روکیں",
-    "checkTafsir": "تفسیر دیکھیں",
+    "checkTafsir": "تفسیر پڑھیں",
     "tafsir": "تفسیر"
   },
   "audioPlayer": {
