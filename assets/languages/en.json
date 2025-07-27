@@ -322,5 +322,9 @@
     "2": "Strengthening Family Bonds through Islamic Values",
     "3": "The Importance of Sincerity in Worship (Ikhlas)",
     "4": "The Journey of Self Purification (Tazkiyah al-Nafs)"
+  },
+  "searchPage": {
+    "title": "Search Results",
+    "noSearchKeyword": "Please enter a keyword to see search results. "
   }
 }

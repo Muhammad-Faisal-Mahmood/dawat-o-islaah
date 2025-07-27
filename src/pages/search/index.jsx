@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -31,14 +32,23 @@ const Search = () => {
   const query = useQuery();
   const source = query.get("source");
   const keyword = query.get("q");
+  const { t } = useLanguage();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Hadith API pagination
   const [hadithTotal, setHadithTotal] = useState(0);
   const [hadithLastPage, setHadithLastPage] = useState(1);
+
+  const isQuran =
+    source?.toLowerCase().includes("quran") ||
+    source?.includes("القرآن") ||
+    source?.toLowerCase() === "alquran";
+  const isHadith =
+    source?.toLowerCase().includes("hadith") || source?.includes("حدیث");
+
+  const isUrdu = source === "القرآن" || source === "حدیث";
 
   useEffect(() => {
     if (!source || !keyword) return;
@@ -50,11 +60,12 @@ const Search = () => {
     setHadithTotal(0);
     setHadithLastPage(1);
 
-    if (source.toLowerCase().includes("quran")) {
+    if (isQuran) {
+      const lang = isUrdu ? "ur" : "en";
       fetch(
         `https://api.alquran.cloud/v1/search/${encodeURIComponent(
           keyword
-        )}/all/en`
+        )}/all/${lang}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -65,9 +76,10 @@ const Search = () => {
           setError("Failed to fetch Quran results.");
           setLoading(false);
         });
-    } else if (source.toLowerCase().includes("hadith")) {
+    } else if (isHadith) {
+      const keyParam = isUrdu ? "hadithUrdu" : "hadithEnglish";
       fetch(
-        `https://hadithapi.com/api/hadiths?apiKey=${HADITH_API_KEY}&hadithEnglish=${encodeURIComponent(
+        `https://hadithapi.com/api/hadiths?apiKey=${HADITH_API_KEY}&${keyParam}=${encodeURIComponent(
           keyword
         )}&paginate=${ITEMS_PER_PAGE}&page=1`
       )
@@ -86,15 +98,15 @@ const Search = () => {
     }
   }, [source, keyword]);
 
-  // Handle page change for Hadith API
   const handleHadithPageChange = (page) => {
     setLoading(true);
     setError("");
     setResults([]);
     setCurrentPage(page);
 
+    const keyParam = isUrdu ? "hadithUrdu" : "hadithEnglish";
     fetch(
-      `https://hadithapi.com/api/hadiths?apiKey=${HADITH_API_KEY}&hadithEnglish=${encodeURIComponent(
+      `https://hadithapi.com/api/hadiths?apiKey=${HADITH_API_KEY}&${keyParam}=${encodeURIComponent(
         keyword
       )}&paginate=${ITEMS_PER_PAGE}&page=${page}`
     )
@@ -112,36 +124,47 @@ const Search = () => {
       });
   };
 
-  // Pagination logic for Quran (client-side)
   const totalResults = results.length;
   const totalPages = Math.ceil(totalResults / ITEMS_PER_PAGE);
-  const paginatedResults =
-    source && source.toLowerCase().includes("quran")
-      ? results.slice(
-          (currentPage - 1) * ITEMS_PER_PAGE,
-          currentPage * ITEMS_PER_PAGE
-        )
-      : results;
+  const paginatedResults = isQuran
+    ? results.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+      )
+    : results;
 
   const handlePrev = () => {
-    if (source && source.toLowerCase().includes("quran")) {
+    if (isQuran) {
       setCurrentPage((p) => Math.max(1, p - 1));
     } else {
       if (currentPage > 1) handleHadithPageChange(currentPage - 1);
     }
+    window.scrollTo({ top: 300, behavior: "smooth" });
   };
+
   const handleNext = () => {
-    if (source && source.toLowerCase().includes("quran")) {
+    if (isQuran) {
       setCurrentPage((p) => Math.min(totalPages, p + 1));
     } else {
       if (currentPage < hadithLastPage) handleHadithPageChange(currentPage + 1);
     }
+    window.scrollTo({ top: 300, behavior: "smooth" });
   };
+
+  if (keyword === "") {
+    return (
+      <div>
+        <p className="text-xl text-center text-gray-900 my-12">
+          {t("searchPage.noSearchKeyword")}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-4 min-h-[60vh]">
-      <h2 className="text-3xl font-bold mb-6 text-center text-[#1E3A5F]">
-        Search Results
+      <h2 className="text-3xl font-bold my-8 text-center text-[#1E3A5F]">
+        {t("searchPage.title")}
       </h2>
       {loading && (
         <div className="flex justify-center py-12">
@@ -156,16 +179,16 @@ const Search = () => {
           ) : (
             <>
               <ul className="space-y-4">
-                {source.toLowerCase().includes("quran")
+                {isQuran
                   ? paginatedResults.map((item) => (
                       <li
                         key={item?.number}
-                        className="bg-white border-2 border-neutral-200 rounded-lg shadow p-4"
+                        className="bg-white border-2 border-neutral-200 rounded-lg shadow p-6"
                       >
                         <div className="mb-2 flex flex-wrap items-center gap-2">
                           <span className="font-bold text-[#157347]">
                             Surah {item?.surah?.number}:{" "}
-                            {item?.surah?.englishName} ({item?.surah?.name})
+                            {item?.surah?.englishName || item?.surah?.name}
                           </span>
                           <span className="text-xs text-gray-500">
                             | Ayah {item?.numberInSurah}
@@ -179,19 +202,9 @@ const Search = () => {
                   : paginatedResults.map((item) => (
                       <li
                         key={item.id}
-                        className="bg-white border-2 border-neutral-200 rounded-lg shadow p-4"
+                        className="bg-white border-2 border-neutral-200 rounded-lg shadow p-6"
                       >
-                        <div className="mb-2 flex flex-wrap items-center gap-2">
-                          <span className="font-bold text-[#157347]">
-                            {highlightText(
-                              item?.hadithEnglish ||
-                                item?.hadithUrdu ||
-                                item?.hadithArabic,
-                              keyword
-                            )}
-                          </span>
-                        </div>
-                        <div className="text-sm text-gray-600">
+                        <div className=" text-[#157347] pb-2">
                           {item?.book?.bookName && (
                             <span>
                               <span className="font-semibold">Book:</span>{" "}
@@ -204,7 +217,9 @@ const Search = () => {
                               | <span className="font-semibold">
                                 Chapter:
                               </span>{" "}
-                              {item?.chapter?.chapterEnglish}
+                              {isUrdu
+                                ? item?.chapter?.chapterUrdu
+                                : item?.chapter?.chapterEnglish}
                             </span>
                           )}
                           {item?.hadithNumber && (
@@ -217,10 +232,17 @@ const Search = () => {
                             </span>
                           )}
                         </div>
+                        <div className="mb-2 flex flex-wrap items-center gap-2">
+                          <span className="text-lg text-gray-800 leading-12">
+                            {highlightText(
+                              isUrdu ? item?.hadithUrdu : item?.hadithEnglish,
+                              keyword
+                            )}
+                          </span>
+                        </div>
                       </li>
                     ))}
               </ul>
-              {/* Pagination Controls */}
               <div className="flex justify-center items-center gap-4 mt-8">
                 <button
                   onClick={handlePrev}
@@ -230,15 +252,12 @@ const Search = () => {
                   Previous
                 </button>
                 <span className="font-semibold text-[#1E3A5F]">
-                  Page {currentPage} of{" "}
-                  {source && source.toLowerCase().includes("quran")
-                    ? totalPages
-                    : hadithLastPage}
+                  Page {currentPage} of {isQuran ? totalPages : hadithLastPage}
                 </span>
                 <button
                   onClick={handleNext}
                   disabled={
-                    source && source.toLowerCase().includes("quran")
+                    isQuran
                       ? currentPage === totalPages
                       : currentPage === hadithLastPage
                   }
