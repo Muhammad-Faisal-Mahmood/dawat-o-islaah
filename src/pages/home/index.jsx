@@ -13,7 +13,7 @@ const LoadingFallback = () => <div>Loading...</div>; // Customize this as needed
 
 const Index = () => {
   return (
-    <div className="flex flex-col gap-y-16 py-16 md:py-0 md:gap-y-28 mb-20">
+    <div className="flex flex-col gap-y-16 py-16 md:py-0 md:gap-y-28 mb-20 ">
       <ZikrOAzkar />
 
       <Books />

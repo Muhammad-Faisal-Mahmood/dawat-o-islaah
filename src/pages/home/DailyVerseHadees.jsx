@@ -17,7 +17,7 @@ const DailyVerseHadees = () => {
   const hadees = hadiths[hadeesIndex];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-6 lg:px-32 px-10 sm:px-14 md:px-20">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-6 lg:px-32 px-6 sm:px-14 md:px-20">
       {/* Verse of the Day */}
       <div>
         <h3 className="text-xl font-semibold text-gray-700 mb-2 text-center">

@@ -81,15 +81,10 @@
   "footer": {
     "brand": "Dawat o Islaah",
     "intro": "Welcome to our Dawat o Islaah website, dedicated to spreading the message of Islam and promoting personal and community development through authentic teachings. Our resources aim to inspire spiritual growth, foster unity, and encourage positive change in line with Islamic principles.",
-    "searchByItems": "Search By Items",
+    "whatWeOffer": "What We Offer",
+    "islamicTools": "ISLAMIC TOOLS",
     "searchByTags": "Search By Tags",
-    "itemsSearchByPosts": [
-      "Quran",
-      "Ahadith",
-      "Blogs",
-      "Islamic Books",
-      "Masail"
-    ],
+    "whatWeOfferList": ["Quran", "Hadith", "Islamic Books", "Masail"],
     "itemsSearchByTags": ["Islaah", "Islamic", "Islamic Posts", "Prayer"]
   },
   "footerBanner": {

@@ -5,7 +5,7 @@ import useBlogs from "../../hooks/useBlogs";
 const PostCard = ({ id, image, title, date, author, tags }) => {
   return (
     <Link to={`/blog/${id}`}>
-      <div className="max-w-sm bg-white shadow-md rounded-lg overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300">
+      <div className=" bg-white w-full shadow-md rounded-lg overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300">
         <div className="relative">
           <img src={image} alt={title} className="w-full h-40 object-cover" />
           {tags && (
@@ -43,13 +43,13 @@ const RecentArticles = () => {
     );
 
   return (
-    <div className="px-10 sm:px-14 md:px-20 lg:px-32 flex flex-col items-center md:block">
-      <div className="w-full flex items-center justify-center mb-8 px-2 md:px-5">
+    <div className="px-6 sm:px-14 md:px-20 lg:px-32 flex flex-col items-center md:block">
+      <div className=" flex items-center justify-center mb-8  px-2 md:px-5">
         <h2 className="text-2xl md:text-3xl text-[#222222] font-bold uppercase tracking-tight">
           Recent articles
         </h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
         {blogs.map((blog, index) => (
           <PostCard
             key={blog.id || index}

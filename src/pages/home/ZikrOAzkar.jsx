@@ -25,7 +25,7 @@ const ZikrOAzkar = () => {
               animate={{ x: [0, "-100%"] }}
               transition={{
                 ease: "linear",
-                duration: validBlogs?.length ? validBlogs.length * 5 : 30,
+                duration: validBlogs?.length ? validBlogs.length * 8 : 30,
                 repeat: Infinity,
                 repeatType: "loop",
               }}
@@ -53,7 +53,7 @@ const ZikrOAzkar = () => {
               animate={{ x: [0, "-100%"] }}
               transition={{
                 ease: "linear",
-                duration: validBlogs?.length ? validBlogs.length * 5 : 30,
+                duration: validBlogs?.length ? validBlogs.length * 8 : 30,
                 repeat: Infinity,
                 repeatType: "loop",
               }}

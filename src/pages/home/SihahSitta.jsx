@@ -26,7 +26,7 @@ const SihahSitta = () => {
   }));
 
   return (
-    <div className="px-10 sm:px-14 md:px-20 lg:px-32 flex flex-col gap-y-10">
+    <div className="px-6 sm:px-14 md:px-20 lg:px-32 flex flex-col gap-y-10">
       <h2 className="text-center font-bold text-2xl sm:text-3xl mb-4">
         {t("sihahSitta.sectionTitle")}
       </h2>
@@ -34,7 +34,7 @@ const SihahSitta = () => {
       <div className="text-center mt-4">
         <Link
           to={"hadith"}
-          className="px-4 py-2 bg-[#1E3A5F] uppercase font-bold text-white rounded"
+          className="px-4 py-4 bg-[#1E3A5F] uppercase font-bold text-white rounded"
         >
           {t("sihahSitta.readAll")}
         </Link>

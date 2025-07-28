@@ -30,9 +30,9 @@ const Books = () => {
   ];
 
   return (
-    <div className="container mx-auto px-10 sm:px-14 md:px-20 lg:px-32 space-y-8 ">
+    <div className="container mx-auto px-6 sm:px-14 md:px-20 lg:px-32 space-y-8 ">
       {/* Featured Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
         {books.map((book, index) => (
           <BookInfoCard key={index} {...book} />
         ))}
