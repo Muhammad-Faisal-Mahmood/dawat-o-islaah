@@ -5,7 +5,7 @@ const FooterBanner = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="w-full bg-[#C9A227] text-center text-white uppercase py-5">
+    <div className="w-full bg-[#C9A227] text-center text-white uppercase leading-10 text-sm">
       {t("footerBanner.copyright")}
     </div>
   );
