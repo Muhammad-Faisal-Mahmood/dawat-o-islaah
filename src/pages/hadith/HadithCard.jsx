@@ -9,11 +9,11 @@ const HadithCard = ({ hadith }) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md mb-4">
       <div className="flex justify-between gap-2">
-        <h3 className="text-xl font-bold text-gray-900 flex-1 leading-8">
+        <h3 className="text-lg font-bold text-gray-900 flex-1 leading-8">
           {hadith?.chapter?.chapterEnglish} {hadith?.headingEnglish && " - "}{" "}
           {hadith?.headingEnglish}
         </h3>
-        <p className="text-gray-500 text-2xl  pb-4 font-hadith flex-1">
+        <p className="text-gray-500 text-3xl  pb-4 font-hadith flex-1 text-end">
           {hadith?.headingArabic}
         </p>
       </div>
@@ -24,7 +24,7 @@ const HadithCard = ({ hadith }) => {
         </p>
 
         <p
-          className={`text-green-600 leading-12 text-2xl font-semibold font-hadith mt-2 ${
+          className={`text-green-600 leading-12 text-3xl font-hadith mt-2 ${
             showFull || !isTruncated ? "block" : "line-clamp-3"
           }`}
         >

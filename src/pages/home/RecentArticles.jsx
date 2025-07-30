@@ -26,7 +26,7 @@ const PostCard = ({ id, image, title, date, author, tags }) => {
             {title.length > 40 ? title.substring(0, 40) + "..." : title}
           </h3>
           <p className="text-sm text-green-500 mb-1">{date}</p>
-          <p className="text-sm text-gray-500">{author}</p>
+          <p className="text-sm text-gray-500">{author && author}</p>
         </div>
       </div>
     </Link>
@@ -58,7 +58,7 @@ const RecentArticles = () => {
             tags={["BLOG"]}
             title={blog.title}
             date={new Date(blog.created_at).toLocaleDateString()}
-            author={"Amaze Technologies"}
+            // author={"Amaze Technologies"}
           />
         ))}
       </div>

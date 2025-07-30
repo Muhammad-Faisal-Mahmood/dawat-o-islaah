@@ -115,7 +115,7 @@ const BlogDetail = () => {
       <p className="text-sm text-green-600 mb-1">
         {new Date(selectedBlog.created_at).toLocaleDateString()}
       </p>
-      <p className="text-sm text-gray-500 mb-6">By Amaze Technologies</p>
+      {/* <p className="text-sm text-gray-500 mb-6">By Amaze Technologies</p> */}
 
       {/* Blog Content */}
       <div

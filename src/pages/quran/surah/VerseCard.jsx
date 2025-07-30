@@ -37,6 +37,50 @@ const VerseCard = ({
   const [tafsirError, setTafsirError] = useState(null);
   const { surahNumber } = useParams();
 
+  // Check if first ayah contains Bismillah and process verses accordingly
+  const processVerses = () => {
+    if (verses.length === 0) return [];
+
+    const firstAyah = verses[0];
+    const bismillah = "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَـٰنِ ٱلرَّحِیمِ";
+
+    const normalizedAyah = firstAyah.text.normalize("NFC").trim();
+    const normalizedBismillah = bismillah.normalize("NFC").trim();
+
+    // Check if first ayah contains Bismillah (it might be followed by other text)
+    if (normalizedAyah.includes(normalizedBismillah)) {
+      // Check if the ayah is ONLY Bismillah (no additional text)
+      if (normalizedAyah === normalizedBismillah) {
+        // If it's only Bismillah, don't process it specially - keep it as is
+        return verses;
+      }
+
+      // Create Bismillah ayah
+      const bismillahAyah = {
+        number: 0,
+        numberInSurah: 0,
+        text: bismillah,
+        surah: { number: 0 },
+      };
+
+      // Remove Bismillah from first ayah and clean up
+      const remainingText = normalizedAyah
+        .replace(normalizedBismillah, "")
+        .trim();
+      const modifiedFirstAyah = {
+        ...firstAyah,
+        text: remainingText,
+      };
+
+      // Return processed verses with Bismillah at the beginning
+      return [bismillahAyah, modifiedFirstAyah, ...verses.slice(1)];
+    }
+
+    return verses;
+  };
+
+  const processedVerses = processVerses();
+
   // Function to handle audio playback
   const playAudio = (index) => {
     if (currentAudio) {
@@ -45,14 +89,33 @@ const VerseCard = ({
     }
 
     if (playingIndex !== index) {
-      const newAudio = new Audio(audioLinks[index]);
-      newAudio.play();
-      setCurrentAudio(newAudio);
-      setPlayingIndex(index);
+      // For Bismillah (index 0), use the provided Bismillah audio
+      if (index === 0) {
+        const bismillahAudio = new Audio(
+          "https://cdn.islamic.network//quran//audio//128//ar.alafasy//1.mp3"
+        );
+        bismillahAudio.play();
+        setCurrentAudio(bismillahAudio);
+        setPlayingIndex(index);
 
-      newAudio.onended = () => {
-        setPlayingIndex(null);
-      };
+        bismillahAudio.onended = () => {
+          setPlayingIndex(null);
+        };
+        return;
+      }
+
+      // For regular verses, use the audioLinks array (adjust index for Bismillah)
+      const audioIndex = index === 0 ? 0 : index - 1;
+      if (audioLinks[audioIndex]) {
+        const newAudio = new Audio(audioLinks[audioIndex]);
+        newAudio.play();
+        setCurrentAudio(newAudio);
+        setPlayingIndex(index);
+
+        newAudio.onended = () => {
+          setPlayingIndex(null);
+        };
+      }
     }
   };
 
@@ -69,6 +132,11 @@ const VerseCard = ({
 
   // Function to show Tafsir in a modal with lazy loading
   const openTafsirModal = async (ayah) => {
+    // Don't show tafsir for Bismillah
+    if (ayah.numberInSurah === 0) {
+      return;
+    }
+
     setShowModal(true);
     setIsLoadingTafsir(true);
     setTafsirError(null);
@@ -123,7 +191,7 @@ const VerseCard = ({
 
   return (
     <div className="space-y-6">
-      {verses.map((ayah, index) => (
+      {processedVerses.map((ayah, index) => (
         <div
           key={ayah.number}
           className="bg-white shadow-lg rounded-lg p-6 md:px-8 relative border-2 border-neutral-200"
@@ -147,69 +215,77 @@ const VerseCard = ({
           </button>
 
           <p className="absolute top-4 right-4 text-gray-500 text-base md:text-lg lg:text-xl">
-            {surahNo}:{ayah.numberInSurah}
+            {ayah.numberInSurah === 0
+              ? `${surahNo}:0`
+              : `${surahNo}:${ayah.numberInSurah}`}
           </p>
 
           {/* Arabic Ayah (Always Centered) */}
-          <p className="text-3xl md:text-4xl text-center mt-14 leading-relaxed font-quran">
+          <p className="text-3xl md:text-4xl text-center my-8 leading-relaxed font-quran">
             {ayah.text}
           </p>
 
-          {/* Translations Grid */}
-          <div className="grid md:grid-cols-2 md:gap-4 mt-6">
-            {/* Left Column (English Translations) */}
-            {isTranslation && (
-              <>
-                <div className="text-left">
-                  {Object.entries(translations.en).map(
-                    ([identifier, ayahList]) => (
-                      <div key={identifier} className="mb-4">
-                        <p className="text-gray-700 text-lg">
-                          {ayahList[index]?.text || "Translation Not Available"}
-                        </p>
-                        <p className="text-sm text-gray-500 mt-1">
-                          - {identifier.replace("en.", "").toUpperCase()}{" "}
-                          (English)
-                        </p>
-                      </div>
-                    )
-                  )}
-                </div>
+          {/* Translations Grid - Only show for non-Bismillah verses */}
+          {ayah.numberInSurah !== 0 && (
+            <div className="grid md:grid-cols-2 md:gap-4 mt-6">
+              {/* Left Column (English Translations) */}
+              {isTranslation && (
+                <>
+                  <div className="text-left">
+                    {Object.entries(translations.en).map(
+                      ([identifier, ayahList]) => (
+                        <div key={identifier} className="mb-4">
+                          <p className="text-gray-700 text-lg">
+                            {ayahList[index - 1]?.text ||
+                              "Translation Not Available"}
+                          </p>
+                          <p className="text-sm text-gray-500 mt-1">
+                            - {identifier.replace("en.", "").toUpperCase()}{" "}
+                            (English)
+                          </p>
+                        </div>
+                      )
+                    )}
+                  </div>
 
-                {/* Right Column (Urdu Translations) */}
-                <div className="text-right">
-                  {Object.entries(translations.ur).map(
-                    ([identifier, ayahList]) => (
-                      <div key={identifier} className="mb-4">
-                        <p className="text-gray-700 text-lg/10 leading-10">
-                          {ayahList[index]?.text || "ترجمہ دستیاب نہیں"}
-                        </p>
-                        <p className="text-sm text-gray-500 mt-1">
-                          - {identifier.replace("ur.", "").toUpperCase()} (Urdu)
-                        </p>
-                      </div>
-                    )
-                  )}
-                </div>
-              </>
-            )}
-          </div>
+                  {/* Right Column (Urdu Translations) */}
+                  <div className="text-right">
+                    {Object.entries(translations.ur).map(
+                      ([identifier, ayahList]) => (
+                        <div key={identifier} className="mb-4">
+                          <p className="text-gray-700 text-lg/10 leading-10">
+                            {ayahList[index - 1]?.text || "ترجمہ دستیاب نہیں"}
+                          </p>
+                          <p className="text-sm text-gray-500 mt-1">
+                            - {identifier.replace("ur.", "").toUpperCase()}{" "}
+                            (Urdu)
+                          </p>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
 
-          {/* Tafsir Button */}
-          <div className="flex justify-center">
-            <button
-              onClick={() => openTafsirModal(ayah)}
-              disabled={isLoadingTafsir}
-              className={`mt-2 flex cursor-pointer items-center gap-2 px-4 py-2 rounded-lg transition ${
-                isLoadingTafsir
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-[#1E3A5F] hover:bg-blue-700"
-              } text-white`}
-            >
-              <IoBookOutline className="text-white" size={24} />
-              {isLoadingTafsir ? "Loading..." : t("quranDetails.checkTafsir")}
-            </button>
-          </div>
+          {/* Tafsir Button - Only show for non-Bismillah verses */}
+          {ayah.numberInSurah !== 0 && (
+            <div className="flex justify-center">
+              <button
+                onClick={() => openTafsirModal(ayah)}
+                disabled={isLoadingTafsir}
+                className={`flex cursor-pointer items-center gap-2 px-4 py-2 rounded-lg transition ${
+                  isLoadingTafsir
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-[#1E3A5F] hover:bg-blue-700"
+                } text-white`}
+              >
+                <IoBookOutline className="text-white" size={24} />
+                {isLoadingTafsir ? "Loading..." : t("quranDetails.checkTafsir")}
+              </button>
+            </div>
+          )}
         </div>
       ))}
 
@@ -246,7 +322,9 @@ const VerseCard = ({
                   <button
                     onClick={() => {
                       // Retry loading
-                      const currentAyah = verses.find((v) => selectedTafsir); // You might need to store current ayah
+                      const currentAyah = processedVerses.find(
+                        (v) => selectedTafsir
+                      ); // You might need to store current ayah
                       if (currentAyah) {
                         openTafsirModal(currentAyah);
                       }
