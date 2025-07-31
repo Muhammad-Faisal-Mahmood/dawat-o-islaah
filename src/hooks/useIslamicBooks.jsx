@@ -20,7 +20,16 @@ const useIslamicBooks = (searchQuery = "", token = null) => {
           ...config,
         });
 
-        setBooks(response.data.results);
+        console.log(response.data.results);
+
+        // Transform the books data to ensure pdf_file uses HTTPS
+        const transformedBooks = response.data.results.map((book) => ({
+          ...book,
+          pdf_file:
+            book.pdf_file?.replace("http://", "https://") || book.pdf_file,
+        }));
+
+        setBooks(transformedBooks);
       } catch (error) {
         console.error("Error fetching books:", error);
       }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaLocationDot, FaLocationCrosshairs } from "react-icons/fa6";
 import { useLanguage } from "../../../context/LanguageContext";
 
