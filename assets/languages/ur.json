@@ -322,5 +322,74 @@
   "searchPage": {
     "title": "تلاش کی فہرست",
     "noSearchKeyword": "نتائج دیکھنے کے لیے براہ کرم کوئی لفظ درج کریں۔"
+  },
+
+  "islamicInheritanceCalculator": {
+    "pageTitle": "اسلامی وراثت کیلکولیٹر",
+    "header": {
+      "currency": "کرنسی",
+      "deceasedGender": "متوفی کی جنس",
+      "genderOptions": {
+        "male": "مرد",
+        "female": "عورت"
+      }
+    },
+    "estate": {
+      "title": "جائیداد",
+      "grossEstate": {
+        "label": "مجموعی جائیداد",
+        "placeholder": "جیسے 1000000"
+      },
+      "debts": {
+        "label": "قرضے",
+        "placeholder": "0"
+      },
+      "funeral": {
+        "label": "کفن دفن کے اخراجات",
+        "placeholder": "0"
+      },
+      "wasiyyah": {
+        "label": "وصیت (≤ 1/3 خالص سے)",
+        "placeholder": "0"
+      }
+    },
+    "heirs": {
+      "title": "ورثاء",
+      "labels": {
+        "husband": "شوہر (0/1)",
+        "wives": "بیویاں (0–4)",
+        "father": "والد (0/1)",
+        "mother": "والدہ (0/1)",
+        "grandfather": "دادا (0/1)",
+        "grandmothers": "دادی/نانی (0–2)",
+        "sons": "بیٹے",
+        "daughters": "بیٹیاں",
+        "gsons": "پوتے (بیٹے کے بیٹے)",
+        "gdaughters": "پوتیاں (بیٹے کی بیٹیاں)",
+        "matSibs": "ماں کی طرف سے بہن بھائی",
+        "fullBro": "حقیقی بھائی",
+        "fullSis": "حقیقی بہنیں",
+        "patBro": "علاتی بھائی",
+        "patSis": "علاتی بہنیں"
+      }
+    },
+    "actions": {
+      "calculate": "حساب کریں",
+      "loadDemo": "نمونہ لوڈ کریں",
+      "reset": "صاف کریں",
+      "disclaimer": "تعلیمی ٹول۔ حنفی مذہب کے مطابق۔ پابند فتوے کے لیے کسی مستند عالم سے رجوع کریں۔"
+    },
+    "results": {
+      "title": "تقسیم",
+      "summaryTable": {
+        "item": "تفصیلات",
+        "amount": "رقم"
+      },
+      "sharesTable": {
+        "heir": "وارث",
+        "fraction": "حصہ",
+        "amount": "رقم"
+      }
+    }
   }
 }

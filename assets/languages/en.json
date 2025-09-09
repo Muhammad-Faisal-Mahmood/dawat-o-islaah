@@ -321,5 +321,74 @@
   "searchPage": {
     "title": "Search Results",
     "noSearchKeyword": "Please enter a keyword to see search results. "
+  },
+
+  "islamicInheritanceCalculator": {
+    "pageTitle": "Islamic Inheritance Calculator",
+    "header": {
+      "currency": "Currency",
+      "deceasedGender": "Deceased Gender",
+      "genderOptions": {
+        "male": "Male",
+        "female": "Female"
+      }
+    },
+    "estate": {
+      "title": "Estate",
+      "grossEstate": {
+        "label": "Gross Estate",
+        "placeholder": "e.g. 1000000"
+      },
+      "debts": {
+        "label": "Debts",
+        "placeholder": "0"
+      },
+      "funeral": {
+        "label": "Funeral & Expenses",
+        "placeholder": "0"
+      },
+      "wasiyyah": {
+        "label": "Wasiyyah (≤ 1/3 of net)",
+        "placeholder": "0"
+      }
+    },
+    "heirs": {
+      "title": "Heirs",
+      "labels": {
+        "husband": "Husband (0/1)",
+        "wives": "Wives (0–4)",
+        "father": "Father (0/1)",
+        "mother": "Mother (0/1)",
+        "grandfather": "Grandfather (0/1)",
+        "grandmothers": "Grandmothers (0–2)",
+        "sons": "Sons",
+        "daughters": "Daughters",
+        "gsons": "Grandsons (son's sons)",
+        "gdaughters": "Granddaughters (son's daughters)",
+        "matSibs": "Maternal siblings",
+        "fullBro": "Full brothers",
+        "fullSis": "Full sisters",
+        "patBro": "Paternal brothers",
+        "patSis": "Paternal sisters"
+      }
+    },
+    "actions": {
+      "calculate": "Calculate",
+      "loadDemo": "Load Demo",
+      "reset": "Reset",
+      "disclaimer": "Educational tool. Hanafi-leaning. For binding rulings, consult a qualified scholar."
+    },
+    "results": {
+      "title": "Distribution",
+      "summaryTable": {
+        "item": "Item",
+        "amount": "Amount"
+      },
+      "sharesTable": {
+        "heir": "Heir",
+        "fraction": "Fraction",
+        "amount": "Amount"
+      }
+    }
   }
 }
